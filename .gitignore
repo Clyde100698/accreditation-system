@@ -38,6 +38,7 @@ next-env.d.ts
 # Office lock files & temp test files
 ~$*.docx
 ~$*.pptx
+~$*.xlsx
 test_*.docx
 test_*.png
 test_*.js

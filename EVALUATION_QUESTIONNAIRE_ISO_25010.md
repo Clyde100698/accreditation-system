@@ -194,3 +194,4 @@ Please assess each software quality indicator using the standardized **5-Point L
 
 ---
 *Thank you for your valuable contribution to the quality assurance and research advancement of STI West Negros University.*
+
