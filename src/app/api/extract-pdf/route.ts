@@ -142,11 +142,26 @@ const KEYWORD_MAP: Record<string, string[]> = {
   'Organizational Chart': ['organizational chart', 'structure', 'hierarchy', 'department head'],
 };
 
+const MONTH_NAMES = 'January|February|March|April|May|June|July|August|September|October|November|December|Jan|Feb|Mar|Apr|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec';
+
 const DATE_PATTERNS = [
-  /(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})/,
+  // 0. Month Day, Year: August 15, 2017 / Aug. 15, 2017 / August-15-2017 / Aug 15 2017
+  new RegExp(`(${MONTH_NAMES})\\.?[-–—\\s]+(\\d{1,2})(?:st|nd|rd|th)?,?[-–—\\s]+(\\d{4})`, 'i'),
+
+  // 1. Day Month Year: 14-Oct-2025 / 15 August 2017 / 15-Aug-2017
+  new RegExp(`(\\d{1,2})[-–—\\s]+(${MONTH_NAMES})\\.?[-–—\\s]+(\\d{4})`, 'i'),
+
+  // 2. YYYY-MM-DD or YYYY/MM/DD
   /(\d{4})[\/\-](\d{1,2})[\/\-](\d{1,2})/,
-  /(January|February|March|April|May|June|July|August|September|October|November|December|Jan|Feb|Mar|Apr|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)\s+(\d{1,2}),?\s+(\d{4})/i,
-  /(\d{1,2})\s+(January|February|March|April|May|June|July|August|September|October|November|December|Jan|Feb|Mar|Apr|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)\s+(\d{4})/i,
+
+  // 3. MM/DD/YYYY or MM-DD-YYYY
+  /(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})/,
+
+  // 4. Month Year: August 2017 / Oct 2025
+  new RegExp(`(?:dated|issued|period|month|sy|ay)?\\s*(${MONTH_NAMES})\\.?[-–—\\s]+(\\d{4})`, 'i'),
+
+  // 5. School Year: SY 2017-2018 / A.Y. 2017-2018
+  /(?:s\.?y\.?|a\.?y\.?|school\s*year|academic\s*year)[-:\s]+(\d{4})[-–—]\d{4}/i,
 ];
 
 const MONTHS: Record<string, string> = {
@@ -168,34 +183,39 @@ function extractDate(text: string): string | null {
   let bestDate: string | null = null;
   let highestIndex = -1;
 
-  for (const pattern of DATE_PATTERNS) {
-    // Add global flag to find all matches
-    const globalPattern = new RegExp(pattern.source, pattern.flags + (pattern.flags.includes('g') ? '' : 'g'));
-    
-    let match;
+  for (let pIdx = 0; pIdx < DATE_PATTERNS.length; pIdx++) {
+    const pattern = DATE_PATTERNS[pIdx];
+    const globalPattern = new RegExp(pattern.source, pattern.flags.includes('g') ? pattern.flags : pattern.flags + 'g');
+
+    let match: RegExpExecArray | null;
     while ((match = globalPattern.exec(text)) !== null) {
       try {
-        let formattedDate = null;
-        if (pattern === DATE_PATTERNS[0]) {
-          const [, m, d, y] = text.substring(match.index).match(pattern) || [];
+        let formattedDate: string | null = null;
+
+        if (pIdx === 0) {
+          const [, monthStr, d, y] = match;
+          const month = MONTHS[monthStr.toLowerCase()];
+          if (y && month && d) formattedDate = `${y}-${month}-${d.padStart(2, '0')}`;
+        } else if (pIdx === 1) {
+          const [, d, monthStr, y] = match;
+          const month = MONTHS[monthStr.toLowerCase()];
+          if (y && month && d) formattedDate = `${y}-${month}-${d.padStart(2, '0')}`;
+        } else if (pIdx === 2) {
+          const [, y, m, d] = match;
           if (y && m && d) formattedDate = `${y}-${m.padStart(2, '0')}-${d.padStart(2, '0')}`;
-        } else if (pattern === DATE_PATTERNS[1]) {
-          formattedDate = match[0];
-        } else if (pattern === DATE_PATTERNS[2]) {
-          const [, monthStr, d, y] = text.substring(match.index).match(pattern) || [];
-          if (y && monthStr && d) {
-            const month = MONTHS[monthStr.toLowerCase()];
-            formattedDate = `${y}-${month}-${d.padStart(2, '0')}`;
-          }
-        } else if (pattern === DATE_PATTERNS[3]) {
-          const [, d, monthStr, y] = text.substring(match.index).match(pattern) || [];
-          if (y && monthStr && d) {
-            const month = MONTHS[monthStr.toLowerCase()];
-            formattedDate = `${y}-${month}-${d.padStart(2, '0')}`;
-          }
+        } else if (pIdx === 3) {
+          const [, m, d, y] = match;
+          if (y && m && d) formattedDate = `${y}-${m.padStart(2, '0')}-${d.padStart(2, '0')}`;
+        } else if (pIdx === 4) {
+          const [, monthStr, y] = match;
+          const month = MONTHS[monthStr.toLowerCase()];
+          if (y && month) formattedDate = `${y}-${month}-01`;
+        } else if (pIdx === 5) {
+          const [, y] = match;
+          if (y) formattedDate = `${y}-08-01`;
         }
-        
-        // Keep the date that appears closest to the END of the document
+
+        // Keep date closest to the end of the document (typically signature/approval date)
         if (formattedDate && match.index > highestIndex) {
           highestIndex = match.index;
           bestDate = formattedDate;
@@ -511,6 +531,9 @@ export async function POST(request: NextRequest) {
         const recencyMsg = `Recency Warning: The detected date (${suggestedDate}) is older than 5 years. PACUCOA requires evidence to be within the 5-year recency window to count toward verified compliance scores.`;
         warning = warning ? `${warning} | ${recencyMsg}` : recencyMsg;
       }
+    } else {
+      const noDateMsg = 'No effective date detected in document text. Please enter the effective date manually below to verify 5-year PACUCOA compliance.';
+      warning = warning ? `${warning} | ${noDateMsg}` : noDateMsg;
     }
 
     return NextResponse.json({

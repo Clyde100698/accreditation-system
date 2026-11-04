@@ -333,13 +333,39 @@ export default function EvidencePage() {
     }
   };
 
-  // Auto-set document type when criterion changes
+  // Auto-set document type when criterion changes, and re-evaluate if file already loaded
   useEffect(() => {
     const criterion = criteria.find(c => c.id === selectedCriterion);
     if (criterion && criterion.expected_document_type) {
       setDocumentType(criterion.expected_document_type);
     } else if (!selectedCriterion) {
       setDocumentType('');
+    }
+
+    // If file was already selected before picking criterion, re-run verification against new criterion
+    if (file && file.type === 'application/pdf') {
+      const expectedType = criterion?.expected_document_type || '';
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('expectedType', expectedType);
+
+      fetch('/api/extract-pdf', {
+        method: 'POST',
+        body: formData,
+      })
+        .then(res => (res.ok ? res.json() : null))
+        .then(result => {
+          if (result) {
+            setExtractionResult(result);
+            if (result.matchedType && expectedType) {
+              setDocumentType(expectedType);
+            }
+            if (result.suggestedDate) {
+              setEffectiveDate(result.suggestedDate);
+            }
+          }
+        })
+        .catch(() => {});
     }
   }, [selectedCriterion, criteria]);
 
@@ -1442,6 +1468,8 @@ export default function EvidencePage() {
                   className={`p-4 rounded-xl text-sm flex gap-3 items-start border transition-all ${
                     extractionResult.isExpiredRecency
                       ? 'bg-amber-50/95 border-amber-300 text-amber-950 shadow-sm'
+                      : !extractionResult.suggestedDate
+                      ? 'bg-slate-50 border-slate-300 text-slate-800'
                       : extractionResult.warning
                       ? 'bg-amber-50 text-amber-800 border-amber-200'
                       : 'bg-emerald-50 text-emerald-900 border-emerald-200'
@@ -1449,19 +1477,28 @@ export default function EvidencePage() {
                 >
                   {extractionResult.isExpiredRecency ? (
                     <Clock className="w-5 h-5 flex-shrink-0 mt-0.5 text-amber-600" />
+                  ) : !extractionResult.suggestedDate ? (
+                    <Info className="w-5 h-5 flex-shrink-0 mt-0.5 text-slate-500" />
                   ) : extractionResult.warning ? (
                     <AlertTriangle className="w-5 h-5 flex-shrink-0 mt-0.5 text-amber-600" />
                   ) : (
                     <CheckCircle2 className="w-5 h-5 flex-shrink-0 mt-0.5 text-emerald-600" />
                   )}
-                  <div className="space-y-1 w-full">
+                  <div className="space-y-1.5 w-full">
                     <div className="flex items-center justify-between gap-2 flex-wrap">
                       <p className="font-bold flex items-center gap-2">
                         {extractionResult.isExpiredRecency ? (
                           <>
-                            <span>PACUCOA 5-Year Recency Warning</span>
+                            <span className="text-amber-950 font-black">PACUCOA 5-Year Recency Warning</span>
                             <span className="px-2 py-0.5 text-[10px] font-black tracking-wider uppercase bg-amber-200 text-amber-900 rounded">
                               Older Than 5 Years
+                            </span>
+                          </>
+                        ) : !extractionResult.suggestedDate ? (
+                          <>
+                            <span className="text-slate-800 font-bold">Document Processed — Date Verification Needed</span>
+                            <span className="px-2 py-0.5 text-[10px] font-bold tracking-wider uppercase bg-slate-200 text-slate-700 rounded">
+                              Date Required
                             </span>
                           </>
                         ) : extractionResult.warning ? (
@@ -1470,19 +1507,29 @@ export default function EvidencePage() {
                           'Document Verified & Compliant'
                         )}
                       </p>
-                      {extractionResult.suggestedDate && (
-                        <span className="text-xs font-mono bg-white px-2 py-0.5 rounded border border-amber-200 text-gray-700 shadow-2xs">
-                          Date: {extractionResult.suggestedDate}
+                      {extractionResult.suggestedDate ? (
+                        <span className={`text-xs font-mono px-2 py-0.5 rounded border shadow-2xs ${
+                          extractionResult.isExpiredRecency 
+                            ? 'bg-amber-100 text-amber-900 border-amber-300 font-bold'
+                            : 'bg-white text-gray-700 border-gray-200'
+                        }`}>
+                          Detected Date: {extractionResult.suggestedDate}
+                        </span>
+                      ) : (
+                        <span className="text-[11px] font-medium text-slate-500 bg-white px-2 py-0.5 rounded border border-slate-200">
+                          Date not detected
                         </span>
                       )}
                     </div>
                     <p className="text-xs leading-relaxed">
                       {extractionResult.warning ||
                         extractionResult.info ||
-                        'The document contents match the expected type and fall cleanly within the active 5-year compliance window.'}
+                        (selectedCriterion
+                          ? 'The document contents match the expected type and fall cleanly within the active 5-year compliance window.'
+                          : 'Document text read successfully. Please select a criterion above to check type matching.')}
                     </p>
                     {extractionResult.isExpiredRecency && (
-                      <p className="text-[11px] text-amber-800 font-medium bg-amber-100/60 p-2 rounded border border-amber-200">
+                      <p className="text-[11px] text-amber-800 font-medium bg-amber-100/60 p-2.5 rounded-lg border border-amber-200">
                         PACUCOA accreditation standards require documents submitted as evidence to be issued or updated within the last 5 years. While you may still upload this historical document for archival reference, QA scoring algorithms will flag it during audit calculations.
                       </p>
                     )}
