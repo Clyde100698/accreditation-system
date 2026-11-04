@@ -1095,16 +1095,32 @@ export default function CriteriaPage() {
       </Modal>
 
       {/* Delete Confirmation */}
-      <ConfirmDialog
-        isOpen={deleteConfirmOpen}
-        onClose={() => { setDeleteConfirmOpen(false); setDeleteTargetId(null); }}
-        onConfirm={handleDelete}
-        title="Delete this criterion?"
-        message="This will permanently remove the criterion and may affect linked evidence and readiness scores. This cannot be undone."
-        confirmLabel="Yes, Delete"
-        variant="destructive"
-        loading={deleting}
-      />
+      {(() => {
+        const targetToDelete = criteria.find((c) => c.id === deleteTargetId);
+        const isTargetShared = targetToDelete ? !targetToDelete.program_id : false;
+        const isProgScope = scopeProgramId !== ALL_PROGRAMS_SCOPE;
+
+        return (
+          <ConfirmDialog
+            isOpen={deleteConfirmOpen}
+            onClose={() => { setDeleteConfirmOpen(false); setDeleteTargetId(null); }}
+            onConfirm={handleDelete}
+            title={
+              isTargetShared && isProgScope
+                ? `⚠️ Delete SHARED criterion [${targetToDelete?.code}] for ALL programs?`
+                : `Delete criterion [${targetToDelete?.code || ''}]?`
+            }
+            message={
+              isTargetShared && isProgScope
+                ? `WARNING: "${targetToDelete?.title}" is a SHARED criterion. Deleting it here will permanently erase it from BSCS, BSIT, BSP, and every program in the institution!\n\nIf you only want to remove it for ${selectedScopeProgram?.code || 'this program'}, click Cancel, then click the Eye icon to mark it "Not Applicable" for ${selectedScopeProgram?.code || 'this program'} only.`
+                : `This will permanently remove "${targetToDelete?.title || 'this criterion'}" and may affect linked evidence and readiness scores. This cannot be undone.`
+            }
+            confirmLabel={isTargetShared && isProgScope ? 'Yes, Delete from ALL Programs' : 'Yes, Delete'}
+            variant="destructive"
+            loading={deleting}
+          />
+        );
+      })()}
     </div>
   );
 }
