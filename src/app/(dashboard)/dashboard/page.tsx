@@ -27,6 +27,7 @@ import {
   Search,
 } from 'lucide-react';
 import { buildCriteriaTree, CriterionTreeNode, calculateWeightedGrandMean, checkLevelReadiness } from '@/lib/scoring';
+import { filterCriteriaForProgram, loadExclusionMap } from '@/lib/program-criteria';
 
 interface HeatmapTreeNode extends CriterionTreeNode {
   scoreObj?: ReadinessScore;
@@ -166,18 +167,35 @@ export default function DashboardPage() {
         const dbLevels = (levelsData || []) as AccreditationLevel[];
         setLevels(dbLevels);
 
+        // Exclusions & Program-specific criteria support
+        const { map: exclusionMap } = await loadExclusionMap(supabase);
+
+        // Areas (with configurable weights)
+        const { data: areasData } = await supabase.from('accreditation_areas').select('*').order('display_order, code');
+        if (areasData) {
+          setAreas(areasData as AccreditationArea[]);
+        }
+
+        // Readiness scores & Criteria
+        const { data: criteriaData } = await supabase.from('accreditation_criteria').select('*').order('code');
+        let { data: scoresData } = await supabase.from('readiness_scores').select('*');
+
+        // Filter criteria by active program scope (shared minus hidden, plus program-specific)
+        const activeProgScope = user!.program_id && !['qa', 'dean'].includes(user!.role)
+          ? user!.program_id
+          : selectedProgram;
+        const applicableCriteria = criteriaData
+          ? filterCriteriaForProgram(criteriaData as AccreditationCriterion[], activeProgScope, exclusionMap)
+          : [];
+
         // Stats
-        const { count: totalCriteria } = await supabase.from('accreditation_criteria').select('*', { count: 'exact', head: true });
-        
         let pendingEvidence = 0;
         let verifiedEvidence = 0;
         if (!['alumni_rep', 'student_rep', 'observer'].includes(user!.role)) {
           let pQ = supabase.from('evidence_documents').select('*', { count: 'exact', head: true }).eq('status', 'pending');
           let vQ = supabase.from('evidence_documents').select('*', { count: 'exact', head: true }).eq('status', 'verified');
 
-          const progFilter = user!.program_id && !['qa', 'dean'].includes(user!.role)
-            ? user!.program_id
-            : selectedProgram !== 'all' ? selectedProgram : null;
+          const progFilter = activeProgScope !== 'all' ? activeProgScope : null;
 
           if (progFilter) {
             pQ = pQ.eq('program_id', progFilter);
@@ -191,17 +209,7 @@ export default function DashboardPage() {
           verifiedEvidence = vCount || 0;
         }
 
-        setStats({ totalCriteria: totalCriteria || 0, pendingEvidence, verifiedEvidence });
-
-        // Areas (with configurable weights)
-        const { data: areasData } = await supabase.from('accreditation_areas').select('*').order('display_order, code');
-        if (areasData) {
-          setAreas(areasData as AccreditationArea[]);
-        }
-
-        // Readiness scores & Criteria
-        const { data: criteriaData } = await supabase.from('accreditation_criteria').select('*').order('code');
-        let { data: scoresData } = await supabase.from('readiness_scores').select('*');
+        setStats({ totalCriteria: applicableCriteria.length, pendingEvidence, verifiedEvidence });
 
         // If remote database has no scores populated, seamlessly fall back to local validated baseline scores
         if (!scoresData || scoresData.length === 0) {
@@ -211,7 +219,7 @@ export default function DashboardPage() {
 
         if (criteriaData && scoresData) {
           const typedScoresList = scoresData as ReadinessScore[];
-          const criteriaWithScores = criteriaData.map(c => {
+          const criteriaWithScores = applicableCriteria.map(c => {
              const scoreObj = selectedProgram === 'all' 
                ? (() => {
                    const matched = typedScoresList.filter(s => s.criterion_id === c.id);
@@ -256,11 +264,14 @@ export default function DashboardPage() {
           const typedCycles = (cyclesData || []) as AccreditationCycle[];
           const comparison: ProgramComparisonItem[] = (progs as Program[]).map(prog => {
             const progScores = typedScores.filter((s: ReadinessScore) => s.program_id === prog.id);
+            const progCriteria = criteriaData
+              ? filterCriteriaForProgram(criteriaData as AccreditationCriterion[], prog.id, exclusionMap)
+              : [];
             
-            // Compute PACUCOA weighted grand mean for this program across 10 Areas
+            // Compute PACUCOA weighted grand mean for this program across 10 Areas using its applicable criteria
             let progWeightedMean = 0;
-            if (progScores.length > 0 && criteriaData && areasData) {
-              const critWithScores = (criteriaData as AccreditationCriterion[]).map(c => {
+            if (progScores.length > 0 && progCriteria.length > 0 && areasData) {
+              const critWithScores = progCriteria.map(c => {
                 const sc = progScores.find(s => s.criterion_id === c.id);
                 return { ...c, score: sc ? sc.score : 0 };
               });

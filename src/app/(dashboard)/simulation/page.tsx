@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/Button';
 import { ReadinessScore, Program, AccreditationLevel } from '@/lib/types';
 import { logAuditEvent } from '@/lib/audit';
 import { calculateWeightedGrandMean, evaluateLevelFloorStatus } from '@/lib/scoring';
+import { loadExclusionMap } from '@/lib/program-criteria';
 import { 
   FlaskConical, 
   CheckSquare, 
@@ -60,12 +61,15 @@ export default function SimulationPage() {
         const pid = selectedProgram || progs[0].id;
         if (!selectedProgram) setSelectedProgram(pid);
 
-        // Fetch scores for selected program
-        const { data: scoresData } = await supabase
-          .from('readiness_scores')
-          .select('*, accreditation_criteria(*, accreditation_areas(*))')
-          .eq('program_id', pid)
-          .order('criterion_id');
+        // Fetch scores and exclusions for selected program
+        const [{ data: scoresData }, { map: exclusionMap }] = await Promise.all([
+          supabase
+            .from('readiness_scores')
+            .select('*, accreditation_criteria(*, accreditation_areas(*))')
+            .eq('program_id', pid)
+            .order('criterion_id'),
+          loadExclusionMap(supabase),
+        ]);
         
         let finalScores = (scoresData || []) as ReadinessScore[];
         if (finalScores.length === 0) {
@@ -86,6 +90,16 @@ export default function SimulationPage() {
             };
           });
         }
+
+        // Filter out criteria that do not apply to pid (other program criteria or excluded shared criteria)
+        const progExclusions = exclusionMap.get(pid);
+        finalScores = finalScores.filter((s) => {
+          const c = s.accreditation_criteria;
+          if (!c) return true;
+          if (c.program_id && c.program_id !== pid) return false;
+          if (progExclusions && progExclusions.has(c.id)) return false;
+          return true;
+        });
         
         setCurrentScores(finalScores);
         setUnresolvedScores(finalScores.filter(s => ['no_evidence', 'weak'].includes(s.status)));

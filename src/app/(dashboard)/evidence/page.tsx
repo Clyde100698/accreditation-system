@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import { useAuth } from '@/lib/hooks/useAuth';
 import { Button } from '@/components/ui/Button';
@@ -12,6 +12,7 @@ import { DocumentViewer } from '@/components/ui/DocumentViewer';
 import { openEvidenceDocument } from '@/lib/evidence-service';
 import { AccreditationCriterion, EvidenceDocument, PdfExtractionResult, Program, AccreditationArea } from '@/lib/types';
 import { getEvidenceList } from '@/app/actions/evidenceActions';
+import { getLeafCriteriaForProgram, loadExclusionMap, ExclusionMap } from '@/lib/program-criteria';
 import {
   Upload,
   AlertTriangle,
@@ -170,11 +171,12 @@ export default function EvidencePage() {
   const [activeTab, setActiveTab] = useState<'library' | 'upload'>('library');
 
   // Foundational data
-  const [criteria, setCriteria] = useState<AccreditationCriterion[]>([]);
+  const [rawCriteria, setRawCriteria] = useState<AccreditationCriterion[]>([]);
   const [allEvidence, setAllEvidence] = useState<EvidenceDocument[]>([]);
   const [myEvidence, setMyEvidence] = useState<EvidenceDocument[]>([]);
   const [areas, setAreas] = useState<AccreditationArea[]>([]);
   const [programs, setPrograms] = useState<Program[]>([]);
+  const [exclusionMap, setExclusionMap] = useState<ExclusionMap>(new Map());
   const [loading, setLoading] = useState(true);
 
   // Filter state
@@ -219,6 +221,19 @@ export default function EvidencePage() {
 
   const supabase = createClient();
 
+  // Leaf criteria filtered to the specific program being uploaded to
+  const effectiveUploadProg = user?.program_id || uploadProgramId || programs[0]?.id;
+  const criteria = useMemo(() => {
+    return getLeafCriteriaForProgram(rawCriteria, effectiveUploadProg, exclusionMap);
+  }, [rawCriteria, effectiveUploadProg, exclusionMap]);
+
+  // If selected criterion is no longer applicable to the selected upload program, reset it
+  useEffect(() => {
+    if (selectedCriterion && criteria.length > 0 && !criteria.some((c) => c.id === selectedCriterion)) {
+      setSelectedCriterion('');
+    }
+  }, [criteria, selectedCriterion]);
+
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const params = new URLSearchParams(window.location.search);
@@ -254,21 +269,16 @@ export default function EvidencePage() {
       const assignedAreaIds = (assignments || []).map(a => a.area_id);
       setUserAssignedAreaIds(assignedAreaIds);
 
-      // 4. Fetch criteria
-      const criteriaQuery = supabase
-        .from('accreditation_criteria')
-        .select('*, accreditation_areas(*)')
-        .order('code');
-      const { data: criteriaData } = await criteriaQuery;
+      // 4. Fetch criteria & exclusions
+      const [criteriaRes, exclusionRes] = await Promise.all([
+        supabase.from('accreditation_criteria').select('*, accreditation_areas(*)').order('code'),
+        loadExclusionMap(supabase),
+      ]);
 
-      if (criteriaData) {
-        const parentIds = new Set((criteriaData as AccreditationCriterion[]).map((c) => c.parent_criterion_id).filter(Boolean));
-        // Keep leaf criteria for compliance uploads
-        const leafCriteria = (criteriaData as AccreditationCriterion[]).filter(
-          (c: AccreditationCriterion) => !parentIds.has(c.id)
-        );
-        setCriteria(leafCriteria);
+      if (criteriaRes.data) {
+        setRawCriteria(criteriaRes.data as AccreditationCriterion[]);
       }
+      setExclusionMap(exclusionRes.map);
 
       // 5. Fetch ALL evidence for the library via Server Action (bypasses RLS filtering)
       const targetProg = (user.role === 'faculty' || user.role === 'program_head') ? (user.program_id || undefined) : undefined;

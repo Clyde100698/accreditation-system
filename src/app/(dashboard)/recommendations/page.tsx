@@ -25,6 +25,7 @@ import { showToast } from '@/components/ui/Toast';
 import { Button } from '@/components/ui/Button';
 import { logAuditEvent } from '@/lib/audit';
 import { calculateReadinessScores } from '@/lib/scoring';
+import { filterCriteriaForProgram, loadExclusionMap, ExclusionMap } from '@/lib/program-criteria';
 import { 
   Check, 
   AlertCircle, 
@@ -78,6 +79,7 @@ export default function RecommendationsAndCyclesPage() {
   const [allCriteria, setAllCriteria] = useState<AccreditationCriterion[]>([]);
   const [allVerifiedEvidence, setAllVerifiedEvidence] = useState<EvidenceDocument[]>([]);
   const [allReadinessScores, setAllReadinessScores] = useState<ReadinessScore[]>([]);
+  const [exclusionMap, setExclusionMap] = useState<ExclusionMap>(new Map());
   const [usersMap, setUsersMap] = useState<Record<string, { full_name: string; email: string }>>({});
   const [certifyingCycle, setCertifyingCycle] = useState<AccreditationCycle | null>(null);
   const [certifyingLoading, setCertifyingLoading] = useState(false);
@@ -173,6 +175,7 @@ export default function RecommendationsAndCyclesPage() {
         { data: scoresData },
         { data: usersData },
         { data: recsData },
+        exclusionRes,
       ] = await Promise.all([
         supabase.from('accreditation_cycles').select('*, programs(*)').order('created_at', { ascending: false }),
         supabase.from('programs').select('*, departments(*, institutions(*))').order('code'),
@@ -194,7 +197,10 @@ export default function RecommendationsAndCyclesPage() {
             creator:created_by(full_name, email)
           )
         `).order('item_number', { ascending: true, nullsFirst: false }).order('created_at', { ascending: true }),
+        loadExclusionMap(supabase),
       ]);
+
+      if (exclusionRes?.map) setExclusionMap(exclusionRes.map);
 
       if (cyclesData) setCycles(cyclesData as AccreditationCycle[]);
       if (programsData) {
@@ -249,11 +255,13 @@ export default function RecommendationsAndCyclesPage() {
 
   // QA Institutional Certification Eligibility Check
   const getOutstandingCriteria = useCallback((cycle: AccreditationCycle) => {
-    const parentIds = new Set(allCriteria.map(c => c.parent_criterion_id).filter(Boolean));
-    const leafCriteria = allCriteria.filter(c => !parentIds.has(c.id));
+    const applicableCriteria = filterCriteriaForProgram(allCriteria, cycle.program_id, exclusionMap);
+    const parentIds = new Set(applicableCriteria.map(c => c.parent_criterion_id).filter(Boolean));
+    const leafCriteria = applicableCriteria.filter(c => !parentIds.has(c.id));
+    const leafIds = new Set(leafCriteria.map(c => c.id));
 
     // 1. Check if readiness_scores exist for this program
-    const programScores = allReadinessScores.filter(s => s.program_id === cycle.program_id);
+    const programScores = allReadinessScores.filter(s => s.program_id === cycle.program_id && leafIds.has(s.criterion_id));
     if (programScores.length > 0) {
       const nonSufficient = programScores.filter(s => s.status !== 'sufficient');
       return nonSufficient.map(s => {
@@ -268,8 +276,8 @@ export default function RecommendationsAndCyclesPage() {
 
     // 2. Otherwise calculate readiness dynamically from verified evidence
     const progEvidence = allVerifiedEvidence.filter(e => e.program_id === cycle.program_id);
-    const calculated = calculateReadinessScores(allCriteria, progEvidence, cycle.program_id);
-    const nonSufficient = calculated.filter(c => c.status !== 'sufficient');
+    const calculated = calculateReadinessScores(applicableCriteria, progEvidence, cycle.program_id);
+    const nonSufficient = calculated.filter(c => c.status !== 'sufficient' && leafIds.has(c.criterion_id || ''));
     return nonSufficient.map(s => {
       const crit = leafCriteria.find(c => c.id === s.criterion_id);
       return {
@@ -278,7 +286,7 @@ export default function RecommendationsAndCyclesPage() {
         status: s.status || 'no_evidence',
       };
     });
-  }, [allCriteria, allReadinessScores, allVerifiedEvidence]);
+  }, [allCriteria, allReadinessScores, allVerifiedEvidence, exclusionMap]);
 
   // QA Certify Cycle Action
   const handleCertifyCycle = async () => {

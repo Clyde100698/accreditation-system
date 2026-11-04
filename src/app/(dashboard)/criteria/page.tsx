@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import { useAuth } from '@/lib/hooks/useAuth';
 import { Button } from '@/components/ui/Button';
@@ -8,28 +8,57 @@ import { Modal } from '@/components/ui/Modal';
 import { TableSkeleton } from '@/components/ui/Skeleton';
 import { ConfirmDialog } from '@/components/ui/ConfirmDialog';
 import { showToast } from '@/components/ui/Toast';
-import { AccreditationCriterion } from '@/lib/types';
+import { AccreditationCriterion, Program } from '@/lib/types';
 import { logAuditEvent } from '@/lib/audit';
-import { Plus, Pencil, Trash2, FileText, ChevronRight, ChevronDown, FolderTree, List, ChevronsUpDown, Search } from 'lucide-react';
+import { Plus, Pencil, Trash2, FileText, ChevronRight, ChevronDown, FolderTree, List, ChevronsUpDown, Search, Eye, EyeOff, Globe, GraduationCap, AlertTriangle } from 'lucide-react';
 import { buildCriteriaTree, CriterionTreeNode } from '@/lib/scoring';
+import { ALL_PROGRAMS_SCOPE, ExclusionMap, loadExclusionMap } from '@/lib/program-criteria';
+import { setCriterionHiddenForProgram } from '@/app/actions/criteriaActions';
+
+/** Small badge telling the user whether a criterion is shared or program-specific. */
+function ScopeBadge({ criterion, programs }: { criterion: AccreditationCriterion; programs: Program[] }) {
+  if (!criterion.program_id) {
+    return (
+      <span className="inline-flex items-center gap-1 text-[10px] font-bold px-1.5 py-0.5 rounded border bg-sky-50 text-sky-700 border-sky-200 shrink-0">
+        <Globe className="w-2.5 h-2.5" /> Shared
+      </span>
+    );
+  }
+  const prog = programs.find((p) => p.id === criterion.program_id);
+  return (
+    <span className="inline-flex items-center gap-1 text-[10px] font-bold px-1.5 py-0.5 rounded border bg-violet-50 text-violet-700 border-violet-200 shrink-0">
+      <GraduationCap className="w-2.5 h-2.5" /> {prog?.code || 'Program'} only
+    </span>
+  );
+}
 
 function CriteriaRow({
   node,
   depth = 0,
   onEdit,
-  onDelete
+  onDelete,
+  programs,
+  scopeProgramId,
+  hiddenIds,
+  onToggleHidden,
 }: {
   node: CriterionTreeNode;
   depth?: number;
   onEdit: (c: AccreditationCriterion) => void;
   onDelete: (id: string) => void;
+  programs: Program[];
+  scopeProgramId: string;
+  hiddenIds: Set<string>;
+  onToggleHidden: (c: AccreditationCriterion) => void;
 }) {
   const [expanded, setExpanded] = useState(true);
   const hasChildren = node.children && node.children.length > 0;
+  const isHidden = hiddenIds.has(node.id);
+  const canToggleHidden = scopeProgramId !== ALL_PROGRAMS_SCOPE && !node.program_id;
 
   return (
     <>
-      <tr className="hover:bg-gray-50/70 transition-colors border-b border-gray-100">
+      <tr className={`hover:bg-gray-50/70 transition-colors border-b border-gray-100 ${isHidden ? 'opacity-50 bg-gray-50' : ''}`}>
         <td className="px-3.5 py-2 flex items-center gap-1.5">
           <div style={{ marginLeft: `${depth * 1.25}rem` }} className="flex items-center">
             {hasChildren ? (
@@ -39,12 +68,20 @@ function CriteriaRow({
             ) : (
               <div className="w-5" /> // spacer
             )}
-            <span className="text-xs font-mono font-semibold text-gray-900">{node.code}</span>
+            <span className={`text-xs font-mono font-semibold text-gray-900 ${isHidden ? 'line-through' : ''}`}>{node.code}</span>
           </div>
         </td>
         <td className="px-3.5 py-2">
           <p className="text-xs text-gray-900 font-medium">{node.title}</p>
-          <p className="text-[10px] text-gray-500 mt-0.5">{node.accreditation_areas?.code || 'No Area Assigned'}</p>
+          <div className="flex items-center gap-1.5 mt-0.5">
+            <span className="text-[10px] text-gray-500">{node.accreditation_areas?.code || 'No Area Assigned'}</span>
+            <ScopeBadge criterion={node} programs={programs} />
+            {isHidden && (
+              <span className="text-[10px] font-bold px-1.5 py-0.5 rounded border bg-gray-100 text-gray-600 border-gray-300">
+                Not applicable
+              </span>
+            )}
+          </div>
         </td>
         <td className="px-3.5 py-2">
           {hasChildren && <span className="text-[10px] text-gray-500 bg-gray-100 px-1.5 py-0.5 rounded">Container</span>}
@@ -55,6 +92,15 @@ function CriteriaRow({
         <td className="px-3.5 py-2 text-xs text-gray-600">{node.rating_axis ? node.rating_axis : 'single'}</td>
         <td className="px-3.5 py-2 text-right">
           <div className="flex items-center justify-end gap-1">
+            {canToggleHidden && (
+              <button
+                onClick={() => onToggleHidden(node)}
+                className={`p-1 rounded transition-colors ${isHidden ? 'text-amber-600 hover:bg-amber-50' : 'text-gray-400 hover:bg-gray-100 hover:text-gray-700'}`}
+                title={isHidden ? 'Mark as applicable to this program again' : 'Mark as not applicable to this program (hide)'}
+              >
+                {isHidden ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
+              </button>
+            )}
             <button onClick={() => onEdit(node)} className="p-1 rounded hover:bg-gray-100 text-gray-400 hover:text-primary transition-colors" title="Edit">
               <Pencil className="w-3.5 h-3.5" />
             </button>
@@ -65,7 +111,17 @@ function CriteriaRow({
         </td>
       </tr>
       {expanded && hasChildren && node.children.map((child: CriterionTreeNode) => (
-        <CriteriaRow key={child.id} node={child} depth={depth + 1} onEdit={onEdit} onDelete={onDelete} />
+        <CriteriaRow
+          key={child.id}
+          node={child}
+          depth={depth + 1}
+          onEdit={onEdit}
+          onDelete={onDelete}
+          programs={programs}
+          scopeProgramId={scopeProgramId}
+          hiddenIds={hiddenIds}
+          onToggleHidden={onToggleHidden}
+        />
       ))}
     </>
   );
@@ -91,6 +147,13 @@ export default function CriteriaPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [viewMode, setViewMode] = useState<'hierarchy' | 'flat'>('hierarchy');
   const [expandedAreaIds, setExpandedAreaIds] = useState<Set<string>>(new Set());
+
+  // Program scope state (Shared base + program-specific criteria)
+  const [programs, setPrograms] = useState<Program[]>([]);
+  const [scopeProgramId, setScopeProgramId] = useState<string>(ALL_PROGRAMS_SCOPE);
+  const [exclusionMap, setExclusionMap] = useState<ExclusionMap>(new Map());
+  const [exclusionTableMissing, setExclusionTableMissing] = useState(false);
+  const [togglingHiddenId, setTogglingHiddenId] = useState<string | null>(null);
 
   const toggleArea = (id: string) => {
     setExpandedAreaIds((prev) => {
@@ -148,15 +211,133 @@ export default function CriteriaPage() {
     }
   }, [supabase]);
 
+  const fetchProgramScope = useCallback(async () => {
+    try {
+      const { data: progs } = await supabase.from('programs').select('*').order('code');
+      if (progs) setPrograms(progs as Program[]);
+      const { map, tableMissing } = await loadExclusionMap(supabase);
+      setExclusionMap(map);
+      setExclusionTableMissing(tableMissing);
+    } catch (err: unknown) {
+      console.error('Error fetching program scope:', err);
+    }
+  }, [supabase]);
+
   useEffect(() => {
     if (user) {
       fetchCriteria();
       fetchAreas();
+      fetchProgramScope();
     }
-  }, [user, fetchCriteria, fetchAreas]);
+  }, [user, fetchCriteria, fetchAreas, fetchProgramScope]);
+
+  const selectedScopeProgram = programs.find((p) => p.id === scopeProgramId) || null;
+
+  /**
+   * IDs hidden for the selected program: shared criteria explicitly marked
+   * "not applicable" plus all of their descendants.
+   */
+  const hiddenIds = useMemo(() => {
+    const result = new Set<string>();
+    if (scopeProgramId === ALL_PROGRAMS_SCOPE) return result;
+    const direct = exclusionMap.get(scopeProgramId) || new Set<string>();
+    if (direct.size === 0) return result;
+    const byId = new Map(criteria.map((c) => [c.id, c]));
+    criteria.forEach((c) => {
+      let cur: AccreditationCriterion | undefined = c;
+      let guard = 0;
+      while (cur && guard < 50) {
+        if (direct.has(cur.id)) {
+          result.add(c.id);
+          break;
+        }
+        cur = cur.parent_criterion_id ? byId.get(cur.parent_criterion_id) : undefined;
+        guard++;
+      }
+    });
+    return result;
+  }, [criteria, exclusionMap, scopeProgramId]);
+
+  /** Criteria visible in the current scope (shared + selected program's own criteria). */
+  const scopedCriteria = useMemo(() => {
+    if (scopeProgramId === ALL_PROGRAMS_SCOPE) return criteria.filter((c) => !c.program_id);
+    return criteria.filter((c) => !c.program_id || c.program_id === scopeProgramId);
+  }, [criteria, scopeProgramId]);
+
+  const scopeStats = useMemo(() => {
+    const shared = scopedCriteria.filter((c) => !c.program_id).length;
+    const own = scopedCriteria.filter((c) => !!c.program_id).length;
+    return { shared, own, hidden: hiddenIds.size, applicable: scopedCriteria.length - hiddenIds.size };
+  }, [scopedCriteria, hiddenIds]);
+
+  const handleToggleHidden = async (c: AccreditationCriterion) => {
+    if (scopeProgramId === ALL_PROGRAMS_SCOPE || c.program_id) return;
+    const prog = programs.find((p) => p.id === scopeProgramId);
+    const currentlyHidden = (exclusionMap.get(scopeProgramId) || new Set()).has(c.id);
+
+    if (!currentlyHidden && hiddenIds.has(c.id)) {
+      showToast('error', `[${c.code}] is hidden because its parent criterion is hidden. Show the parent instead.`);
+      return;
+    }
+
+    setTogglingHiddenId(c.id);
+    const res = await setCriterionHiddenForProgram({
+      programId: scopeProgramId,
+      criterionId: c.id,
+      hidden: !currentlyHidden,
+      userId: user?.id,
+    });
+    setTogglingHiddenId(null);
+
+    if (!res.success) {
+      if (res.tableMissing) setExclusionTableMissing(true);
+      showToast('error', res.error || 'Failed to update criterion applicability');
+      return;
+    }
+
+    setExclusionMap((prev) => {
+      const next = new Map(prev);
+      const set = new Set(next.get(scopeProgramId) || []);
+      if (currentlyHidden) set.delete(c.id);
+      else set.add(c.id);
+      next.set(scopeProgramId, set);
+      return next;
+    });
+
+    await logAuditEvent(supabase, {
+      userId: user!.id,
+      action: 'criterion_edited',
+      entityType: 'accreditation_criteria',
+      entityId: c.id,
+      metadata: {
+        code: c.code,
+        title: c.title,
+        program_id: scopeProgramId,
+        program_code: prog?.code,
+        applicability: currentlyHidden ? 'applicable' : 'not_applicable',
+      },
+    });
+
+    showToast(
+      'success',
+      currentlyHidden
+        ? `[${c.code}] now applies to ${prog?.code || 'this program'} again.`
+        : `[${c.code}] marked not applicable to ${prog?.code || 'this program'}.`
+    );
+  };
 
   const resetForm = () => {
-    setForm({ code: '', title: '', weight: '1.0', required_count: '1', expected_document_type: '', program_id: '', area_id: '', parent_criterion_id: '', rating_axis: '' });
+    setForm({
+      code: '',
+      title: '',
+      weight: '1.0',
+      required_count: '1',
+      expected_document_type: '',
+      program_id: scopeProgramId !== ALL_PROGRAMS_SCOPE ? scopeProgramId : '',
+      area_id: '',
+      parent_criterion_id: '',
+      rating_axis: '',
+    });
     setEditingCriterion(null);
     setFormError(null);
   };
@@ -194,6 +375,31 @@ export default function CriteriaPage() {
 
       if (!frameworkId) {
         throw new Error('No accreditation framework found in database.');
+      }
+
+      // Scope consistency: a criterion's parent must be shared or belong to the same program
+      if (form.parent_criterion_id) {
+        const parent = criteria.find((c) => c.id === form.parent_criterion_id);
+        if (parent?.program_id && parent.program_id !== (form.program_id || null)) {
+          const parentProg = programs.find((p) => p.id === parent.program_id);
+          throw new Error(
+            form.program_id
+              ? `Parent [${parent.code}] belongs to ${parentProg?.code || 'another program'}. Pick a shared parent or one from the same program.`
+              : `Parent [${parent.code}] is ${parentProg?.code || 'program'}-only, so a shared criterion cannot sit under it. Choose "${parentProg?.code || 'that program'} only" in "Applies To" or pick a shared parent.`
+          );
+        }
+      }
+
+      // Prevent switching a shared criterion to program-specific while other programs' children depend on it
+      if (editingCriterion && !editingCriterion.program_id && form.program_id) {
+        const foreignChildren = criteria.filter(
+          (c) => c.parent_criterion_id === editingCriterion.id && (!c.program_id || c.program_id !== form.program_id)
+        );
+        if (foreignChildren.length > 0) {
+          throw new Error(
+            `[${editingCriterion.code}] has ${foreignChildren.length} sub-criteria used by other programs. Move or delete them first, or use "Mark as not applicable" on the program instead.`
+          );
+        }
       }
 
       const payload = {
@@ -299,7 +505,7 @@ export default function CriteriaPage() {
     );
   }
 
-  const filteredCriteria = criteria.filter((c) => {
+  const filteredCriteria = scopedCriteria.filter((c) => {
     if (!searchQuery) return true;
     const q = searchQuery.toLowerCase();
     return (
@@ -384,6 +590,61 @@ export default function CriteriaPage() {
         </div>
       </div>
 
+      {/* Program Scope Selector */}
+      <div className="shrink-0 bg-white border border-gray-200 rounded-xl px-4 py-2.5 flex flex-col lg:flex-row lg:items-center justify-between gap-2">
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="text-[11px] font-bold uppercase tracking-wider text-gray-500">Program:</span>
+          <div className="flex flex-wrap items-center gap-1 bg-gray-100 p-0.5 rounded-lg border border-gray-200">
+            <button
+              onClick={() => setScopeProgramId(ALL_PROGRAMS_SCOPE)}
+              className={`flex items-center gap-1 px-2.5 py-1 rounded text-xs font-bold transition-all ${
+                scopeProgramId === ALL_PROGRAMS_SCOPE ? 'bg-white text-sky-700 shadow-xs' : 'text-gray-500 hover:text-gray-900'
+              }`}
+              title="Criteria shared by every program"
+            >
+              <Globe className="w-3.5 h-3.5" /> Shared (All Programs)
+            </button>
+            {programs.map((p) => (
+              <button
+                key={p.id}
+                onClick={() => setScopeProgramId(p.id)}
+                className={`flex items-center gap-1 px-2.5 py-1 rounded text-xs font-bold transition-all ${
+                  scopeProgramId === p.id ? 'bg-white text-violet-700 shadow-xs' : 'text-gray-500 hover:text-gray-900'
+                }`}
+                title={p.name}
+              >
+                <GraduationCap className="w-3.5 h-3.5" /> {p.code}
+              </button>
+            ))}
+          </div>
+        </div>
+        <p className="text-[11px] text-gray-500">
+          {selectedScopeProgram ? (
+            <>
+              <span className="font-bold text-gray-800">{selectedScopeProgram.code}</span> uses{' '}
+              <span className="font-bold text-gray-800">{scopeStats.applicable}</span> criteria ·{' '}
+              <span className="text-sky-700 font-semibold">{scopeStats.shared} shared</span> ·{' '}
+              <span className="text-violet-700 font-semibold">{scopeStats.own} {selectedScopeProgram.code}-only</span> ·{' '}
+              <span className="text-gray-600 font-semibold">{scopeStats.hidden} not applicable</span>
+              {' '}— click <Eye className="w-3 h-3 inline -mt-0.5" /> to mark a shared criterion as not applicable.
+            </>
+          ) : (
+            <>
+              <span className="font-bold text-gray-800">{scopeStats.shared}</span> shared criteria apply to every program. Select a program to add its own criteria or hide shared ones that don&apos;t apply.
+            </>
+          )}
+        </p>
+      </div>
+
+      {exclusionTableMissing && (
+        <div className="shrink-0 flex items-start gap-2 bg-amber-50 border border-amber-200 text-amber-900 rounded-xl px-4 py-2 text-xs">
+          <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+          <span>
+            <b>One-time setup needed:</b> run <code className="font-mono bg-amber-100 px-1 rounded">supabase/migrations/MIGRATION_V8_PROGRAM_SPECIFIC_CRITERIA.sql</code> in the Supabase SQL Editor to enable marking shared criteria as &quot;not applicable&quot; per program. Adding program-only criteria already works.
+          </span>
+        </div>
+      )}
+
       {loading ? (
         <div className="flex-1 min-h-0 bg-white border border-gray-200 rounded-xl p-4">
           <TableSkeleton rows={8} cols={6} />
@@ -413,7 +674,16 @@ export default function CriteriaPage() {
               </thead>
               <tbody className="divide-y divide-gray-100">
                 {roots.map((root) => (
-                  <CriteriaRow key={root.id} node={root} onEdit={openEditModal} onDelete={openDeleteConfirm} />
+                  <CriteriaRow
+                    key={root.id}
+                    node={root}
+                    onEdit={openEditModal}
+                    onDelete={openDeleteConfirm}
+                    programs={programs}
+                    scopeProgramId={scopeProgramId}
+                    hiddenIds={hiddenIds}
+                    onToggleHidden={handleToggleHidden}
+                  />
                 ))}
               </tbody>
             </table>
@@ -468,7 +738,7 @@ export default function CriteriaPage() {
                           weight: '1.0',
                           required_count: '1',
                           expected_document_type: '',
-                          program_id: '',
+                          program_id: scopeProgramId !== ALL_PROGRAMS_SCOPE ? scopeProgramId : '',
                           area_id: area.id,
                           parent_criterion_id: '',
                           rating_axis: 'single',
@@ -494,16 +764,25 @@ export default function CriteriaPage() {
                       </p>
                     ) : (
                       <div className="space-y-3">
-                        {areaCriteria.map((c) => (
+                        {areaCriteria.map((c) => {
+                          const isHidden = hiddenIds.has(c.id);
+                          const canToggleHidden = scopeProgramId !== ALL_PROGRAMS_SCOPE && !c.program_id;
+                          return (
                           <div
                             key={c.id}
                             className="relative pl-6 before:content-[''] before:absolute before:left-2.5 before:top-4 before:bottom-0 before:w-0.5 before:bg-primary/20 after:content-[''] after:absolute after:left-2.5 after:top-4 after:w-3.5 after:h-0.5 after:bg-primary/20"
                           >
-                            <div className="bg-white rounded-xl border border-gray-200 p-3.5 hover:border-primary/40 hover:shadow-xs transition-all">
+                            <div className={`rounded-xl border p-3.5 transition-all ${
+                              isHidden
+                                ? 'bg-gray-50 border-dashed border-gray-300 opacity-60'
+                                : c.program_id
+                                  ? 'bg-violet-50/30 border-violet-200 hover:border-violet-400 hover:shadow-xs'
+                                  : 'bg-white border-gray-200 hover:border-primary/40 hover:shadow-xs'
+                            }`}>
                               {/* Criterion Top Bar */}
                               <div className="flex items-start justify-between gap-3">
                                 <div className="flex items-start gap-2.5 min-w-0">
-                                  <span className="font-mono text-xs font-black bg-primary text-white px-2 py-0.5 rounded shadow-2xs shrink-0 mt-0.5">
+                                  <span className={`font-mono text-xs font-black text-white px-2 py-0.5 rounded shadow-2xs shrink-0 mt-0.5 ${isHidden ? 'bg-gray-400 line-through' : c.program_id ? 'bg-violet-600' : 'bg-primary'}`}>
                                     {c.code}
                                   </span>
                                   <div className="min-w-0">
@@ -511,6 +790,12 @@ export default function CriteriaPage() {
                                       {c.title}
                                     </h4>
                                     <div className="flex flex-wrap items-center gap-2 mt-1.5">
+                                      <ScopeBadge criterion={c} programs={programs} />
+                                      {isHidden && (
+                                        <span className="text-[10px] font-bold px-1.5 py-0.5 rounded border bg-gray-100 text-gray-600 border-gray-300">
+                                          Not applicable to {selectedScopeProgram?.code}
+                                        </span>
+                                      )}
                                       <span className="text-[10px] font-bold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
                                         Required: {c.required_count || 1} {c.required_count === 1 ? 'doc' : 'docs'}
                                       </span>
@@ -526,6 +811,18 @@ export default function CriteriaPage() {
 
                                 {/* Action Buttons */}
                                 <div className="flex items-center gap-1 shrink-0">
+                                  {canToggleHidden && (
+                                    <button
+                                      onClick={() => handleToggleHidden(c)}
+                                      disabled={togglingHiddenId === c.id}
+                                      className={`p-1.5 rounded-lg transition-colors disabled:opacity-40 ${
+                                        isHidden ? 'text-amber-600 hover:bg-amber-50' : 'text-gray-400 hover:bg-gray-100 hover:text-gray-700'
+                                      }`}
+                                      title={isHidden ? `Mark as applicable to ${selectedScopeProgram?.code} again` : `Mark as not applicable to ${selectedScopeProgram?.code}`}
+                                    >
+                                      {isHidden ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
+                                    </button>
+                                  )}
                                   <button
                                     onClick={() => openEditModal(c)}
                                     className="p-1.5 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-primary transition-colors"
@@ -566,7 +863,8 @@ export default function CriteriaPage() {
                               )}
                             </div>
                           </div>
-                        ))}
+                          );
+                        })}
                       </div>
                     )}
                   </div>
@@ -625,11 +923,53 @@ export default function CriteriaPage() {
                   className="w-full px-3.5 py-2.5 bg-white border border-gray-300 rounded-lg text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                 >
                   <option value="">-- Top-Level Node (No Parent) --</option>
-                  {criteria.filter(c => c.id !== editingCriterion?.id).map((c) => (
-                    <option key={c.id} value={c.id}>[{c.code}] {c.title}</option>
-                  ))}
+                  {criteria
+                    .filter((c) => c.id !== editingCriterion?.id)
+                    .filter((c) => !c.program_id || c.program_id === (form.program_id || null))
+                    .map((c) => (
+                      <option key={c.id} value={c.id}>
+                        [{c.code}] {c.title}{c.program_id ? ` (${programs.find((p) => p.id === c.program_id)?.code || 'program'} only)` : ''}
+                      </option>
+                    ))}
                 </select>
               </div>
+            </div>
+
+            {/* Applies To (Program Scope) */}
+            <div>
+              <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1.5">
+                Applies To <span className="text-red-500">*</span>
+              </label>
+              <select
+                value={form.program_id}
+                onChange={(e) => {
+                  const nextProg = e.target.value;
+                  const parent = criteria.find((c) => c.id === form.parent_criterion_id);
+                  const parentStillValid = !parent || !parent.program_id || parent.program_id === (nextProg || null);
+                  setForm({ ...form, program_id: nextProg, parent_criterion_id: parentStillValid ? form.parent_criterion_id : '' });
+                }}
+                className="w-full px-3.5 py-2.5 bg-white border border-gray-300 rounded-lg text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+              >
+                <option value="">All Programs (Shared criterion)</option>
+                {programs.map((p) => (
+                  <option key={p.id} value={p.id}>
+                    {p.code} only — {p.name}
+                  </option>
+                ))}
+              </select>
+              {form.program_id ? (
+                <p className="text-[11px] text-violet-700 mt-1">
+                  Only {programs.find((p) => p.id === form.program_id)?.code || 'this program'} will see and be scored on this criterion.
+                </p>
+              ) : editingCriterion && !editingCriterion.program_id ? (
+                <p className="text-[11px] text-amber-700 mt-1 flex items-center gap-1">
+                  <AlertTriangle className="w-3 h-3 shrink-0" />
+                  This is a shared criterion — your changes will apply to ALL programs. To remove it for one program only, use the
+                  <Eye className="w-3 h-3 inline" /> button on the Criteria page with that program selected.
+                </p>
+              ) : (
+                <p className="text-[11px] text-gray-500 mt-1">Every program will see and be scored on this criterion.</p>
+              )}
             </div>
 
             <div>
