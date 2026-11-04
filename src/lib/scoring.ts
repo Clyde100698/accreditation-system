@@ -68,8 +68,16 @@ export function calculateReadinessScores(
       const validEvidence = evidence.filter((e) => {
         if (e.criterion_id !== node.id) return false;
         if (e.status !== 'verified') return false;
-        if (node.expected_document_type && e.document_type !== node.expected_document_type) return false;
         if (e.effective_date && new Date(e.effective_date) < fiveYearsAgo) return false;
+        if (node.expected_document_type && e.document_type) {
+          const expected = node.expected_document_type.trim().toLowerCase();
+          const actual = e.document_type.trim().toLowerCase();
+          if (expected !== actual && !actual.includes(expected) && !expected.includes(actual)) {
+            const options = expected.split('/').map((s) => s.trim()).filter(Boolean);
+            const matchesOption = options.some((opt) => actual === opt || actual.includes(opt) || opt.includes(actual));
+            if (!matchesOption && options.length > 0) return false;
+          }
+        }
         return true;
       });
 
