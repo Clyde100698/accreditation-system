@@ -12,6 +12,13 @@ import { showToast } from '@/components/ui/Toast';
 import { Department, Program, Institution } from '@/lib/types';
 import { logAuditEvent } from '@/lib/audit';
 import {
+  saveDepartment,
+  deleteDepartment,
+  saveProgram,
+  deleteProgram,
+  toggleProgramActiveScope,
+} from '@/app/actions/academicActions';
+import {
   Building2,
   Plus,
   Pencil,
@@ -124,65 +131,38 @@ export default function AcademicRegistryPage() {
       return;
     }
 
-    // Prevent duplicate department code
-    const duplicateCode = departments.find(
-      (d) => d.id !== editingDept?.id && d.code.trim().toUpperCase() === trimmedCode
-    );
-    if (duplicateCode) {
-      showToast('error', `Department code "${trimmedCode}" already exists (${duplicateCode.name})`);
-      return;
-    }
-
-    // Prevent duplicate department name
-    const duplicateName = departments.find(
-      (d) => d.id !== editingDept?.id && d.name.trim().toLowerCase() === trimmedName.toLowerCase()
-    );
-    if (duplicateName) {
-      showToast('error', `Department name "${trimmedName}" already exists with code [${duplicateName.code}]`);
-      return;
-    }
-
     setDeptSubmitting(true);
 
     try {
       const instId = institutions[0]?.id;
-      if (!instId) {
-        showToast('error', 'No parent institution found');
+      const res = await saveDepartment({
+        id: editingDept?.id,
+        name: trimmedName,
+        code: trimmedCode,
+        institution_id: instId,
+      });
+
+      if (!res.success) {
+        showToast('error', res.error || 'Failed to save department');
         setDeptSubmitting(false);
         return;
       }
 
       if (editingDept) {
-        const { error } = await supabase
-          .from('departments')
-          .update({
-            name: trimmedName,
-            code: trimmedCode,
-          })
-          .eq('id', editingDept.id);
-
-        if (error) throw error;
-        showToast('success', `Department [${trimmedCode}] updated successfully`);
-      } else {
-        const { data, error } = await supabase
-          .from('departments')
-          .insert({
-            name: trimmedName,
-            code: trimmedCode,
-            institution_id: instId,
-          })
-          .select()
-          .single();
-
-        if (error) throw error;
-
-        await logAuditEvent('department_created', 'departments', data.id, {
+        await logAuditEvent('department_updated', 'departments', editingDept.id, {
           name: trimmedName,
           code: trimmedCode,
         });
-
+        showToast('success', `Department [${trimmedCode}] updated successfully`);
+      } else {
+        if (res.data?.id) {
+          await logAuditEvent('department_created', 'departments', res.data.id, {
+            name: trimmedName,
+            code: trimmedCode,
+          });
+          setSelectedDeptId(res.data.id);
+        }
         showToast('success', `Department [${trimmedCode}] created successfully`);
-        setSelectedDeptId(data.id);
       }
 
       setIsDeptModalOpen(false);
@@ -190,7 +170,8 @@ export default function AcademicRegistryPage() {
       setDeptForm({ name: '', code: '' });
       fetchData();
     } catch (err: unknown) {
-      showToast('error', err instanceof Error ? err.message : 'Failed to save department');
+      const msg = err instanceof Error ? err.message : String(err);
+      showToast('error', msg || 'Failed to save department');
     } finally {
       setDeptSubmitting(false);
     }
@@ -227,65 +208,38 @@ export default function AcademicRegistryPage() {
       return;
     }
 
-    // Prevent duplicate program code across the institution
-    const duplicateCode = programs.find(
-      (p) => p.id !== editingProg?.id && p.code.trim().toUpperCase() === trimmedCode
-    );
-    if (duplicateCode) {
-      showToast('error', `Program code "${trimmedCode}" already exists (${duplicateCode.name})`);
-      return;
-    }
-
-    // Prevent duplicate program name within the same department
-    const duplicateName = programs.find(
-      (p) =>
-        p.id !== editingProg?.id &&
-        p.department_id === progForm.department_id &&
-        p.name.trim().toLowerCase() === trimmedName.toLowerCase()
-    );
-    if (duplicateName) {
-      showToast('error', `A program named "${trimmedName}" already exists in this department.`);
-      return;
-    }
-
     setProgSubmitting(true);
 
     try {
-      if (editingProg) {
-        const { error } = await supabase
-          .from('programs')
-          .update({
-            name: trimmedName,
-            code: trimmedCode,
-            department_id: progForm.department_id,
-          })
-          .eq('id', editingProg.id);
+      const res = await saveProgram({
+        id: editingProg?.id,
+        name: trimmedName,
+        code: trimmedCode,
+        department_id: progForm.department_id,
+        is_accreditation_active: editingProg ? editingProg.is_accreditation_active : true,
+      });
 
-        if (error) throw error;
+      if (!res.success) {
+        showToast('error', res.error || 'Failed to save program');
+        setProgSubmitting(false);
+        return;
+      }
+
+      if (editingProg) {
         await logAuditEvent('program_updated', 'programs', editingProg.id, {
           name: trimmedName,
           code: trimmedCode,
         });
         showToast('success', `Program [${trimmedCode}] updated successfully`);
       } else {
-        const { data, error } = await supabase
-          .from('programs')
-          .insert({
+        if (res.data?.id) {
+          await logAuditEvent('program_created', 'programs', res.data.id, {
             name: trimmedName,
             code: trimmedCode,
-            department_id: progForm.department_id,
-            is_accreditation_active: true,
-          })
-          .select()
-          .single();
-
-        if (error) throw error;
-        await logAuditEvent('program_created', 'programs', data.id, {
-          name: trimmedName,
-          code: trimmedCode,
-        });
+          });
+          setSelectedDeptId(progForm.department_id);
+        }
         showToast('success', `Program [${trimmedCode}] registered successfully`);
-        setSelectedDeptId(progForm.department_id);
       }
 
       setIsProgModalOpen(false);
@@ -293,7 +247,8 @@ export default function AcademicRegistryPage() {
       setProgForm({ name: '', code: '', department_id: '' });
       fetchData();
     } catch (err: unknown) {
-      showToast('error', err instanceof Error ? err.message : 'Failed to save program');
+      const msg = err instanceof Error ? err.message : String(err);
+      showToast('error', msg || 'Failed to save program');
     } finally {
       setProgSubmitting(false);
     }
@@ -304,12 +259,10 @@ export default function AcademicRegistryPage() {
     setToggleLoading(prog.id);
     const newState = !prog.is_accreditation_active;
     try {
-      const { error } = await supabase
-        .from('programs')
-        .update({ is_accreditation_active: newState })
-        .eq('id', prog.id);
-
-      if (error) throw error;
+      const res = await toggleProgramActiveScope(prog.id, newState);
+      if (!res.success) {
+        throw new Error(res.error || 'Failed to update program status');
+      }
 
       await logAuditEvent(
         newState ? 'program_activated' : 'program_deactivated',
@@ -326,7 +279,8 @@ export default function AcademicRegistryPage() {
       );
       fetchData();
     } catch (err: unknown) {
-      showToast('error', err instanceof Error ? err.message : 'Failed to update program status');
+      const msg = err instanceof Error ? err.message : String(err);
+      showToast('error', msg || 'Failed to update program status');
     } finally {
       setToggleLoading(null);
     }
@@ -339,34 +293,43 @@ export default function AcademicRegistryPage() {
 
     try {
       if (deleteTarget.type === 'dept') {
-        const childProgs = programs.filter((p) => p.department_id === deleteTarget.id);
-        if (childProgs.length > 0) {
-          showToast(
-            'error',
-            `Cannot delete department "${deleteTarget.name}" because it still contains ${childProgs.length} program(s). Delete or reassign the programs first.`
-          );
+        const res = await deleteDepartment(deleteTarget.id);
+        if (!res.success) {
+          showToast('error', res.error || 'Failed to delete department');
           setIsDeleting(false);
           setDeleteTarget(null);
           return;
         }
 
-        const { error } = await supabase.from('departments').delete().eq('id', deleteTarget.id);
-        if (error) throw error;
+        await logAuditEvent('department_deleted', 'departments', deleteTarget.id, {
+          name: deleteTarget.name,
+        });
 
         showToast('success', `Department "${deleteTarget.name}" deleted`);
         if (selectedDeptId === deleteTarget.id) {
           setSelectedDeptId('all');
         }
       } else {
-        const { error } = await supabase.from('programs').delete().eq('id', deleteTarget.id);
-        if (error) throw error;
+        const res = await deleteProgram(deleteTarget.id);
+        if (!res.success) {
+          showToast('error', res.error || 'Failed to delete program');
+          setIsDeleting(false);
+          setDeleteTarget(null);
+          return;
+        }
+
+        await logAuditEvent('program_deleted', 'programs', deleteTarget.id, {
+          name: deleteTarget.name,
+        });
+
         showToast('success', `Program "${deleteTarget.name}" deleted`);
       }
 
       setDeleteTarget(null);
       fetchData();
     } catch (err: unknown) {
-      showToast('error', err instanceof Error ? err.message : 'Deletion failed');
+      const msg = err instanceof Error ? err.message : String(err);
+      showToast('error', msg || 'Deletion failed');
     } finally {
       setIsDeleting(false);
     }

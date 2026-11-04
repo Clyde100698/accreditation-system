@@ -7,6 +7,7 @@ import { TableSkeleton } from '@/components/ui/Skeleton';
 import { showToast } from '@/components/ui/Toast';
 import { Program, Department, AccreditationLevel } from '@/lib/types';
 import { logAuditEvent } from '@/lib/audit';
+import { toggleProgramActiveScope } from '@/app/actions/academicActions';
 import {
   SlidersHorizontal,
   CheckCircle2,
@@ -63,12 +64,10 @@ export default function AccreditationScopePage() {
     setTogglingId(prog.id);
 
     try {
-      const { error } = await supabase
-        .from('programs')
-        .update({ is_accreditation_active: nextState })
-        .eq('id', prog.id);
-
-      if (error) throw error;
+      const res = await toggleProgramActiveScope(prog.id, nextState);
+      if (!res.success) {
+        throw new Error(res.error || 'Failed to update scope');
+      }
 
       await logAuditEvent('accreditation_scope_updated', 'programs', prog.id, {
         program_code: prog.code,
@@ -76,23 +75,21 @@ export default function AccreditationScopePage() {
         is_accreditation_active: nextState,
       });
 
-      showToast('success', `Accreditation scope updated for ${prog.code}`);
+      // Update local state
+      setPrograms((prev) =>
+        prev.map((p) => (p.id === prog.id ? { ...p, is_accreditation_active: nextState } : p))
+      );
+
+      showToast(
+        'success',
+        `${prog.code} is now ${nextState ? 'ACTIVE in' : 'REMOVED from'} current accreditation cycle`
+      );
     } catch (err: unknown) {
-      showToast('error', err instanceof Error ? err.message : 'Failed to update scope');
+      const msg = err instanceof Error ? err.message : String(err);
+      showToast('error', msg || 'Failed to update scope');
     } finally {
       setTogglingId(null);
     }
-
-    // Update local state
-    setPrograms((prev) =>
-      prev.map((p) => (p.id === prog.id ? { ...p, is_accreditation_active: nextState } : p))
-    );
-
-    showToast(
-      'success',
-      `${prog.code} is now ${nextState ? 'ACTIVE in' : 'REMOVED from'} current accreditation cycle`
-    );
-    setTogglingId(null);
   };
 
   const filteredPrograms = programs.filter((p) => {
