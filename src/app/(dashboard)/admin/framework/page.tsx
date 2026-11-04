@@ -22,9 +22,7 @@ import { logAuditEvent } from '@/lib/audit';
 import {
   INITIAL_RATING_SCALES,
   INITIAL_LEVEL_SPECIFIC_CRITERIA,
-  INITIAL_AREAS,
   INITIAL_CRITERIA,
-  INITIAL_LEVELS,
 } from '@/lib/mock-data';
 import {
   SlidersHorizontal,
@@ -39,7 +37,6 @@ import {
   AlertCircle,
   Copy,
   Search,
-  CheckCircle2,
   ChevronDown,
   ChevronRight,
   FileText,
@@ -397,7 +394,7 @@ export default function FrameworkConfigPage() {
         display_order: Number(areaForm.display_order) || 1,
       };
 
-      let opError: any = null;
+      let opError: { message: string } | null = null;
       let insertedId = editingArea?.id;
 
       if (editingArea) {
@@ -537,7 +534,7 @@ export default function FrameworkConfigPage() {
         framework_id: fwId,
       };
 
-      let opError: any = null;
+      let opError: { message: string } | null = null;
       let insertedId = editingLevel?.id;
 
       if (editingLevel) {

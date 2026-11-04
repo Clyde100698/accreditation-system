@@ -236,14 +236,29 @@ export async function POST(request: NextRequest) {
     // Date extraction
     const suggestedDate = extractDate(text);
 
+    let warning = !matched && expectedType
+      ? `This document doesn't appear to match the expected type "${expectedType}" — please verify.${usedOcr ? ' (Analyzed via OCR — accuracy may vary)' : ''}`
+      : null;
+
+    // Check PACUCOA 5-year recency window
+    let isExpiredRecency = false;
+    if (suggestedDate) {
+      const fiveYearsAgo = new Date();
+      fiveYearsAgo.setFullYear(fiveYearsAgo.getFullYear() - 5);
+      if (new Date(suggestedDate) < fiveYearsAgo) {
+        isExpiredRecency = true;
+        const recencyMsg = `Recency Warning: The detected date (${suggestedDate}) is older than 5 years. PACUCOA requires evidence to be within the 5-year recency window to count toward verified compliance scores.`;
+        warning = warning ? `${warning} | ${recencyMsg}` : recencyMsg;
+      }
+    }
+
     return NextResponse.json({
       matchedType: matched,
       suggestedDate,
+      isExpiredRecency,
       extractedKeywords: foundKeywords,
       isScanned: usedOcr,
-      warning: !matched && expectedType
-        ? `This document doesn't appear to match the expected type "${expectedType}" — please verify.${usedOcr ? ' (Analyzed via OCR — accuracy may vary)' : ''}`
-        : null,
+      warning,
       info: matched && usedOcr ? 'Document analyzed via OCR on scanned image.' : null,
     });
   } catch (error: unknown) {

@@ -1,0 +1,4 @@
+scripts/**
+backups/**
+node_modules/**
+.next/**

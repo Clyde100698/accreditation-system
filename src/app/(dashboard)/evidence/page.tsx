@@ -21,7 +21,6 @@ import {
   Folder,
   Search,
   Eye,
-  FileText,
   Layers,
   TableProperties,
   ChevronDown,
@@ -31,12 +30,9 @@ import {
   Play,
   Cloud,
   Link2,
-  Globe,
-  Film,
   Sparkles,
   X,
   RotateCcw,
-  Filter,
 } from 'lucide-react';
 
 interface ParsedEvidenceMeta {
@@ -263,7 +259,7 @@ export default function EvidencePage() {
         .select('*, accreditation_areas(*)')
         .order('code');
       const { data: criteriaData } = await criteriaQuery;
-      
+
       if (criteriaData) {
         const parentIds = new Set((criteriaData as AccreditationCriterion[]).map((c) => c.parent_criterion_id).filter(Boolean));
         // Keep leaf criteria for compliance uploads
@@ -594,7 +590,7 @@ export default function EvidencePage() {
       folderMap.get(fName)!.docs.push(doc);
     });
     const folderGroups = Array.from(folderMap.values()).sort((a, b) => a.folderName.localeCompare(b.folderName));
-    
+
     // 2. Group by criterion within this area
     const criteriaMap = new Map<string, { criterion: AccreditationCriterion; docs: EvidenceDocument[] }>();
     areaEvidence.forEach((doc) => {
@@ -656,11 +652,10 @@ export default function EvidencePage() {
         <div className="flex items-center bg-gray-100 p-0.5 rounded-lg border border-gray-200">
           <button
             onClick={() => setActiveTab('library')}
-            className={`flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-bold transition-all ${
-              activeTab === 'library'
+            className={`flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-bold transition-all ${activeTab === 'library'
                 ? 'bg-white text-gray-900 shadow-xs'
                 : 'text-gray-500 hover:text-gray-900'
-            }`}
+              }`}
           >
             <Layers className="w-3.5 h-3.5" />
             Library ({filteredEvidence.length})
@@ -668,11 +663,10 @@ export default function EvidencePage() {
           {canUpload ? (
             <button
               onClick={() => setActiveTab('upload')}
-              className={`flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-bold transition-all ${
-                activeTab === 'upload'
+              className={`flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-bold transition-all ${activeTab === 'upload'
                   ? 'bg-white text-gray-900 shadow-xs'
                   : 'text-gray-500 hover:text-gray-900'
-              }`}
+                }`}
             >
               <Upload className="w-3.5 h-3.5" />
               Upload New
@@ -781,9 +775,8 @@ export default function EvidencePage() {
                 <div className="flex items-center bg-gray-100 p-0.5 rounded-lg border border-gray-200">
                   <button
                     onClick={() => setViewMode('folder')}
-                    className={`flex items-center gap-1.5 px-2.5 py-1 rounded text-xs font-bold transition-all ${
-                      viewMode === 'folder' ? 'bg-white text-primary shadow-xs' : 'text-gray-500 hover:text-gray-900'
-                    }`}
+                    className={`flex items-center gap-1.5 px-2.5 py-1 rounded text-xs font-bold transition-all ${viewMode === 'folder' ? 'bg-white text-primary shadow-xs' : 'text-gray-500 hover:text-gray-900'
+                      }`}
                     title="Real-life Exhibit Folders tree mirroring BSCS_REAL_DATA"
                   >
                     <Folder className="w-3.5 h-3.5" />
@@ -791,9 +784,8 @@ export default function EvidencePage() {
                   </button>
                   <button
                     onClick={() => setViewMode('hierarchy')}
-                    className={`flex items-center gap-1.5 px-2.5 py-1 rounded text-xs font-bold transition-all ${
-                      viewMode === 'hierarchy' ? 'bg-white text-primary shadow-xs' : 'text-gray-500 hover:text-gray-900'
-                    }`}
+                    className={`flex items-center gap-1.5 px-2.5 py-1 rounded text-xs font-bold transition-all ${viewMode === 'hierarchy' ? 'bg-white text-primary shadow-xs' : 'text-gray-500 hover:text-gray-900'
+                      }`}
                     title="Grouped by PACUCOA Criteria"
                   >
                     <Layers className="w-3.5 h-3.5" />
@@ -801,9 +793,8 @@ export default function EvidencePage() {
                   </button>
                   <button
                     onClick={() => setViewMode('flat')}
-                    className={`flex items-center gap-1.5 px-2.5 py-1 rounded text-xs font-bold transition-all ${
-                      viewMode === 'flat' ? 'bg-white text-primary shadow-xs' : 'text-gray-500 hover:text-gray-900'
-                    }`}
+                    className={`flex items-center gap-1.5 px-2.5 py-1 rounded text-xs font-bold transition-all ${viewMode === 'flat' ? 'bg-white text-primary shadow-xs' : 'text-gray-500 hover:text-gray-900'
+                      }`}
                     title="Flat Table view"
                   >
                     <TableProperties className="w-3.5 h-3.5" />
@@ -817,11 +808,10 @@ export default function EvidencePage() {
             <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pt-1 border-t border-gray-100">
               <button
                 onClick={() => handleSelectArea('all')}
-                className={`px-2.5 py-1 rounded-full text-xs font-bold transition-all shrink-0 ${
-                  filterArea === 'all'
+                className={`px-2.5 py-1 rounded-full text-xs font-bold transition-all shrink-0 ${filterArea === 'all'
                     ? 'bg-primary text-white shadow-xs'
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
+                  }`}
               >
                 All Areas ({allEvidence.length})
               </button>
@@ -832,11 +822,10 @@ export default function EvidencePage() {
                   <button
                     key={a.id}
                     onClick={() => handleSelectArea(a.id)}
-                    className={`px-2.5 py-1 rounded-full text-xs font-semibold transition-all shrink-0 flex items-center gap-1.5 ${
-                      isSelected
+                    className={`px-2.5 py-1 rounded-full text-xs font-semibold transition-all shrink-0 flex items-center gap-1.5 ${isSelected
                         ? 'bg-gray-900 text-white shadow-xs'
                         : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                    }`}
+                      }`}
                     title={`${a.code}: ${a.title} (${count} documents)`}
                   >
                     <span className="font-bold">{a.code}</span>
@@ -982,7 +971,7 @@ export default function EvidencePage() {
                 return (
                   <div key={area.id} className="bg-white rounded-xl border border-gray-200 shadow-xs overflow-hidden">
                     {/* Area Header Accordion */}
-                    <div 
+                    <div
                       onClick={() => toggleAreaExpand(area.id)}
                       className="bg-gray-50/90 hover:bg-gray-100/80 cursor-pointer px-3.5 py-2.5 border-b border-gray-200 flex items-center justify-between transition-colors select-none"
                     >
@@ -999,9 +988,8 @@ export default function EvidencePage() {
                         <span className="text-xs text-gray-500 font-medium hidden sm:inline">
                           {folderGroups.length} {folderGroups.length === 1 ? 'Folder' : 'Folders'}
                         </span>
-                        <span className={`text-xs font-bold px-2.5 py-1 rounded-full ${
-                          totalDocs > 0 ? 'bg-primary/10 text-primary' : 'bg-gray-200 text-gray-600'
-                        }`}>
+                        <span className={`text-xs font-bold px-2.5 py-1 rounded-full ${totalDocs > 0 ? 'bg-primary/10 text-primary' : 'bg-gray-200 text-gray-600'
+                          }`}>
                           {totalDocs} {totalDocs === 1 ? 'Document' : 'Documents'}
                         </span>
                       </div>
@@ -1119,7 +1107,7 @@ export default function EvidencePage() {
                 return (
                   <div key={area.id} className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
                     {/* Area Header Accordion */}
-                    <div 
+                    <div
                       onClick={() => toggleAreaExpand(area.id)}
                       className="bg-gray-50/90 hover:bg-gray-100/80 cursor-pointer px-3.5 py-2.5 border-b border-gray-200 flex items-center justify-between transition-colors"
                     >
@@ -1133,9 +1121,8 @@ export default function EvidencePage() {
                         </div>
                       </div>
                       <div className="flex items-center gap-3">
-                        <span className={`text-xs font-bold px-2.5 py-1 rounded-full ${
-                          totalDocs > 0 ? 'bg-primary/10 text-primary' : 'bg-gray-200 text-gray-600'
-                        }`}>
+                        <span className={`text-xs font-bold px-2.5 py-1 rounded-full ${totalDocs > 0 ? 'bg-primary/10 text-primary' : 'bg-gray-200 text-gray-600'
+                          }`}>
                           {totalDocs} {totalDocs === 1 ? 'Document' : 'Documents'}
                         </span>
                       </div>
@@ -1259,11 +1246,10 @@ export default function EvidencePage() {
                 <button
                   type="button"
                   onClick={() => setUploadMode('file')}
-                  className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-bold transition-all ${
-                    uploadMode === 'file'
+                  className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-bold transition-all ${uploadMode === 'file'
                       ? 'bg-white text-gray-900 shadow-xs'
                       : 'text-gray-500 hover:text-gray-900'
-                  }`}
+                    }`}
                 >
                   <Upload className="w-3.5 h-3.5" />
                   <span>Upload Local File</span>
@@ -1271,11 +1257,10 @@ export default function EvidencePage() {
                 <button
                   type="button"
                   onClick={() => setUploadMode('link')}
-                  className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-bold transition-all ${
-                    uploadMode === 'link'
+                  className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-bold transition-all ${uploadMode === 'link'
                       ? 'bg-primary text-white shadow-xs'
                       : 'text-gray-500 hover:text-gray-900'
-                  }`}
+                    }`}
                 >
                   <Video className="w-3.5 h-3.5" />
                   <span>Video & Cloud Link</span>
@@ -1291,10 +1276,10 @@ export default function EvidencePage() {
                 {(!user.program_id || ['system_admin', 'qa'].includes(user.role)) && (
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">Target Academic Program</label>
-                    <select 
-                      required 
-                      value={uploadProgramId} 
-                      onChange={(e) => setUploadProgramId(e.target.value)} 
+                    <select
+                      required
+                      value={uploadProgramId}
+                      onChange={(e) => setUploadProgramId(e.target.value)}
                       className="w-full px-3 py-2.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary focus:border-transparent bg-white font-medium"
                     >
                       {programs.map((p) => (
@@ -1307,10 +1292,10 @@ export default function EvidencePage() {
 
                 <div className={user.program_id && !['system_admin', 'qa'].includes(user.role) ? 'md:col-span-2' : ''}>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Criterion</label>
-                  <select 
-                    required 
-                    value={selectedCriterion} 
-                    onChange={(e) => setSelectedCriterion(e.target.value)} 
+                  <select
+                    required
+                    value={selectedCriterion}
+                    onChange={(e) => setSelectedCriterion(e.target.value)}
                     className="w-full px-3 py-2.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary focus:border-transparent bg-white"
                   >
                     <option value="">Select a criterion...</option>
@@ -1357,12 +1342,12 @@ export default function EvidencePage() {
                   </select>
                   <p className="text-xs text-gray-400 mt-1">
                     {user.role === 'faculty'
-                      ? (userAssignedAreaIds.length > 0 
-                          ? 'Showing only criteria in your assigned accreditation area.' 
-                          : 'You do not have an assigned accreditation area yet. Please contact your QA Administrator.')
-                      : (userAssignedAreaIds.length > 0 
-                          ? 'Criteria in your assigned area appear first. You can also select from other areas.' 
-                          : 'Choose which PACUCOA criterion this document proves compliance for.')}
+                      ? (userAssignedAreaIds.length > 0
+                        ? 'Showing only criteria in your assigned accreditation area.'
+                        : 'You do not have an assigned accreditation area yet. Please contact your QA Administrator.')
+                      : (userAssignedAreaIds.length > 0
+                        ? 'Criteria in your assigned area appear first. You can also select from other areas.'
+                        : 'Choose which PACUCOA criterion this document proves compliance for.')}
                   </p>
                 </div>
               </div>
@@ -1432,15 +1417,15 @@ export default function EvidencePage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   <div className="md:col-span-2">
                     <label className="block text-sm font-medium text-gray-700 mb-1">File</label>
-                    <input 
-                      id="file-upload" 
-                      type="file" 
-                      accept=".pdf,.doc,.docx,.jpg,.png,.xlsx,.xls,.mp4" 
-                      required 
-                      onChange={handleFileChange} 
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm file:mr-4 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20 transition-colors" 
+                    <input
+                      id="file-upload"
+                      type="file"
+                      accept=".pdf,.doc,.docx,.jpg,.png,.xlsx,.xls,.mp4"
+                      required
+                      onChange={handleFileChange}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm file:mr-4 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20 transition-colors"
                     />
-                    <p className="text-xs text-gray-400 mt-1">Accepted formats: PDF, Word, Excel, JPG, PNG, MP4 (max 10MB). For videos or files larger than 10MB, switch to the "Video & Cloud Link" mode above.</p>
+                    <p className="text-xs text-gray-400 mt-1">Accepted formats: PDF, Word, Excel, JPG, PNG, MP4 (max 10MB). For videos or files larger than 10MB, switch to the &quot;Video &amp; Cloud Link&quot; mode above.</p>
                     {extracting && (
                       <p className="text-xs text-blue-600 mt-1 flex items-center gap-1">
                         <span className="w-3 h-3 border-2 border-blue-600 border-t-transparent rounded-full animate-spin inline-block" /> Scanning document contents...
@@ -1449,12 +1434,11 @@ export default function EvidencePage() {
                   </div>
                 </div>
               )}
-              
+
               {/* Extraction Warnings/Hints */}
               {extractionResult && uploadMode === 'file' && (
-                <div className={`p-4 rounded-lg text-sm flex gap-3 items-start border ${
-                  extractionResult.warning ? 'bg-amber-50 text-amber-800 border-amber-200' : 'bg-blue-50 text-blue-800 border-blue-200'
-                }`}>
+                <div className={`p-4 rounded-lg text-sm flex gap-3 items-start border ${extractionResult.warning ? 'bg-amber-50 text-amber-800 border-amber-200' : 'bg-blue-50 text-blue-800 border-blue-200'
+                  }`}>
                   {extractionResult.warning ? (
                     <AlertTriangle className="w-5 h-5 flex-shrink-0 mt-0.5 text-amber-600" />
                   ) : (
@@ -1485,10 +1469,10 @@ export default function EvidencePage() {
                       {documentType}
                     </div>
                   ) : (
-                    <select 
-                      required 
-                      value={documentType} 
-                      onChange={(e) => setDocumentType(e.target.value)} 
+                    <select
+                      required
+                      value={documentType}
+                      onChange={(e) => setDocumentType(e.target.value)}
                       className="w-full px-3 py-2.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary focus:border-transparent bg-white"
                     >
                       <option value="">Select type...</option>
@@ -1520,17 +1504,30 @@ export default function EvidencePage() {
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     Effective / Recording Date
-                    {extractionResult?.suggestedDate && uploadMode === 'file' && (
-                      <span className="ml-2 inline-flex items-center text-xs text-green-600">
-                        <CheckCircle2 className="w-3 h-3 mr-1" />Auto-detected
+                    {effectiveDate && (
+                      <span className={`ml-2 inline-flex items-center text-xs font-medium px-1.5 py-0.5 rounded ${new Date(effectiveDate) < new Date(new Date().setFullYear(new Date().getFullYear() - 5))
+                          ? 'text-amber-800 bg-amber-100 border border-amber-200'
+                          : 'text-green-700 bg-green-50'
+                        }`}>
+                        {new Date(effectiveDate) < new Date(new Date().setFullYear(new Date().getFullYear() - 5)) ? (
+                          <>
+                            <AlertTriangle className="w-3 h-3 mr-1 text-amber-600" />
+                            Exceeds 5-Year Window (&gt;5 Yrs)
+                          </>
+                        ) : (
+                          <>
+                            <CheckCircle2 className="w-3 h-3 mr-1 text-green-600" />
+                            Within 5-Year Window
+                          </>
+                        )}
                       </span>
                     )}
                   </label>
-                  <input 
-                    type="date" 
-                    value={effectiveDate} 
-                    onChange={(e) => setEffectiveDate(e.target.value)} 
-                    className="w-full px-3 py-2.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary focus:border-transparent" 
+                  <input
+                    type="date"
+                    value={effectiveDate}
+                    onChange={(e) => setEffectiveDate(e.target.value)}
+                    className="w-full px-3 py-2.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary focus:border-transparent"
                   />
                   <p className="text-xs text-gray-400 mt-1">The date this document was issued, recorded, or last updated.</p>
                 </div>
