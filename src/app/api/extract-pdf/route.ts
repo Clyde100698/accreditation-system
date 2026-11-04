@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import zlib from 'zlib';
 
 // Force Node.js runtime (not Edge)
 export const runtime = 'nodejs';
@@ -282,6 +283,101 @@ function matchKeywords(text: string, expectedType: string): { matched: boolean; 
   };
 }
 
+// -------------------------------------------------------------
+// Ultra-fast zero-dependency native PDF stream text extractor
+// Bypasses missing worker files & canvas issues in cloud serverless (Vercel)
+// -------------------------------------------------------------
+function unescapePdfString(str: string): string {
+  return str
+    .replace(/\\\\/g, '\\')
+    .replace(/\\n/g, '\n')
+    .replace(/\\r/g, '\r')
+    .replace(/\\t/g, '\t')
+    .replace(/\\b/g, '\b')
+    .replace(/\\f/g, '\f')
+    .replace(/\\\(/g, '(')
+    .replace(/\\\)/g, ')')
+    .replace(/\\([0-7]{1,3})/g, (_, oct) => String.fromCharCode(parseInt(oct, 8)));
+}
+
+function decodeHexPdfString(hex: string): string {
+  try {
+    const clean = hex.replace(/\s+/g, '');
+    let res = '';
+    for (let i = 0; i < clean.length; i += 2) {
+      res += String.fromCharCode(parseInt(clean.substring(i, i + 2), 16));
+    }
+    return res;
+  } catch {
+    return '';
+  }
+}
+
+function extractTextDirectFromStreams(buffer: Buffer): string {
+  const content = buffer.toString('binary');
+  const textPieces: string[] = [];
+
+  const streamRegex = /stream[\r\n]+([\s\S]*?)[\r\n]+endstream/g;
+  let match;
+
+  while ((match = streamRegex.exec(content)) !== null) {
+    const rawStream = Buffer.from(match[1], 'binary');
+    let decompressed: Buffer;
+    try {
+      decompressed = zlib.inflateSync(rawStream);
+    } catch {
+      try {
+        decompressed = zlib.inflateRawSync(rawStream);
+      } catch {
+        decompressed = rawStream;
+      }
+    }
+
+    const streamStr = decompressed.toString('latin1');
+
+    // 1. Literal strings: (text) Tj
+    const tjLiteralRegex = /\(((?:[^()\\]|\\.)*)\)\s*Tj/g;
+    let tjMatch;
+    while ((tjMatch = tjLiteralRegex.exec(streamStr)) !== null) {
+      textPieces.push(unescapePdfString(tjMatch[1]));
+    }
+
+    // 2. Hex strings: <hex> Tj
+    const tjHexRegex = /<([0-9a-fA-F\s]+)>\s*Tj/g;
+    let hexMatch;
+    while ((hexMatch = tjHexRegex.exec(streamStr)) !== null) {
+      textPieces.push(decodeHexPdfString(hexMatch[1]));
+    }
+
+    // 3. Array strings with TJ: [(text) 20 (more)] TJ or [<hex> 20 <hex>] TJ
+    const arrayRegex = /\[([\s\S]*?)\]\s*TJ/g;
+    let arrMatch;
+    while ((arrMatch = arrayRegex.exec(streamStr)) !== null) {
+      const arrayContent = arrMatch[1];
+      const itemRegex = /\(((?:[^()\\]|\\.)*)\)|<([0-9a-fA-F\s]+)>/g;
+      let itemMatch;
+      const subPieces: string[] = [];
+      while ((itemMatch = itemRegex.exec(arrayContent)) !== null) {
+        if (itemMatch[1] !== undefined) subPieces.push(unescapePdfString(itemMatch[1]));
+        else if (itemMatch[2] !== undefined) subPieces.push(decodeHexPdfString(itemMatch[2]));
+      }
+      if (subPieces.length > 0) textPieces.push(subPieces.join(''));
+    }
+  }
+
+  // Also check raw uncompressed text outside streams if any
+  const rawTjRegex = /\(((?:[^()\\]|\\.)*)\)\s*Tj/g;
+  let rawMatch;
+  while ((rawMatch = rawTjRegex.exec(content)) !== null) {
+    const s = unescapePdfString(rawMatch[1]);
+    if (!textPieces.includes(s)) {
+      textPieces.push(s);
+    }
+  }
+
+  return textPieces.join(' ').replace(/\s+/g, ' ').trim();
+}
+
 export async function POST(request: NextRequest) {
   ensurePolyfills();
   let parser: any = null;
@@ -307,30 +403,49 @@ export async function POST(request: NextRequest) {
     }
 
     const buffer = Buffer.from(await file.arrayBuffer());
-
-    // Import packages dynamically
-    const { PDFParse } = await import('pdf-parse');
-    const Tesseract = await import('tesseract.js');
-
-    parser = new PDFParse({ data: buffer });
     let text = '';
     let usedOcr = false;
 
-    // Step 1: Try digital text extraction first
+    // -------------------------------------------------------------
+    // Step 1: Ultra-fast native stream extraction (Works on Vercel & local)
+    // -------------------------------------------------------------
     try {
-      const textResult = await parser.getText();
-      text = textResult.text || '';
-      console.log('[PDF Extract] Digital text length:', text.trim().length);
-    } catch (e: unknown) {
-      const error = e as Error;
-      console.log('[PDF Extract] Digital extraction failed:', error.message);
+      text = extractTextDirectFromStreams(buffer);
+      console.log('[PDF Extract] Direct stream extracted length:', text.trim().length);
+    } catch (streamErr) {
+      console.warn('[PDF Extract] Direct stream extraction failed:', streamErr);
     }
 
-    // Step 2: If no text found, fall back to OCR
+    // -------------------------------------------------------------
+    // Step 2: Fall back to pdf-parse if stream extraction had < 50 chars
+    // -------------------------------------------------------------
     if (text.trim().length < 50) {
-      console.log('[PDF Extract] Falling back to OCR...');
       try {
-        // Use pdf-parse built-in screenshot feature
+        const { PDFParse } = await import('pdf-parse');
+        parser = new PDFParse({ data: buffer });
+        const textResult = await parser.getText();
+        const parsedText = textResult.text || '';
+        if (parsedText.trim().length > text.trim().length) {
+          text = parsedText;
+        }
+        console.log('[PDF Extract] pdf-parse extracted length:', text.trim().length);
+      } catch (e: unknown) {
+        const error = e as Error;
+        console.log('[PDF Extract] pdf-parse extraction failed:', error.message);
+      }
+    }
+
+    // -------------------------------------------------------------
+    // Step 3: If still < 50 chars, fall back to OCR (for image-only scanned PDFs)
+    // -------------------------------------------------------------
+    if (text.trim().length < 50) {
+      console.log('[PDF Extract] Falling back to OCR for scanned document...');
+      try {
+        if (!parser) {
+          const { PDFParse } = await import('pdf-parse');
+          parser = new PDFParse({ data: buffer });
+        }
+        const Tesseract = await import('tesseract.js');
         const shotResult = await parser.getScreenshot({ imageBuffer: true, scale: 2.0 });
         
         // OCR the first 2 pages max to keep it fast
@@ -343,8 +458,11 @@ export async function POST(request: NextRequest) {
           ocrTexts.push(result.data.text);
         }
         
-        text = ocrTexts.join('\n');
-        usedOcr = true;
+        const ocrCombined = ocrTexts.join('\n');
+        if (ocrCombined.trim().length > text.trim().length) {
+          text = ocrCombined;
+          usedOcr = true;
+        }
         console.log('[PDF Extract] OCR text length:', text.trim().length);
       } catch (ocrError: unknown) {
         const error = ocrError as Error;
@@ -361,7 +479,7 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // If still no text after OCR
+    // If still no text after all tiers
     if (text.trim().length < 20) {
       return NextResponse.json({
         matchedType: false,
