@@ -1,0 +1,378 @@
+P [Normal]: WEB-BASED ACCREDITATION MANAGEMENT AND READINESS ASSESSMENT SYSTEM
+P [Normal]: Chapters I to III (Draft for Adviser Review)
+P [Normal]: CHAPTER I
+P [Normal]: INTRODUCTION
+P [Normal]: Background of the Study
+P [Normal]: Accreditation is one of the main ways in which a higher education institution (HEI) in the Philippines shows that its programs meet an external standard of quality. Participation in accreditation is voluntary and is initiated by the private sector. Conchada and Tiongco (2015) note that this arrangement protects academic freedom and encourages institutions to compete, but that it can also breed complacency in others. They suggest that institutions build an accreditation mechanism, such as a quality assurance framework, into their own operating systems. This study takes that suggestion as its starting point: accreditation readiness is better managed as a continuous institutional activity than assembled hurriedly when an external survey visit is announced.
+P [Normal]: The Philippine Association of Colleges and Universities Commission on Accreditation (PACUCOA) is one of the private-sector accrediting agencies and is listed on the cover of its Manual as an affiliate member of the Federation of Accrediting Agencies of the Philippines (FAAP). Its Manual of Accreditation (PACUCOA, 2023) sets out the process a program follows: an application, an institutional self-survey, and the organization of the accrediting team. It then describes the visits that follow: an orientation visit, a preliminary visit, a Level I formal accreditation visit, and reaccreditation visits for Levels II, III, and IV. The self-survey is therefore not a preliminary formality. It is the school's own structured assessment, and it comes before every external visit.
+P [Normal]: The Manual also fixes how the self-survey is scored. Each Area is rated by the self-survey team and the accreditors on a scale of 0 (missing but necessary) to 5 (excellent), with a "not applicable" option where a provision does not apply. The mean rating of each section is multiplied by the section's weight. The weighted values are summed and divided by the total weight, which is 30 for basic education and undergraduate programs, to obtain the final rating (PACUCOA, 2023).
+P [Normal]: The following areas focused on undergraduate programs with equivalent weight are:
+
+--- TABLE (11 rows x 2 cols) ---
+Area Number and Name | Equivalent Weight
+Area I: Philosophy and Objectives | 3
+Area II: Faculty | 4
+Area III: Instruction | 3
+Area IV: Laboratory | 3
+Area V: Research | 3
+Area VI: Library | 3
+Area VII: Student Services | 3
+Area VIII: Social Orientation and Community Involvement | 3
+Area IX: Physical Plant and Facilities | 2
+Area X: Organization and Administration | 3
+--- END TABLE ---
+
+P [Normal]: Instruction carries a weight of four (4), Physical Plant and Facilities a weight of two (2), and every other Area a weight of three (3). The Manual further sets minimum ratings for each status: a general average of at least 3.00 for Candidate status; at least 3.00 with no section below 3.00 for Level I; at least 3.50 with no section below 3.50 for Level II; and at least 4.00 with no criterion below 4.00 for Levels III and IV (PACUCOA, 2023). A program can therefore fail to reach a level even when its overall average is high, because one weak Area is enough to hold it back.
+P [Normal (Web)]: Meeting these ratings requires a large body of documentary evidence, such as faculty records and transcripts, course syllabi, research outputs, library holdings, student services records, building plans, and minutes of meetings. For each of the ten (10) Areas, PACUCOA’s Manual of Accreditation lists suggested exhibits, including the following (PACUCOA, 2023):
+P [Normal]: Area I (Philosophy and Objectives): the statement of philosophy, vision, mission, and core values, and evidence that stakeholders know and accept them.
+P [Normal]: Area II (Faculty): faculty qualification and service records, recruitment and ranking policies, and evidence of a faculty development program.
+P [Normal]: Area III (Instruction): course syllabi, sample tests, class records, and records of class observation.
+P [Normal]: Area VI (Library): budget records, holdings lists, and staff records.
+P [Normal]: Area IX (Physical Plant and Facilities): site and building plans, and occupancy and fire inspection certificates.
+P [Normal]: The remaining Areas have similar lists. These documents come from many offices and many people. Faculty qualification and service records are typically held by the human resources office and the registrar. Syllabi, tests, and class records are kept by individual faculty members and academic departments. Research outputs sit with the research office and the faculty who produced them, library records with the library, and guidance and placement records with the student services offices. Site plans, permits, and certificates come from the physical plant or property office, and budgets, audited statements, and meeting minutes from the finance office and administration. No single person holds all of these. Preparing for a survey therefore means collecting exhibits from many custodians who each have other duties, and then checking that every document is complete, current, and filed under the right criterion. [To be completed: the actual STI West Negros University offices that hold these documents, from the QA interview.
+P [Normal]: The Manual’s policies are also time-bound. A compliance report for a revisit is due at least thirty (30) days before the scheduled visit, and an accredited program must be visited by a resurvey team at least six (6) months before its accredited status expires. If that visit does not take place, the status lapses and the program reverts to Candidate status, unless a grace period is granted (PACUCOA, 2023). A grace period of six (6) months to one (1) year may be granted only once, and only for specific reasons, such as force majeure, the lack of a qualified dean, faculty member, or chief librarian, failure to meet licensure examination requirements, or a change in school leadership (PACUCOA, 2023). These deadlines leave little room to discover missing evidence late. Many exhibits cannot be produced on short notice, because they record what happened over time, such as meeting minutes, class observation records, evaluation results, and training records. If a gap is found only in the final weeks, the school can explain it but cannot go back and create the record. The Manual also expects the exhibits that support a compliance report to be ready for the revisit team (PACUCOA, 2023), so one missing document can weaken a whole report. Finding gaps early, and seeing which Areas are weakest, is the practical purpose of continuous readiness.
+P [Normal]: Some institutions that compile exhibits manually, this workload is usually carried out through physical folders, shared drives, and email. Vendors of accreditation software describe the same pattern of scattered folders and email chains as the situation their products are meant to replace (Watermark Insights, n.d.-b). At STI West Negros University, shared Google Drive folders are used to keep accreditation evidence. [Insert findings from the QA office and CICT Chair interviews describing how STI West Negros University currently prepares, reviews, and stores accreditation evidence, and any problems this causes.]
+P [Normal]: Background of the Institution
+P [Normal]: STI West Negros University (STI WNU) is a private university in Bacolod City, Negros Occidental. According to the university state reference, it began as West Negros College, founded on Valentine's Day in 1948 by three Baptist women leaders, Luciana Aritao, Teresa Padilla, and Rosario Remetio, shortly after the Second World War (STI West Negros University, n.d.). The college was first housed in a rented hall and moved to its Burgos Street campus in 1951 as enrollment grew (Visayan Daily Star, n.d.).
+P [Normal]: In 2013, STI Education Systems Holdings, Inc. executed a deed of absolute sale for more than 99 percent of the outstanding shares of West Negros University Corp. STI Holdings said the purchase would widen its network of institutions and course offerings at the tertiary level and give it entry into basic education and graduate studies (Philippine Daily Inquirer, 2013). The university has since operated as STI West Negros University. Before the acquisition, the university had eight colleges offering 28 associate and bachelor's degree programs, together with a School of Graduate Studies offering master's and doctoral programs. It was reported to be accredited by PACUCOA for several of its colleges (Philippine Daily Inquirer, 2013).
+P [Normal]: Today, the university awards associate, bachelor's, master's, and doctoral degrees. It describes itself as a second-level accredited school under PACUCOA, with about 14,000 students per semester and about 1,500 graduates each school year (STI West Negros University, n.d.). Its campus lies on Burgos Street in central Bacolod City (Philippine Daily Inquirer, 2013b).
+P [Normal]: The College of Information and Communications Technology (CICT) offers the Bachelor of Science in Information Technology (BSIT) and the Bachelor of Science in Computer Science (BSCS). The BSCS program serves as the primary pilot site of this study, with BSIT providing additional departmental context. According to the department, BSCS currently holds Level I accredited status, while BSIT holds Level II re-accredited status under PACUCOA. [As of 2026, BSCS has newly attained Level I accredited status, and BSIT holds Level II reaccredited status under PACUCOA. The next scheduled survey activity for each program is set for [month and year, to be confirmed with the QA office] Because CICT offers computing programs, it is well placed to serve as the pioneer department to adopt a web-based system for managing its own accreditation evidence and readiness assessments.
+P [Normal]: The Proposed System
+P [Normal]: This study proposes the Web-Based Accreditation Management and Readiness Assessment System. It moves the paper-based and shared-drive exhibit and readiness process to a single web platform, so that evidence is kept, verified, and scored digitally.
+P [Normal]: The system is designed around the PACUCOA undergraduate framework:
+P [Normal]: 1. It organizes evidence under PACUCOA's ten areas and criteria, and it lets the Program Head delegate each area to an Area Chair, an optional Co-Chair, and members.
+P [Normal]: 2. It requires that evidence be verified by someone other than the person who uploaded it (the self-verification block). The QA Officer, as the final institutional authority, is exempt so reviews are not stalled, and QA verifications are recorded in the audit log.
+P [Normal]: 3. It computes an indicative readiness rating using the Manual's weighting formula (total weight of 30) and checks it against the Manual's level thresholds.
+P [Normal]: 4. It visualizes the ten areas in a unified 5-column by 2-row (5×2) executive command dashboard, accompanied by an instant criteria drill-down inspector and a dual-constraint color-coded heatmap.
+P [Normal]: 5. It lets administrators simulate how completing up to ten selected unresolved criteria (applying a fixed assumed completion score of 4.00) would change the program rating and level, without altering recorded readiness data.
+P [Normal]: 6. It tracks post-visit opportunities and recommendations using a 4-column compliance matrix modeled on the format of the CICT BSCS Compliance Report (College of Information and Communications Technology, n.d.) (Opportunity for Improvement, PACUCOA Recommendation, Actions Taken with sub-numbered items, and Team Verification with linked evidence exhibits inspected via an inline document viewer).
+P [Normal]: The structure of the framework (areas, weights, criteria, and levels) is stored as configurable data rather than hardcoded in the application. Neither the rating scale nor the weights are changed from those in the Manual.
+P [Normal]: Objective of the Study
+P [Normal]: General Objective
+P [Normal]: This study aims to design, develop, and evaluate a Web-Based Accreditation Management and Readiness Assessment System aligned with the PACUCOA Manual of Accreditation (2023), using the College of Information and Communications Technology (CICT) of STI West Negros University—specifically its BSCS program—as the pilot site.
+P [Normal]: Specifically, the system aims to:
+P [Normal]: To build an Evidence Management and Mapping module that stores accreditation evidence under PACUCOA Areas and criteria, suggests a document type and effective date from the text of uploaded PDF files, supports delegation of Areas to Area Chairs, Co-Chairs, and Members, and requires every document to be verified by someone other than its uploader.
+P [Normal]: To implement a Readiness Scoring and Executive Dashboard module that computes ratings at the criterion, Area, and program levels with the PACUCOA weighting formula, checks them against the Manual’s level thresholds, and displays them on a 5×2 Area dashboard with a criteria drill-down, a heatmap, and a gap report.
+P [Normal]: To provide a Readiness Simulation module that projects the program rating and level if up to ten selected unresolved criteria were completed (at a fixed assumed score of 4.00), without changing recorded readiness scores.
+P [Normal]: To incorporate a Post-Visit Compliance Tracking module that records opportunities for improvement, accreditor recommendations, sub-numbered actions taken, and team verifications linked to evidence exhibits.
+P [Normal]: To assess the quality of the system against the software quality characteristics of ISO/IEC 25010, using the target respondents.
+P [Normal]: Conceptual Framework
+P [Normal]: The study follows an Input–Process–Output (IPO) model with a feedback loop, as outlined in Figure 1.
+P [Normal]: Figure 1. Conceptual Framework of the Study (Input–Process–Output Model with Feedback Loop).
+P [Normal]: Narrative of the Conceptual Framework
+P [Normal (Web)]: Within the conceptual framework, the inputs form the foundation on which the entire system operates. These consist of the PACUCOA undergraduate framework data, which defines the ten Areas, their weights totaling 30, the criteria definitions, the required document counts, and the minimum rating thresholds. Alongside this, the system takes in user accounts and role scopes that determine who may see and do what, the institutional evidence documents uploaded by faculty members, and the post-visit survey recommendations that arise from accreditation visits.
+P [Normal (Web)]: These inputs are then transformed through a series of core processes. The system first performs criteria mapping and rule-based keyword extraction on the PDF text layers of the uploaded evidence, linking each document to the criteria it supports. Each Area is then delegated to the responsible personnel and independently verified, a step governed by the self-verification block so that no one confirms their own submitted work. Once evidence is verified, the system mathematically computes criterion scores, Area means, and the weighted grand mean, and it evaluates the results against dual-constraint level floors, which require that both the overall score and the individual minimums be satisfied. A what-if simulation is calculated in memory, allowing users to project the effect of hypothetical changes without altering the official records. The system also tracks sub-numbered post-visit actions linked to their corresponding exhibits, and it records every completed administrative action in the audit log to preserve accountability.
+P [Normal (Web)]: These processes produce the system’s outputs, which present the results to the people who need them. The executive 5×2 dashboard displays all ten Areas at a glance, while the criteria drill-down inspector allows a closer look at individual criteria. A color-coded heatmap highlights strengths and weaknesses visually, and the gap report identifies where evidence or ratings fall short of requirements. The projected simulation results show the anticipated outcomes of what-if scenarios, and the compliance report with linked exhibits consolidates the evidence behind each post-visit action. The audit trail provides a traceable record of administrative activity, and the empirical ISO/IEC 25010 evaluation results document how well the system performs against recognized software quality standards.
+P [Normal]: Significance of the Study
+P [Normal]: The results of this study may benefit the following groups:
+P [List Bullet]: STI West Negros University. The institution gains a centralized web platform to organize accreditation evidence and monitor readiness continuously. This supports its PACUCOA accreditation efforts and reduces the last-minute preparation rush.
+P [List Bullet]: Quality Assurance (QA) Office: The QA office gains a university-wide overview of program readiness, maintains framework parameters, and conducts supervisory reviews.
+P [List Bullet]: College Dean and Program Heads: The Dean can review programs within the college. Program Heads can identify weak Areas, assign committee responsibilities, track verified evidence, and use simulations to prioritize outstanding tasks.
+P [List Bullet]: Area Chairs, Co-Chairs, and Faculty Members: Faculty members know exactly which criteria and documents are assigned to them, can inspect uploaded files directly via the integrated document viewer, and receive prompt feedback on approvals or rejections.
+P [List Bullet]: Alumni and Student Representatives: Stakeholders can view a high-level readiness summary of their program, supporting transparency in quality assurance.
+P [List Bullet]: Future Researchers: The study provides a documented, PACUCOA-aligned system design, mathematical scoring model, and evaluation dataset that other researchers may build upon.
+P [Normal]: Scope and Limitation of the Study
+P [Normal]: Scope of the Study
+P [Normal]: The study covers the design, development, and evaluation of a web-based system for the PACUCOA self-survey and readiness-preparation phase.
+P [Normal]: The system circulates to the PACUCOA framework following the Manual of Accreditation (Rev. September 2023):
+P [List Bullet]: The ten Areas of undergraduate programs and their weights (total weight: 30).
+P [List Bullet]: The 0-to-5 rating scale and the weighted-average rating formula.
+P [List Bullet]: The minimum rating thresholds and floor rules for Candidate status, Level I, Level II, and indicative Level III and IV.
+P [List Bullet]: The pilot covers the Bachelor of Science in Computer Science (BSCS) program as the primary pilot site, with the Bachelor of Science in Information Technology (BSIT) providing additional departmental context at STI West Negros University.
+P [List Bullet]: The system includes four functional modules: Evidence Management and Mapping, Readiness Scoring and Executive Dashboard, Readiness Simulation, and Post-Visit Compliance Tracking.
+P [List Bullet]: The system supports eight user roles, such as: System Admin, Quality Assurance Officer, Deans, Program Heads, Area Chairs, Co-Area Chairs, Faculty Members, and Alumni/Student Representatives.
+P [List Bullet]: An audit trail logs completed evaluative and administrative actions. Areas, criteria, weights, and levels are stored as configurable database entities.
+P [Normal]: Limitations of the Study
+P [Normal (Web)]: The system is intended to support, and not replace, PACUCOA’s official accreditation process. The application, the organization of the accrediting team, the on-site visits, and the award of official status remain with PACUCOA (PACUCOA, 2023). The ratings the system produces are indicative estimates of documentary sufficiency. They do not represent the qualitative judgment of external accreditors and do not guarantee any accreditation outcome.
+P [Normal (Web)]: In terms of coverage, the pilot prototype implements a representative set of 22 criteria across the ten Areas. The full PACUCOA undergraduate survey instrument contains a more extensive set of criteria and sub-items, which can be configured into the database as the institution expands its use of the system. The scoring engine likewise implements only the undergraduate 10-Area framework, with a weight total of 30. The structures for graduate programs (weight total of 50), technical-vocational programs, and basic education units are not modeled. The supplementary qualitative criteria for Levels III and IV, such as community outreach visibility and research tradition, are also outside the scope of the system, as are PRC licensure examination passing percentages, since the computing degree programs (BSCS and BSIT) do not have professional board examinations.
+P [Normal (Web)]: Several technical limitations also apply. Automated document classification and date suggestions rely on rule-based keyword matching executed on digital PDF text layers. Because the system does not include Optical Character Recognition (OCR), scanned or image-only PDFs without readable text cannot be classified automatically and must be tagged manually. Document versioning is handled simply: each upload is stored as an individual record with its effective date and review status, and explicit linking of replacement documents in a version chain is not implemented. The system also operates independently and does not interface with the university’s student information system or learning management system.
+P [Normal (Web)]: With respect to accountability, the audit trail has a defined scope. Blocked self-verification attempts are rejected at the database level by Row-Level Security before application-level logging executes, so the audit log records completed transactions rather than rejected attempts.
+P [Normal (Web)]: Finally, the study is bound by its timeframe and evaluation setting. Development and data gathering are carried out within a three-month period from August to October 2026, which limits both the number of development iterations and the duration of the evaluation. The evaluation is also limited to respondents from CICT and selected IT experts at STI West Negros University.
+P [Normal]: Definition of Terms
+P [Normal (Web)]: Accreditation. A voluntary, standards-based process by which an authorized accrediting agency evaluates and recognizes the quality of an educational institution or program. Conceptually, accreditation in this study refers to the PACUCOA process that the CICT undergraduate programs (BSCS and BSIT) prepare for, with the system supporting the documentary side of that preparation but not replacing the official evaluation.
+P [Normal (Web)]: PACUCOA. The Philippine Association of Colleges and Universities Commission on Accreditation, the accrediting body whose framework this study implements. Conceptually, PACUCOA is the source of the ten Areas, weights, rating scale, and level thresholds that the system encodes in its scoring engine.
+P [Normal (Web)]: Manual of Accreditation. The official regulatory document (Revised September 2023) published by PACUCOA that establishes accreditation procedures, the 0-5 rating scale, Area weights, status thresholds, and suggested exhibits. Conceptually, the Manual serves as the authoritative reference from which the system’s criteria definitions, required document counts, and minimum rating thresholds are drawn.
+P [Normal (Web)]: Self-Survey. An internal evaluation conducted by the school assessing its academic program against the Areas and criteria of the survey instrument prior to an external visit. Conceptually, the system digitizes the self-survey by letting the institution upload, verify, and score evidence against each criterion before the PACUCOA team arrives.
+P [Normal (Web)]: Area. One of the ten major evaluative divisions of the PACUCOA undergraduate survey (e.g., Faculty, Instruction, Laboratories), each carrying an assigned mathematical weight. Conceptually, each Area is a unit of delegation in the system, assigned to responsible personnel and displayed as one of the ten tiles of the executive 5×2 dashboard.
+P [Normal (Web)]: Criterion. An evaluative item within an Area against which evidence is uploaded and scored. Conceptually, the pilot prototype implements 22 representative criteria, each with its own required document count and score.
+P [Normal (Web)]: Evidence (Exhibit). A document, syllabus, report, or certification uploaded to demonstrate compliance with a criterion. Conceptually, evidence refers to the PDF files uploaded by faculty members, which the system classifies by keyword and which count toward a criterion only after verification.
+P [Normal (Web)]: Evidence Mapping. The association of an uploaded file with its corresponding PACUCOA Area and criterion. Conceptually, this is done through rule-based keyword matching on the PDF text layer, with manual tagging as the fallback for scanned documents.
+P [Normal (Web)]: Verification. The formal review of an uploaded exhibit by an authorized user, resulting in approval or rejection with reviewer notes. Conceptually, only approved documents are counted as valid in score computation, so verification is the step that turns an upload into usable evidence.
+P [Normal (Web)]: Separation of Duties (Self-Verification Block). The rule prohibiting a user from verifying a document that they personally uploaded. The QA Officer is exempt as the final authority, and QA verifications are recorded in the audit trail. Conceptually, the block is enforced at the database level through Row-Level Security so that no uploader can approve their own submission, which protects the integrity of the resulting scores.
+P [Normal (Web)]: Criterion Score. A computed value from 0.00 to 5.00 expressing the ratio of valid, verified documents (V) to required documents (R). Conceptually, it is the basic unit of measurement in the system, and every higher-level figure is derived from it.
+P [Normal (Web)]: Area Mean. The arithmetic average of criterion scores within an Area. Conceptually, the Area Mean summarizes the documentary readiness of one Area and is the value shown on its dashboard tile and checked against the level floors.
+P [Normal (Web)]: Program Rating. The weighted average of Area means, computed as the sum of (Area Mean × Area Weight) divided by the total weight of 30. Conceptually, it is the single indicative figure that represents the overall documentary readiness of a program, and it is not a prediction of the official PACUCOA rating.
+P [Normal (Web)]: Level. A PACUCOA accreditation status (Candidate, Level I, Level II, Level III, or Level IV). Conceptually, the system assigns an indicative level only when both the Program Rating and the individual Area minimums satisfy the dual-constraint floors.
+P [Normal (Web)]: Gap. A criterion with no verified evidence or with a score below the passing baseline of 3.00. Conceptually, gaps are the items listed in the gap report and show the institution where to direct its documentation efforts first.
+P [Normal (Web)]: Heatmap. A color-coded display visualizing scores across Areas and criteria according to PACUCOA thresholds. Conceptually, it lets users see strengths and weaknesses at a glance without reading individual scores.
+P [Normal (Web)]: Readiness Simulation. A what-if calculation projecting the program rating and level if up to ten selected unresolved criteria were completed (using an assumed score of 4.00), leaving actual readiness records untouched. Conceptually, the simulation is computed in memory and never saved, so planners can test priorities without altering official data.
+P [Normal (Web)]: Post-Visit Compliance Matrix. A 4-column matrix tracking Opportunities for Improvement, Recommendations, Actions Taken, and Team Verification with linked evidence exhibits. Conceptually, it carries the recommendations from the accreditation team’s visit into the system, where each sub-numbered action is tied to the exhibits that prove it was addressed.
+P [Normal (Web)]: Role-Based Access Control (RBAC). Restricting system permissions according to the designated roles of users. Conceptually, each user account is limited to the Areas and functions allowed by its role scope, such as uploading for faculty or final verification for the QA Officer.
+P [Normal (Web)]: Audit Trail. A chronological record of completed administrative and evaluative actions stored in the database. Conceptually, the audit trail records completed transactions only, since blocked self-verification attempts are rejected by Row-Level Security before application-level logging occurs.
+P [Normal (Web)]: CICT, BSCS, BSIT. The College of Information and Communications Technology and its Bachelor of Science in Computer Science and Bachelor of Science in Information Technology programs. Conceptually, these are the academic unit and programs of STI West Negros University whose respondents and accreditation context define the setting of the study.
+P [Normal]: CHAPTER II
+REVIEW OF RELATED LITERATURE AND PRIOR ARTS SEARCH
+P [Normal]: Review of Related Literature
+P [Normal]: Accreditation and Quality Assurance in Philippine Higher Education
+P [Normal]: Conchada and Tiongco (2015) reviewed the accreditation system for Philippine higher education institutions and its accrediting bodies. They describe an arrangement that is initiated by the private sector and voluntary, noting two related features: the voluntary nature of the system and the diversity of accrediting agencies serving different institutional sectors. They argue that voluntary accreditation protects academic freedom and encourages institutions to compete, but that it may leave other institutions complacent between survey cycles. Their policy recommendation is that an internal accreditation mechanism, such as a continuous quality assurance framework, should be incorporated into the institution itself. Viewed this way, accreditation readiness should not be treated as an episodic project assembled only when an external team visits; institutions benefit from maintaining the ability to show compliance continuously. That ability relies on keeping evidence organized, verified, and scored between visits.
+P [Normal]: According to the Manual of Accreditation (PACUCOA, 2023) serves as the primary standard for this study. It defines the preliminary steps (application, institutional self-survey, and team organization) and the sequence of visits: orientation, preliminary, Level I formal, and Level II to IV reaccreditation visits. Under the Manual, the self-survey and the external accreditors' evaluation use the same single-axis 0-to-5 rating scale, running from 5 (provision is very extensive and functioning excellently) down to 0 (provision is missing but necessary), alongside a "not applicable" option where a provision does not apply.
+P [Normal]: The Manual specifies how ratings are aggregated. The mean rating of each section is multiplied by its assigned weight, and the sum is divided by the total weight of 30 for undergraduate programs. The weights for undergraduate programs are 3 for Philosophy and Objectives, Faculty, Laboratory, Research, Library, Student Services, Social Orientation and Community Involvement, and Organization and Administration; 4 for Instruction; and 2 for Physical Plant and Facilities.
+P [Normal]: Minimum rating thresholds then apply: 3.00 for Candidate status; 3.00 with no section below 3.00 for Level I; 3.50 with no section below 3.50 for Level II; and 4.00 with no criterion below 4.00 for Levels III and IV (PACUCOA, 2023). Level II reaccredited status is granted for a duration of five years (PACUCOA, 2023). These rules make two design features essential for any readiness tool: it must compute the weighted rating using the Manual's exact formula, and it must highlight the lowest Area mean as clearly as the general average, because a single deficient Area can block an accreditation level.
+P [Normal]: The Manual also sets policies that create operational deadlines. A compliance report is required at least 30 days before a revisit. The revisit team evaluates compliance using an assessment scale from full compliance (5) down to non-compliance (1). An accredited program must be resurveyed at least six months before its status expires, or its status lapses and reverts to Candidate status unless a grace period is granted (PACUCOA, 2023). Together, the extensive exhibit requirements and the strict revisit timelines describe a documentation workload that is large, multi-departmental, and time-sensitive.
+P [Normal]: Digital Evidence Management and Continuous Readiness
+P [Normal]: Vendors of accreditation software describe a similar industry transition from episodic document gathering to continuous readiness. Watermark Insights (n.d.-a) presents its accreditation tools as a method for keeping evidence organized throughout the cycle, centralizing documentation, and preparing self-study reports efficiently. Its product materials describe managing accreditation cycles through a centralized evidence repository and structured templates, in contrast to scattered desktop folders and email threads (Watermark Insights, n.d.-b). While vendor publications are commercial descriptions of product intent, they confirm that centralized evidence repositories and always-accessible readiness tracking represent recognized needs in higher education quality assurance.
+P [Normal]: Decision Support and What-If Analysis
+P [Normal]: A readiness rating that reflects only the current state leaves an important planning question unanswered: which unresolved requirements should faculty prioritize? Decision support systems literature treats what-if analysis as a standard capability. In what-if analysis, a decision maker adjusts an input assumption and observes the projected effect on the outcome, without altering the underlying production data (Turban et al., 2011). The Readiness Simulation module applies this concept to accreditation: selected unresolved criteria are assumed to achieve a completion score of 4.00, the weighted rating formula is recomputed in memory, and the projected rating and level are displayed alongside the current status.
+P [Normal]: Access Control and Separation of Duties
+P [Normal]: Because an accreditation platform stores sensitive institutional files and generates ratings relied upon by academic leadership, access control is fundamental to its design. Role-based access control (RBAC) assigns permissions to roles and roles to users, simplifying administration and audits (Sandhu et al., 1996).
+P [Normal]: A related integrity principle is separation of duties, which requires that no single person can complete a sensitive evaluation transaction alone (Clark & Wilson, 1987). In this system, that principle is implemented as the self-verification block: a document must be reviewed and approved by an authorized user other than its uploader before it counts toward readiness. Access rules are enforced at the database tier using PostgreSQL Row-Level Security (RLS), ensuring that restrictions hold on every database operation (Supabase, n.d.).
+P [Normal]: Software Quality Evaluation
+P [Normal]: ISO/IEC 25010 defines a software product quality model comprising eight characteristics: functional suitability, performance efficiency, compatibility, usability, reliability, security, maintainability, and portability (International Organization for Standardization [ISO] & International Electrotechnical Commission [IEC], 2011). The standard provides the framework for the descriptive evaluation instrument described in Chapter III.
+P [Normal]: Prior Arts Search
+P [Normal]: Scope of the Search
+P [Normal]: The search examined publicly accessible documentation, system overviews, and product whitepapers for commercial accreditation management software used in higher education, alongside the academic literature cited above. The search was conducted in September and October 2026. Because it relied on publicly available materials, features not publicly detailed by vendors may exist; the comparison below, therefore, reports what reviewed sources describe and does not claim what products cannot do.
+P [Normal]: Existing Systems
+P [List Bullet]: Watermark Planning & Self-Study: Watermark Insights (n.d.-a, n.d.-b) provides a centralized evidence library and customizable self-study templates, primarily oriented toward US accreditation frameworks.
+P [List Bullet]: AchieveIt: AchieveIt (n.d.) offers accreditation management software for institutions preparing for surveys and reaccreditation, with evidence collection, requirements tracking, and progress dashboards.
+P [List Bullet]: Creatrix Campus: Creatrix Campus (n.d.) features an accreditation module within a wider higher-education ERP. Users track accreditation criteria, assign tasks to faculty, and map outcomes to international frameworks such as ABET, AACSB, and NAAC.
+P [Normal]: Comparative Analysis
+P [Normal]: Table 1 presents a comparison between the reviewed software platforms and the proposed system developed in this study.
+
+--- TABLE (11 rows x 5 cols) ---
+Feature / Evaluative Dimension | Watermark | AchieveIt | Creatrix Campus | Proposed System
+Centralized evidence repository | Described | Described | Described | Yes (Supabase Storage mapped to criteria)
+Accreditor-specific framework or templates | Pre-built templates | Requirements tracking | Templates cloned to standards | PACUCOA Areas, criteria, and weights, stored as editable data
+Assignment of responsibility | Collaborative workflows | Accountability features | Tasks assigned to faculty | Area Chair, Co-Chair, and Member delegated per Area by Program Head
+Progress or readiness dashboards | Described | Real-time progress | Reports and dashboards | Yes, with 5×2 command matrix, criteria inspector, and heatmap
+PACUCOA framework named in reviewed materials | Not stated | Not stated | Not stated | Yes (explicitly modeled)
+Rating computed with PACUCOA weighting formula (Sum=30) and floor rules | Not stated | Not stated | Not stated | Yes (Area floors for Lev. I/II, criterion floor for Lev. III/IV)
+What-if readiness simulation | Not stated | Not stated | Not stated | Yes (non-mutating projection with fixed 4.00 assumed score)
+Enforced verification by someone other than the uploader | Not stated | Not stated | Not stated | Yes (enforced by database policy, with audited QA exemption)
+Post-visit compliance matrix with linked exhibits | Not stated | Not stated | Not stated | Yes (4-column format with sub-numbered actions and linked exhibits)
+Integration with SIS or LMS | Not stated | Not stated | Described | No (out of scope)
+--- END TABLE ---
+
+P [Normal]: Table 1. Comparison of Reviewed Systems and the Proposed System, Based on Public Materials.
+P [Normal]: Synthesis and Research Gap
+P [Normal]: The reviewed systems demonstrate that centralized document repositories, progress dashboards, and task delegation are established capabilities in commercial accreditation software. The reviewed materials, however, did not show software tailored to the PACUCOA framework, its 30-weight undergraduate formula, its dual-constraint level threshold floors, or a what-if simulation tool that leaves underlying readiness data untouched.
+P [Normal]: Furthermore, existing tools do not incorporate an enforced self-verification block at the database level paired with the 4-column post-visit compliance matrix used in departmental PACUCOA reporting. This study addresses that specific gap by designing and evaluating a web platform tailored to the PACUCOA self-survey and compliance preparation process for CICT at STI West Negros University.
+P [Normal]: CHAPTER III
+MATERIALS AND METHODS
+P [Normal]: System Design
+P [Normal]: Requirements Gathering
+P [Normal]: Requirements were gathered through document analysis of the PACUCOA Manual of Accreditation (2023), review of departmental compliance records (specifically the CICT BSCS Compliance Report; College of Information and Communications Technology, n.d.), and consultative discussions with stakeholders at STI West Negros University.
+P [Normal]: The Manual provided the framework rules: the ten Areas, their weights totaling 30, the 0-to-5 rating scale, the status thresholds, and the suggested exhibits. Departmental consultations helped define the organizational workflow, including the separation of the System Administrator from the QA Officer, Area delegation to Chairs and Members, read-only access for stakeholder representatives, and server-side parsing of uploaded PDF files. [List consultation dates, participants, and official titles, such as the CICT Dean, Program Head, QA Director, and participating faculty members.]
+P [Normal]: Development Methodology
+P [Normal]: The system was developed using an Agile, incremental approach that borrows practices from Scrum, including a product backlog, time-boxed iterations, and periodic stakeholder reviews (Beck et al., 2001; Schwaber & Sutherland, 2020; Pressman & Maxim, 2020). Because development was carried out by a single researcher within a three-month timeframe (August to October 2026), full Scrum ceremonies were not adopted.
+P [Normal]: The development schedule was organized across four iterations, as shown in Table 2.
+
+--- TABLE (6 rows x 3 cols) ---
+Period | Development Activities | Deliverables
+August 2026 | Proposal preparation; study of the PACUCOA accreditation framework and CICT compliance records; requirements definition. | Proposal; feature backlog.
+Late August to Early September 2026 | Iteration 1: Database schema design; Supabase authentication; PostgreSQL Row-Level Security (RLS); application shell; Academic Registry and account management. | Core database schema; functional authentication and RBAC.
+September 2026 | Iteration 2: PACUCOA criteria setup; evidence upload module; rule-based PDF text parsing; Area committee delegation; implementation of the self-verification block. | Evidence repository; PDF auto-tagging; Area delegation with enforced separation of duties.
+Late September to Early October 2026 | Iteration 3: Mathematical scoring engine; 5×2 executive command dashboard; heatmap and gap report; non-mutating Readiness Simulation module; boundary testing. | Automated scoring engine; single-screen executive matrix; what-if simulation tool.
+October 2026 | Iteration 4: 4-Column Post-Visit Compliance Matrix module; sub-numbered action tracking; exhibit linking with inline document preview. Planned: evaluation by respondents using the ISO/IEC 25010 questionnaire and data analysis. | Compliance reporting module; completed web application. Evaluation results are pending.
+--- END TABLE ---
+
+P [Normal]: Table 2. Development Timeline, August to October 2026.
+P [Normal]: Stakeholder feedback iteratively shaped the backlog. For example, requests for PDF text parsing and for an inline document previewer were integrated after review sessions and built into subsequent iterations.
+P [Normal]: System Architecture
+P [Normal]: The platform is a web application accessible via modern web browsers. A Next.js application serves the user interface, React server components, and API routes (Vercel, n.d.). Supabase provides authentication, a PostgreSQL database, and object storage for uploaded evidence files (Supabase, n.d.).
+P [Normal]: A server-side routine extracts text from uploaded PDF files and applies rule-based keyword matching. Access rules are enforced inside the database engine via PostgreSQL Row-Level Security policies, ensuring that access constraints apply to every database transaction. Completed evaluative and administrative actions are logged to an audit table.
+P [Normal]: Figure 2. System Architecture.
+P [Normal]: Users, Roles, and Access Control
+P [Normal]: Access follows role-based access control (Sandhu et al., 1996) combined with program and Area delegations. Table 3 lists the system roles and their permissions.
+
+--- TABLE (8 rows x 3 cols) ---
+Role | Scope | Main Permissions
+System Admin | Institution | Creates and manages departments, programs, and user accounts. No access to accreditation evidence or evaluation workflows.
+QA Officer | Institution | Configures frameworks, Areas, weights, criteria, and levels; reviews readiness across all programs; may verify evidence as supervisory authority (exempt from the self-verification block; actions logged to audit trail).
+Dean | College | Views readiness dashboards, heatmaps, and simulations for all programs in the college. Read-only.
+Program Head | Program | Assigns Area Chairs, Co-Chairs, and Members; monitors program readiness; verifies evidence in the program (except own uploads); executes simulations.
+Area Chair / Co-Chair | Assigned Area | Verifies uploaded evidence within the assigned Area (except own uploads); tracks compliance matrix items. Co-Chairs possess identical verification authority.
+Faculty Member | Assigned Area | Uploads evidence for criteria in assigned Areas; inputs metadata. Cannot verify evidence.
+Alumni / Student Rep | Program | Views program readiness summaries. No access to evidence files or administrative settings. [Confirm whether this role may run simulations; the current build lists the simulation page for this role.]
+--- END TABLE ---
+
+P [Normal]: Table 3. Roles and Permissions.
+P [Normal]: Data Design
+P [Normal]: The data model is configurable. Framework content is stored in database tables rather than hardcoded in application logic. Table 4 summarizes the principal entities.
+
+--- TABLE (15 rows x 2 cols) ---
+Entity / Table | Purpose
+institutions, departments, programs | Represents the academic organizational structure (e.g., STI WNU, CICT, BSCS, BSIT).
+accreditation_frameworks | Stores framework definitions (e.g., PACUCOA Undergraduate 2023).
+accreditation_areas | Defines the ten Areas (Area I to Area X), titles, and numerical weights (total weight: 30).
+accreditation_criteria | Defines criteria under each Area, expected document types, and required document counts (R).
+accreditation_levels | Stores accreditation levels, labels, and general average threshold values.
+users | User accounts with assigned roles and departmental scopes.
+area_assignments | Maps users to an Area of a program as Area Chair, Co-Chair, or Member.
+evidence_documents | Uploaded file records with criterion ID, document type, effective date, uploader, verification status, and reviewer notes.
+readiness_scores | Stores computed criterion scores and statuses per program; Area means and the program rating are computed from these scores.
+accreditation_cycles | Groups post-visit recommendations by program accreditation cycle.
+accreditation_recommendations | Stores post-visit survey opportunities for improvement and accreditor recommendations.
+compliance_actions | Stores sub-numbered actions taken, team verification text, and foreign key link (linked_evidence_id) to verified exhibits.
+simulations | Stores parameters and results of what-if simulation runs, isolated from production readiness scores.
+audit_log | Records actor, action type, affected record, and timestamp for completed actions.
+--- END TABLE ---
+
+P [Normal]: Table 4. Principal Data Entities.
+P [Normal]: System Process Flow
+P [Normal]: Figure 3 illustrates how the system operates from initial administrative setup to post-visit compliance reporting.
+P [Normal]: Figure 3. System Process Flow.
+P [Normal]: Functional Modules
+P [Normal]: Evidence Management and Mapping Module
+P [Normal]: Each criterion belongs to an Area and has an expected document type and a required document count (R), both configured by the QA Officer. A faculty member uploads a document against a criterion in an assigned Area, selects the document type, and specifies the effective date. Uploads are initially marked pending.
+
+--- TABLE (5 rows x 2 cols) ---
+Name | Specifications
+ | 
+ | 
+ | 
+ | 
+--- END TABLE ---
+
+P [List Bullet]: PDF-Assisted Tagging: When the uploaded file is a PDF, the system extracts its text layer and checks for keywords matching expected document types. It suggests a document type and, where a recognizable date pattern appears, an effective date. The user can accept or modify these suggestions. Scanned or image-only PDFs without readable text must be tagged manually, as the system does not include optical character recognition.
+P [List Bullet]: Independent Verification: An Area Chair or Co-Chair reviews pending documents in the assigned Area and approves or rejects them with optional reviewer notes. The review interface includes an integrated document preview modal (DocumentViewer), allowing reviewers to inspect PDF contents directly in the browser before taking evaluative action.
+P [List Bullet]: Self-Verification Block: To enforce separation of duties, the system prevents Program Heads, Area Chairs, and Co-Chairs from verifying documents that they personally uploaded. In the interface, the verification controls for self-uploaded documents are disabled and replaced by a notice. At the database tier, PostgreSQL Row-Level Security policies reject update queries where the reviewer ID matches the uploader ID. The QA Officer is exempt from this block to prevent administrative deadlocks, and all QA verification actions are recorded in the audit log. Only verified documents count toward readiness.
+P [Normal]: Readiness Scoring and Executive Dashboard Module
+P [Normal]: Criterion Scoring Formula
+P [Normal]: For each criterion, let R be the number of required documents and V the number of valid documents. A document is valid when:
+P [Normal]: Its status is verified;
+P [Normal]: Its document type matches the expected document type and;
+P [Normal]: Its effective date falls within the validity window configured by the Quality Assurance Officer (e.g., within the last 5 years).
+P [Normal]: Documents that fail these checks do not increment V.
+P [Normal]: The criterion score s (from 0.00 to 5.00) is computed as follows:
+P [List Bullet]: s = 0.00 when V = 0 (Missing);
+P [List Bullet]: s = the larger of 1.00 and 2.00 × (V ÷ R), when 0 < V < R, so partial evidence scores below 2.00 (Poor to Fair);
+P [List Bullet]: s = 3.00 + 2.00 × ((V ÷ R) − 1), with a maximum of 5.00, when V ≥ R, so meeting the required count yields 3.00 (Good), and additional valid documents increase the score toward 5.00 (Excellent).
+P [Normal]: This piecewise model aligns with the Manual's scale, where 3 represents an adequate provision and scores of 4 and 5 represent moderately and very extensive provisions (PACUCOA, 2023). Criteria marked "not applicable" are excluded from the calculation. This score measures documentary sufficiency; it does not replace accreditors' qualitative evaluations.
+P [Normal]: Area Mean and Program Rating
+P [Normal]: The Area mean is the arithmetic average of the criterion scores under that Area:
+P [Normal]: Area Mean = Sum of Criterion Scores ÷ Number of Applicable Criteria
+P [Normal]: The program rating follows the Manual's weighted formula:
+P [Normal]: Program Rating = Σ(Area Mean × Area Weight) ÷ Σ(Area Weight)
+P [Normal]: The divisor is the sum of configured weights (30 for the ten undergraduate Areas) and is not hardcoded (PACUCOA, 2023).
+P [Normal]: Dual-Constraint Level Threshold Evaluation
+P [Normal]: The system evaluates computed ratings against the Manual's rules:
+P [List Bullet]: Candidate Status: Program rating of at least 3.00.
+P [List Bullet]: Level I: Program rating of at least 3.00, with no Area mean below 3.00.
+P [List Bullet]: Level II: Program rating of at least 3.50, with no Area mean below 3.50.
+P [List Bullet]: Levels III and IV: Program rating of at least 4.00, with no individual criterion below 4.00 (reported as an indicative check, as supplementary Level III/IV criteria are outside the pilot scope).
+P [Normal]: For Candidate, Level I, and Level II, the floor constraint applies to Area means. For Levels III and IV, the floor constraint applies to individual criterion scores.
+P [Normal]: Executive 5×2 Command Dashboard and Visualizations
+P [Normal]: To prevent fragmented vertical scrolling, the dashboard displays all ten Areas simultaneously on a unified 5-column by 2-row (5×2) command matrix:
+P [List Bullet]: Row 1: Area I (Philosophy), Area II (Faculty), Area III (Instruction), Area IV (Laboratory), Area V (Research)
+P [List Bullet]: Row 2: Area VI (Library), Area VII (Student Services), Area VIII (Social Orientation), Area IX (Physical Plant), Area X (Organization & Administration)
+P [Normal]: Each card displays the Area's weight, computed mean, status badge, and an instant drill-down inspector showing constituent criteria, valid document counts (V/R), and gap indicators.
+P [Normal]: The heatmap uses color bands tied to the Manual's thresholds, labeled by score range only:
+P [List Bullet]: Below 3.00 (Red)
+P [List Bullet]: 3.00 to 3.49 (Amber)
+P [List Bullet]: 3.50 to 3.99 (Yellow)
+P [List Bullet]: 4.00 and above (Green)
+P [Normal]: Readiness Simulation Module
+P [Normal]: The simulation module lets an authorized user (Program Head, Dean, or QA Officer) select up to ten unresolved criteria (those with no evidence or a score below 3.00) and observe the projected effect on program standing.
+P [List Bullet]: Each selected criterion is assigned a fixed assumed completion score of 4.00 (Very Good). A criterion already scoring above 4.00 remains at its existing score.
+P [List Bullet]: The system recalculates Area means, the program rating, and level thresholds using the same mathematical functions used for regular scoring, displaying the baseline, projected values, and their difference.
+P [List Bullet]: Data Isolation: Simulation results are stored only in simulation history records and are never written to operational readiness scores. A visible simulation banner clearly distinguishes projected results from actual readiness data.
+P [Normal]: Post-Visit Compliance Tracking Module
+P [Normal]: To support the preparation of compliance reports required prior to PACUCOA revisits, the system provides a post-visit compliance tracking module modeled on the format of the CICT BSCS Compliance Report (College of Information and Communications Technology, n.d.):
+P [List Bullet]: Opportunity for Improvement: Documents the deficiency identified by the accrediting team.
+P [List Bullet]: PACUCOA Recommendation: Records the formal recommendation issued by the accreditors.
+P [List Bullet]: Actions Taken: Details institutional actions taken, sub-numbered (e.g., 1.1, 1.2) to track multiple remediation steps.
+P [List Bullet]: Team Verification & Linked Exhibits: Records internal verification comments and links specific verified evidence exhibits. Clicking an exhibit chip opens the inline DocumentViewer, allowing reviewers to inspect the supporting file directly.
+P [Normal]: Illustration of the Scoring Mechanics
+P [Normal]: Table 5 uses hypothetical Area means to illustrate how the mathematical weighting formula and floor rules operate.
+
+--- TABLE (12 rows x 4 cols) ---
+Area | Area Mean | Weight | Weighted Value
+I. Philosophy and Objectives | 4.00 | 3 | 12.00
+II. Faculty | 3.50 | 3 | 10.50
+III. Instruction | 3.00 | 4 | 12.00
+IV. Laboratory | 3.00 | 3 | 9.00
+V. Research | 2.50 | 3 | 7.50
+VI. Library | 3.50 | 3 | 10.50
+VII. Student Services | 4.00 | 3 | 12.00
+VIII. Social Orientation and Community Involvement | 3.00 | 3 | 9.00
+IX. Physical Plant and Facilities | 4.00 | 2 | 8.00
+X. Organization and Administration | 3.50 | 3 | 10.50
+Total | — | 30 | 101.00
+--- END TABLE ---
+
+P [Normal]: Table 5. Hypothetical Computation of a Program Rating (Illustration).
+P [Normal]: The program rating is 101.00 ÷ 30 = 3.37. The program meets the Candidate threshold of 3.00. However, it does not qualify for Level I because Area V (Research), at 2.50, falls below the mandatory 3.00 floor, even though the overall average exceeds 3.00.
+P [Normal]: If unresolved criteria in Area V were completed under simulation and the Area mean rose to 3.50, the weighted total would increase by (3.50 − 2.50) × 3 = 3.00 to 104.00, raising the rating to 104.00 ÷ 30 = 3.47. Because no Area would remain below 3.00, the program would meet Level I, while remaining below the 3.50 required for Level II.
+P [Normal]: This test case, alongside five other boundary cases, was verified against the implemented scoring code on September 28, 2026, and all cases returned the expected status levels, including a case with an overall rating of 3.56 and one Area at 3.20, which correctly returned Level I rather than Level II.
+P [Normal]: Research Design
+P [Normal]: The study uses a Developmental Research Design with a descriptive evaluation component (Richey & Klein, 2007). Developmental research focuses on the design, development, and evaluation of a software product or instructional process, which fits a study resulting in a working web application. The descriptive component collects respondents' ratings of the finished system using a questionnaire based on the ISO/IEC 25010 software quality model.
+P [Normal]: Locale of the Study
+P [Normal]: The study was conducted at STI West Negros University, Burgos Street, Bacolod City, Negros Occidental, within the College of Information and Communications Technology (CICT), covering the BSCS program as the primary pilot and BSIT as departmental context. CICT was selected because it is the researcher's home academic unit, offers a manageable pilot scope, and provided the compliance records that shaped the system.
+P [Normal]: Respondents of the Study
+P [Normal]: Respondents will be selected from CICT, its supporting offices, and IT professionals using Purposive Sampling (Etikan et al., 2016). Purposive sampling is appropriate because the evaluation requires individuals who have experience with accreditation workflows or software engineering quality standards. Total enumeration will be used for smaller administrative groups.
+P [Normal]: Table 6 outlines the proposed respondent groups.
+
+--- TABLE (6 rows x 3 cols) ---
+Respondent Group | Basis of Selection | Proposed Number
+Dean and Program Heads (BSCS, BSIT) | Oversee programs and assign accreditation tasks | 2
+Faculty who serve as Area Chairs, Co-Chairs, or Members | Gather, upload, and review accreditation exhibits | 5
+QA Office Personnel | Configure framework settings and monitor accreditation | 1
+Information Technology Experts | Assess technical software quality characteristics | 7
+Total | — | 15
+--- END TABLE ---
+
+P [Normal]: Table 6. Proposed Respondents of the Study.
+P [Normal]: Data Analysis and Statistical Treatment
+P [Normal]: Evaluation Instrument
+P [Normal]: The planned evaluation instrument is based on the quality model of ISO/IEC 25010 (ISO & IEC, 2011). Items will be rated on a 5-point Likert scale (Likert, 1932): 5 = Strongly Agree, 4 = Agree, 3 = Neutral, 2 = Disagree, 1 = Strongly Disagree.
+P [Normal]: End-user respondents (Dean, Program Heads, Faculty, QA personnel) will rate functional suitability, usability, reliability, and security. IT experts will rate functional suitability, performance efficiency, reliability, security, and maintainability. [Confirm final list of survey items with the adviser.]
+P [Normal]: Statistical Treatment
+P [Normal]: Respondent profiles will be summarized using frequency and percentage. Survey responses will be analyzed using the Weighted Mean:
+P [Normal]: Weighted Mean = Σ(f × x) ÷ n
+P [Normal]: where f is the frequency of rating x and n is the total number of respondents.
+P [Normal]: Weighted means will be interpreted using equal intervals of 0.80 across the five categories, as presented in Table 7.
+
+--- TABLE (6 rows x 2 cols) ---
+Mean Range | Verbal Interpretation
+4.21 – 5.00 | Strongly Agree
+3.41 – 4.20 | Agree
+2.61 – 3.40 | Neutral
+1.81 – 2.60 | Disagree
+1.00 – 1.80 | Strongly Disagree
+--- END TABLE ---
+
+P [Normal]: Table 7. Interpretation of Weighted Means.
+P [Normal]: The accuracy of the mathematical scoring engine will be reported as the percentage of test cases in which the system's rating matched hand-computed values.
+P [Normal]: Ethical Considerations (P form)
+P [Normal]: The study follows these ethical principles:
+P [Normal]: 1. Institutional Permission: Written permission will be requested from the Dean of CICT and the QA Office before formal testing and evaluation data gathering.
+P [Normal]: 2. Informed Consent: Respondents will be informed of the purpose of the study, the voluntary nature of participation, and their right to withdraw at any time. Informed consent will be obtained prior to data collection.
+P [Normal]: 3. Data Privacy: The study adheres to the Data Privacy Act of 2012 (Republic Act No. 10173). Only data relevant to the evaluation will be collected, and personal information will be kept confidential.
+P [Normal]: 4. Protection of Institutional Documents: Testing uses sample, sanitized, or authorized documents. Test credentials will be removed before deployment.
+P [Normal]: 5. Academic Integrity: Sources are acknowledged using APA 7th edition, and manuscripts will be submitted for institutional plagiarism and grammar checks.
+P [Normal]: 6. Accuracy of Claims: The system's ratings are explicitly presented as indicative estimates of documentary sufficiency. The study makes no claim that ratings guarantee official accreditation outcomes from PACUCOA.
+P [Normal]: REFERENCES
+P [Normal]: AchieveIt. (n.d.). Accreditation management software. https://www.achieveit.com/?p=59266
+P [Normal]: Beck, K., Beedle, M., van Bennekum, A., Cockburn, A., Cunningham, W., Fowler, M., Grenning, J., Highsmith, J., Hunt, A., Jeffries, R., Kern, J., Marick, B., Martin, R. C., Mellor, S., Schwaber, K., Sutherland, J., & Thomas, D. (2001). Manifesto for agile software development. https://agilemanifesto.org/
+P [Normal]: Clark, D. D., & Wilson, D. R. (1987). A comparison of commercial and military computer security policies. In Proceedings of the 1987 IEEE Symposium on Security and Privacy (pp. 184–194). IEEE.
+P [Normal]: College of Information and Communications Technology. (n.d.). BSCS compliance report [Unpublished internal document]. STI West Negros University.
+P [Normal]: Conchada, M. I., & Tiongco, M. M. (2015). A review of the accreditation system for Philippine higher education institutions (PIDS Discussion Paper Series No. 2015-30). Philippine Institute for Development Studies. https://doi.org/10.62986/dp2015.30
+P [Normal]: Creatrix Campus. (n.d.). Accreditation management software. https://creatrixcampus.com/accreditation-management-software
+P [Normal]: Etikan, I., Musa, S. A., & Alkassim, R. S. (2016). Comparison of convenience sampling and purposive sampling. American Journal of Theoretical and Applied Statistics, 5(1), 1–4.
+P [Normal]: International Organization for Standardization & International Electrotechnical Commission. (2011). Systems and software engineering — Systems and software quality requirements and evaluation (SQuaRE) — System and software quality models (ISO/IEC 25010:2011).
+P [Normal]: Likert, R. (1932). A technique for the measurement of attitudes. Archives of Psychology, 22(140), 1–55.
+P [Normal]: Philippine Association of Colleges and Universities Commission on Accreditation. (2023). Manual of accreditation (Rev. ed.). PACUCOA.
+P [Normal]: Philippine Daily Inquirer. (2013a, September 5). STI to acquire West Negros University. Inquirer Technology. https://technology.inquirer.net/?p=28933
+P [Normal]: Philippine Daily Inquirer. (2013b, October 3). STI acquires West Negros U. Inquirer Business. https://business.inquirer.net/?p=145807
+P [Normal]: Pressman, R. S., & Maxim, B. R. (2020). Software engineering: A practitioner's approach (9th ed.). McGraw-Hill Education.
+P [Normal]: Republic Act No. 10173. (2012). Data Privacy Act of 2012. Republic of the Philippines.
+P [Normal]: Richey, R. C., & Klein, J. D. (2007). Design and development research: Methods, strategies, and issues. Lawrence Erlbaum Associates.
+P [Normal]: Sandhu, R. S., Coyne, E. J., Feinstein, H. L., & Youman, C. E. (1996). Role-based access control models. Computer, 29(2), 38–47.
+P [Normal]: Schwaber, K., & Sutherland, J. (2020). The Scrum guide: The definitive guide to Scrum: The rules of the game. https://scrumguides.org/scrum-guide.html
+P [Normal]: STI West Negros University. (n.d.). About us. https://stiwnu.com/sti/aboutsti
+P [Normal]: Supabase. (n.d.). Row level security. https://supabase.com/docs/guides/database/postgres/row-level-security
+P [Normal]: Turban, E., Sharda, R., & Delen, D. (2011). Decision support and business intelligence systems (9th ed.). Pearson.
+P [Normal]: Vercel. (n.d.). Next.js documentation. https://nextjs.org/docs
+P [Normal]: Visayan Daily Star. (n.d.). STIWNU inaugurates new SBE building. https://visayandailystar.com/stiwnu-inaugurates-new-sbe-building/
+P [Normal]: Watermark Insights. (n.d.-a). Accreditation. https://watermarkinsights.com/explore/accreditation/
+P [Normal]: Watermark Insights. (n.d.-b). Repeatable excellence: Building a reliable foundation for accreditation readiness [Solution tour]. https://www.watermarkinsights.com/?p=19643

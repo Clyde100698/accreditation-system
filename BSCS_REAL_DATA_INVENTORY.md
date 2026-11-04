@@ -1,0 +1,266 @@
+# BSCS Real Data Inventory
+
+- **Total Directories:** 76
+- **Total Files:** 185
+
+- **📁 `BSCS_REAL_DATA (Root)`** (1 files)
+  - 📄 `BSCS Compliance Report.docx`
+  - **📁 `Area 01 - Philosophy and Objectives`** (0 files)
+    - **📁 `Area 01 - Philosophy and Objectives\EXHIBIT 1`** (2 files)
+      - 📄 `1.1 Memorandum from the Dean.pdf`
+      - 📄 `1.2 PEO Development Report.pdf`
+    - **📁 `Area 01 - Philosophy and Objectives\EXHIBIT 2`** (1 files)
+      - 📄 `2.1 Post Activity Reports.pdf`
+    - **📁 `Area 01 - Philosophy and Objectives\EXHIBIT 3`** (1 files)
+      - 📄 `3.1 APPROVED PEO AND PO REVIEW GUIDELINES.pdf`
+  - **📁 `Area 02 - Faculty. Trainors`** (0 files)
+    - **📁 `Area 02 - Faculty. Trainors\EXHIBIT 1 - FDP_FPE`** (3 files)
+      - 📄 `1.1 Faculty Traning and Development Program SY2025-2026.pdf`
+      - 📄 `1.2 Faculty Development Plan SY2020-2025.pdf`
+      - 📄 `1.3 Faculty Performance Evaluation Analysis 2nd Semester SY2024-2025.pdf`
+    - **📁 `Area 02 - Faculty. Trainors\EXHIBIT 2 - Faculty Trainings`** (2 files)
+      - 📄 `2.1 Faculty Trainings.pdf`
+      - 📄 `2.2 Certificates of Attendance.pdf`
+    - **📁 `Area 02 - Faculty. Trainors\EXHIBIT 3 - Research Activities`** (6 files)
+      - 📄 `3.1 CICT Research Publication and Presentation.pdf`
+      - 📄 `3.2 CICT Research Activities.pdf`
+      - 📄 `3.3 Guidelines on Research Incentives 2023_September 26.pdf`
+      - 📄 `3.4 PAS for CICT Research Incentives.pdf`
+      - 📄 `3.5 CICT Research Manual-Research Agenda.pdf`
+      - 📄 `3.6 Research Agenda-Research Courses.pdf`
+    - **📁 `Area 02 - Faculty. Trainors\EXHIBIT 4 - Library Utilization`** (4 files)
+      - 📄 `4.1 LIBRARY UTILIZATION REPORT 2025-2026.pdf`
+      - 📄 `4.2 LIBRARY UTILIZATION REPORT 2024-2025.pdf`
+      - 📄 `4.3 LIBRARY UTILIZATION REPORT 2023-2024.pdf`
+      - 📄 `4.4 LIBRARY UTILIZATION REPORT 2022-2023.pdf`
+    - **📁 `Area 02 - Faculty. Trainors\EXHIBIT 5 - Dean and PH Load`** (2 files)
+      - 📄 `5.1 Teaching Load of College Dean 2425_2526.pdf`
+      - 📄 `5.2 Teaching Load of Program Head 2425_2526.pdf`
+    - **📁 `Area 02 - Faculty. Trainors\EXHIBIT 6 - FDP`** (2 files)
+      - 📄 `6.1 Faculty Development Plan SY2025-2026.pdf`
+      - 📄 `6.2 Faculty Development Plan.pdf`
+    - **📁 `Area 02 - Faculty. Trainors\EXHIBIT 7 - FS Consultation`** (5 files)
+      - 📄 `7.1 Consultation Schedule Posted in Bulletin Boards.pdf`
+      - 📄 `7.1a CONSULTATION SCHEDULE SY2025-2026.pdf`
+      - 📄 `7.1b CONSULTATION SCHEDULE SY2024-2025.pdf`
+      - 📄 `7.3 Records of Consultation Sessions.pdf`
+      - 📄 `7.4 Project Development Documentation.pdf`
+      - **📁 `Area 02 - Faculty. Trainors\EXHIBIT 7 - FS Consultation\7.2 Faculty-Student Consultation Forms and Photos`** (9 files)
+        - 📄 `7.2.1 FS Consultation OVBalangue 2325.pdf`
+        - 📄 `7.2.2 FS Consultation by WBucao 2325.pdf`
+        - 📄 `7.2.3 FGrp Consultation by NColumida 2324.pdf`
+        - 📄 `7.2.4 FGrp Consultation by RDLoyola 2324.pdf`
+        - 📄 `7.2.5 FGrp Consultation by MGDionson 2324.pdf`
+        - 📄 `7.2.6 FGrp Consultation by DDuazo 2324.pdf`
+        - 📄 `7.2.7 FS Consultation by Lontes 25-26.pdf`
+        - 📄 `7.2.8 FS Group Consultation by Sumagaysay 25-26.pdf`
+        - 📄 `7.2.9 FS Consultation by MCuaycong 2123.pdf`
+    - **📁 `Area 02 - Faculty. Trainors\EXHIBIT 8 - Faculty Immersion`** (2 files)
+      - 📄 `8.1 MOA STIWNU-SPRINGVALLEY.pdf`
+      - 📄 `8.2 Communication Proposals and Engagement.pdf`
+    - **📁 `Area 02 - Faculty. Trainors\EXHIBIT 9 - IT Membership`** (4 files)
+      - 📄 `9.1a List of Faculty-Professional Organization 1st Sem 2025-2026.pdf`
+      - 📄 `9.1b List of Faculty-Professional Organization 2nd 2025-2026.pdf`
+      - 📄 `9.2a Certificates of IT Membership 1st 2025-2026.pdf`
+      - 📄 `9.2b Certificates of IT Org Membership 2nd 2025-2026.pdf`
+  - **📁 `Area 03 - Instruction. Training Standards`** (0 files)
+    - **📁 `Area 03 - Instruction. Training Standards\EXHIBIT 1 - Curriculum Review`** (2 files)
+      - 📄 `1.1 AAOM Curriculum Review Policy.pdf`
+      - 📄 `1.2 BSCS Curriculum Review Activity Report.pdf`
+    - **📁 `Area 03 - Instruction. Training Standards\EXHIBIT 2 - Co-curricular Activity`** (3 files)
+      - 📄 `2.1 List of Co-Curricular Activities.pdf`
+      - 📄 `2.2 Post Activity Evaluation Results.pdf`
+      - 📄 `2.3 Action Plan 2024-2026.pdf`
+    - **📁 `Area 03 - Instruction. Training Standards\EXHIBIT 3`** (2 files)
+      - 📄 `3.1 Laboratory Manual Creation Activity Report.pdf`
+      - 📄 `3.2 Sample Laboratory Manual - COSC1021 Software Engg 1.pdf`
+    - **📁 `Area 03 - Instruction. Training Standards\EXHIBIT 4`** (2 files)
+      - 📄 `4.1 Guidelines in Conducting Make up Classes.pdf`
+      - 📄 `4.2 Make-up Class Form.pdf`
+    - **📁 `Area 03 - Instruction. Training Standards\EXHIBIT 5`** (3 files)
+      - 📄 `5.1 List of Co-Curricular Activities-The Rise of the Houses.pdf`
+      - 📄 `5.2 Activity Reports with Students Attendance.pdf`
+      - 📄 `5.3 Student Development Plan.pdf`
+    - **📁 `Area 03 - Instruction. Training Standards\EXHIBIT 6`** (2 files)
+      - 📄 `6.1 Data Structures Class Session Guide.pdf`
+      - 📄 `6.2 Data Structures and Algorithms Syllabus.pdf`
+  - **📁 `Area 04 - Laboratories`** (0 files)
+    - **📁 `Area 04 - Laboratories\Exhibit 1`** (2 files)
+      - 📄 `EXHIBIT 1.1.docx`
+      - 📄 `EXHIBIT 1.2.docx`
+    - **📁 `Area 04 - Laboratories\Exhibit 10`** (2 files)
+      - 📄 `10.1 Provision of High Speed Printer.pdf`
+      - 📄 `10.2 High Speed Printer Procurment.pdf`
+    - **📁 `Area 04 - Laboratories\Exhibit 11`** (3 files)
+      - 📄 `11.1 Computer Laboratory and IT Safety Training.pdf`
+      - 📄 `11.2 Computer Laboratory Manual.docx`
+      - 📄 `11.3 Manual Dessimination per laboratory.docx`
+    - **📁 `Area 04 - Laboratories\Exhibit 2`** (1 files)
+      - 📄 `2.1 Satisfaction Survey Updated.pdf`
+    - **📁 `Area 04 - Laboratories\Exhibit 3`** (1 files)
+      - 📄 `3.1 Laboratory Manuals Endorsement.pdf`
+    - **📁 `Area 04 - Laboratories\Exhibit 4`** (2 files)
+      - 📄 `4.1 Inventory Report.pdf`
+      - 📄 `4.2 Asset Accountability Form.pdf`
+    - **📁 `Area 04 - Laboratories\Exhibit 5`** (1 files)
+      - 📄 `5.1 Proof of installed software.docx`
+    - **📁 `Area 04 - Laboratories\Exhibit 6`** (2 files)
+      - 📄 `6.1 List of OS in All Comlab.docx`
+      - 📄 `6.2 Revised Course Syllabus COSC1008-PlatformTechnology (Operating System).pdf`
+    - **📁 `Area 04 - Laboratories\Exhibit 7`** (2 files)
+      - 📄 `7.1 Annual Maintenance Report.docx`
+      - 📄 `7.2 Policies and Guidelines.docx`
+    - **📁 `Area 04 - Laboratories\Exhibit 8`** (2 files)
+      - 📄 `8.1 Computer Specification.pdf`
+      - 📄 `8.2 Inventory Reports.docx`
+    - **📁 `Area 04 - Laboratories\Exhibit 9`** (1 files)
+      - 📄 `9.1 TECH LAB INVENTORY REPORT.pdf`
+  - **📁 `Area 05 - Research`** (2 files)
+    - 📄 `Self Survey Instrument (SSI) Area 1.xlsx`
+    - 📄 `Self Survey Instrument (SSI) Area 5.xlsx`
+    - **📁 `Area 05 - Research\EVIDENCES`** (0 files)
+      - **📁 `Area 05 - Research\EVIDENCES\1. Policies and Guidelines for Research Incentives`** (5 files)
+        - 📄 `Guidelines on Research Incentives 2023_September 26.pdf`
+        - 📄 `PAS for CCJE Faculty Incentives.pdf`
+        - 📄 `PAS for CICT Incentives.pdf`
+        - 📄 `Research Incentives 2025 (1).pdf`
+        - 📄 `Research-Incentives (1) (1).pdf`
+      - **📁 `Area 05 - Research\EVIDENCES\10. Exposure to Research Capability Program`** (9 files)
+        - 📄 `FARMER-AND-INDUSTRY-ENCOUNTERS-THROUGH-SCIENCE-AND-TECHNOLOGY-FIESTA-ON-TILAPIA.pdf`
+        - 📄 `GETTING-ACCPETED-IN-HIGH-IMPACT-JOURNALS-WITH-AI-ASSISTED-RESEARCH.pdf`
+        - 📄 `Mixed-Method Research Workshop (2).jpg`
+        - 📄 `Open Journal System and Standard Operating Procedures Workshop.jpg`
+        - 📄 `POST-ACTIVITY-REPORT-FORTHESIS-CONVERSION-WORKSHOP (1).pdf`
+        - 📄 `POST-ACTIVITY-REPORT-RECALIBRATION-SEMINARS-FOR-UNIVERSITY-EDITORS (1).pdf`
+        - 📄 `POST-ACTIVITY-REPORT-RECALIBRATION-SEMINARS-FOR-UNIVERSITY-STATISTICIANS (1).pdf`
+        - 📄 `POST-ACTIVITY-WORKSHOP-RESEARCH-ETHICS.pdf`
+        - 📄 `Research-Capability Building_Documentation.docx`
+      - **📁 `Area 05 - Research\EVIDENCES\11. Graduate Tracer Study`** (1 files)
+        - 📄 `CICT Tracer Study.pdf`
+      - **📁 `Area 05 - Research\EVIDENCES\11. Research in Program Curriculum`** (1 files)
+        - 📄 `BSCS-CURRICULUM-STRUCTURE.pdf`
+      - **📁 `Area 05 - Research\EVIDENCES\12. Research Manual Orientation`** (0 files)
+      - **📁 `Area 05 - Research\EVIDENCES\14. Research Agenda`** (0 files)
+      - **📁 `Area 05 - Research\EVIDENCES\15. Institutional Format and Oral Defense in Research Manual`** (2 files)
+        - 📄 `Research-Manual-2025v3 (1).pdf`
+        - 📄 `Theses and Dissertation-WRITING-GUIDELINES.pdf`
+      - **📁 `Area 05 - Research\EVIDENCES\2. Research Outputs of Non-Teaching Staff`** (2 files)
+        - 📄 `Assessing+CICT+Student+Perception+of+AI+and+its+Influence+on+Academic+Achievement.pdf`
+        - 📄 `Miss Talavera Certificate of Publication.jpg`
+      - **📁 `Area 05 - Research\EVIDENCES\3. Dissemination and Utilization of Research Findings`** (1 files)
+        - 📄 `3. DISSEMINATION AND UTILIZATION.pdf`
+      - **📁 `Area 05 - Research\EVIDENCES\4. In-house Statistician, language editor, and Research Associate`** (0 files)
+        - **📁 `Area 05 - Research\EVIDENCES\4. In-house Statistician, language editor, and Research Associate\4.2`** (1 files)
+          - 📄 `4. Raymart B. Abella as Statistician_Letter.pdf`
+        - **📁 `Area 05 - Research\EVIDENCES\4. In-house Statistician, language editor, and Research Associate\4.3`** (3 files)
+          - 📄 `Abella Appointment as Research Associate.pdf`
+          - 📄 `Abella_Certificates.pdf`
+          - 📄 `Abella_Diploma.pdf`
+        - **📁 `Area 05 - Research\EVIDENCES\4. In-house Statistician, language editor, and Research Associate\4.4`** (1 files)
+          - 📄 `3. Research Director - Dr. Randolf Asistido.pdf`
+        - **📁 `Area 05 - Research\EVIDENCES\4. In-house Statistician, language editor, and Research Associate\4.5`** (1 files)
+          - 📄 `PICTURES OF RESEARCH OFFICE (WITH DESCRIPTION).docx`
+      - **📁 `Area 05 - Research\EVIDENCES\5. Faculty Research Organization Membership`** (5 files)
+        - 📄 `1. Asistido_Research Membership.jpg`
+        - 📄 `2. Abella_Certificate of Research Membership(1).pdf`
+        - 📄 `2. Abella_Certificate of Research Membership.pdf`
+        - 📄 `3. Mayagma_Research Membership.jpg`
+        - 📄 `4. Oyo_s Research Membership.pdf`
+      - **📁 `Area 05 - Research\EVIDENCES\6. Research Thrust and Agenda Orientation`** (2 files)
+        - 📄 `1. Research-Manual-2025v3 (1).pdf`
+        - 📄 `3. Faculty Research Orientation.FINAL.pdf`
+      - **📁 `Area 05 - Research\EVIDENCES\7. Faculty Research in Institution Research Publication`** (1 files)
+        - 📄 `2025_STI WNU Faculty Research Output.xlsx`
+      - **📁 `Area 05 - Research\EVIDENCES\8. Time to Conduct Research`** (2 files)
+        - 📄 `8. Abella_Certificate of Publication.pdf`
+        - 📄 `8. Abella_Certificate of Recognition and Appreciation.pdf`
+      - **📁 `Area 05 - Research\EVIDENCES\9. Official Institution Research Writing Format`** (2 files)
+        - 📄 `Research-Manual-2025v3 (1).pdf`
+        - 📄 `Theses and Dissertation-WRITING-GUIDELINES.pdf`
+      - **📁 `Area 05 - Research\EVIDENCES\Research Manual Orientation`** (0 files)
+  - **📁 `Area 06 - Library`** (1 files)
+    - 📄 `AREA VI BSCS Compliance Report.docx`
+    - **📁 `Area 06 - Library\BS Computer Science Compliance Report`** (0 files)
+      - **📁 `Area 06 - Library\BS Computer Science Compliance Report\EXHIBIT 1`** (7 files)
+        - 📄 `1.1. BS COMPUTER SCIENCE- BOOKLISTING 1.PDF`
+        - 📄 `1.1. BS COMPUTER SCIENCE- BOOKLISTING 2.PDF`
+        - 📄 `1.1. BS COMPUTER SCIENCE- BOOKLISTING 3.PDF`
+        - 📄 `1.1. BS COMPUTER SCIENCE- BOOKLISTING 4.PDF`
+        - 📄 `1.2. BSCS ACQUSITION LIST 2025-2026.PDF`
+        - 📄 `1.3. RECIEVED OF PAYMENTS.pdf`
+        - 📄 `1.4. APPROVED CAPEX 2025.pdf`
+      - **📁 `Area 06 - Library\BS Computer Science Compliance Report\EXHIBIT 2`** (1 files)
+        - 📄 `2. OPAC.pdf`
+      - **📁 `Area 06 - Library\BS Computer Science Compliance Report\EXHIBIT 3`** (3 files)
+        - 📄 `3.1. INTERPRETED STATISTICAL REPORT.pdf`
+        - 📄 `3.2. SATISFACTION SURVEY.pdf`
+        - 📄 `3.3. LIBARIANS RESEARCH OUTPUT (published).PDF`
+      - **📁 `Area 06 - Library\BS Computer Science Compliance Report\EXHIBIT 4`** (4 files)
+        - 📄 `4.1. Certificate of subcription.pdf`
+        - 📄 `4.2. OR-PO (Purchase of Order) Scanned.pdf`
+        - 📄 `4.3. Lists of Subscribed Periodicals.pdf`
+        - 📄 `4.4. MOA Certificate of Subscription.pdf`
+      - **📁 `Area 06 - Library\BS Computer Science Compliance Report\EXHIBIT 5`** (3 files)
+        - 📄 `5.1. Journals Accession Record.pdf`
+        - 📄 `5.2. Pictures of Bound Journals.pdf`
+        - 📄 `Aprroved PAS Journals for  binding 2024-2025.PDF`
+      - **📁 `Area 06 - Library\BS Computer Science Compliance Report\EXHIBIT 6`** (4 files)
+        - 📄 `6.1. CIRCULATION COMPARATIVE STATISTICAL REPORT.PDF`
+        - 📄 `6.2. GENERAL REFERENCE COMPARATIVE STATISTICAL REPORT.PDF`
+        - 📄 `6.3. PERIODICAL COMPARATIVE STATISTICAL REPORT.PDF`
+        - 📄 `6.5. GRAD. SCHOOLCOMAPARATIVE STATISTICAL REPORT.PDF`
+  - **📁 `Area 07 - Student Services`** (1 files)
+    - 📄 `[10] DIGITIZATION OF RECORDS.pdf`
+    - **📁 `Area 07 - Student Services\BSCE SCHOLARSHIP`** (15 files)
+      - 📄 `AY 2024-2025 Scholarship Office (Result Students Satisfaction).docx`
+      - 📄 `CERTIFICATES .pdf`
+      - 📄 `ORGANIZATIONAL CHART.pdf`
+      - 📄 `REVISION 2025 SCHOLARSHIP HANDBOOK.docx`
+      - 📄 `SATISFACTION SURVEY AY 2024-2025.pdf`
+      - 📄 `SCHOLARSHIP ANNUAL OPERATIONAL PLAN AY 2024-2025.pdf`
+      - 📄 `SCHOLARSHIP B.4 REVISION OF POLICIES 15YEARS .pdf`
+      - 📄 `SCHOLARSHIP CREDENTIALS & CERTIFICATES.pdf`
+      - 📄 `SCHOLARSHIP DEVELOPMENT  PLAN AY 2020-2025.pdf`
+      - 📄 `SCHOLARSHIP MEMBERSHIP CERTIFICATES.pdf`
+      - 📄 `SCHOLARSHIP OFFICE MANUAL  (Edited WI).pdf`
+      - 📄 `SCHOLARSHIP WORKING STATION.pdf`
+      - 📄 `SCHOLASRHIP CHED CERTIFICATES.pdf`
+      - 📄 `Scholarship Work Instruction.pdf`
+      - 📄 `Summary of Scholarship Per Program AY 2025-2026.xlsx`
+    - **📁 `Area 07 - Student Services\BSCS GSC`** (13 files)
+      - 📄 `BSCS Compliance Report .pdf`
+      - 📄 `BSCS Compliance Report [FINAL].pdf`
+      - 📄 `[1] RESEARCH.pdf`
+      - 📄 `[2] STUDENT DEVELOPMENT PROGRAMS.pdf`
+      - 📄 `[3] COR AND LICENCES.pdf`
+      - 📄 `[4] MEMBERSHIP AND LICENCES.pdf`
+      - 📄 `[5] PSCYHOLOGICAL TESTS.pdf`
+      - 📄 `[6] STUDENT DEVELOPMENT PROGRAMS.pdf`
+      - 📄 `[7] TRAININGS AND NEEDS ANALYSIS.pdf`
+      - 📄 `[8] POST EVALUATION REPORT AND SATISFACTION SURVEY.pdf`
+      - 📄 `[9] COUNSELING ROOMS.pdf`
+      - 📄 `[9] FACILITIES BSCS.pdf`
+      - 📄 `[FINAL] BSCS Compliance 2.docx.pdf`
+  - **📁 `Area 10 - Organization and Administration`** (1 files)
+    - 📄 `BSCS Compliance Report.docx`
+    - **📁 `Area 10 - Organization and Administration\Exhibit A`** (2 files)
+      - 📄 `BFO_Budget Code Monitoring.png`
+      - 📄 `BFO_Project Approval Monitoring.png`
+    - **📁 `Area 10 - Organization and Administration\Exhibit B`** (1 files)
+      - 📄 `360-degree Performance Evaluation Form.pdf`
+    - **📁 `Area 10 - Organization and Administration\Exhibit C`** (2 files)
+      - 📄 `NCPAR_Observations_Summary.xlsx`
+      - 📄 `QMR Memo No. 001 2024-2025.docx`
+    - **📁 `Area 10 - Organization and Administration\Exhibit D`** (0 files)
+      - **📁 `Area 10 - Organization and Administration\Exhibit D\BSMath`** (2 files)
+        - 📄 `BS MATH_FILING.jpg`
+        - 📄 `BS MATH_STEEL CABINET.jpg`
+      - **📁 `Area 10 - Organization and Administration\Exhibit D\BSTM`** (2 files)
+        - 📄 `CHTM- DOCUMENT FILING.docx`
+        - 📄 `MEMO-DOCUMENT CONTROLLER APPOINTMENT.pdf`
+    - **📁 `Area 10 - Organization and Administration\Exhibit D_BSCS`** (5 files)
+      - 📄 `BSCS_FILING CABINET 2.jpg`
+      - 📄 `BSCS_FILING CABINET 3.jpg`
+      - 📄 `BSCS_FILING CABINET 4.jpg`
+      - 📄 `BSCS_FILING CABINET 5.jpg`
+      - 📄 `BSCS_FILING CABINET.jpg`

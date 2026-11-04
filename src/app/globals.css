@@ -1,0 +1,153 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  
+  /* Dynamic Theme CSS Variables (Space-separated RGB for Tailwind alpha support) */
+  --color-primary: 0 0 247;
+  --color-primary-hover: 0 0 196;
+  --color-primary-foreground: 255 255 255;
+}
+
+html, body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+/* Skeleton flat animation */
+@keyframes pulse-flat {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.45; }
+}
+.skeleton {
+  background-color: #e2e8f0;
+  animation: pulse-flat 1.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  border-radius: 6px;
+}
+
+/* Toast slide-up animation */
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-slide-up {
+  animation: slide-up 0.25s ease-out;
+}
+
+/* Confirm dialog scale-in animation */
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.animate-scale-in {
+  animation: scale-in 0.15s ease-out;
+}
+
+/* Card hover lift */
+.card-hover {
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+.card-hover:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transform: translateY(-1px);
+}
+
+/* Heatmap cell hover */
+.heatmap-cell {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.heatmap-cell:hover {
+  transform: scale(1.03);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  position: relative;
+}
+
+/* In-browser Word (.docx) rendered styling */
+.docx-wrapper {
+  background: transparent !important;
+  padding: 16px 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  width: 100% !important;
+}
+
+.docx-wrapper > section.docx,
+section.docx {
+  background: #ffffff !important;
+  color: #111827 !important;
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.12), 0 2px 6px -1px rgba(0, 0, 0, 0.08) !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 6px !important;
+  margin: 0 auto 24px auto !important;
+  box-sizing: border-box !important;
+  max-width: 100% !important;
+}
+
+/* Fit Width mode: page expands to fill the entire container width */
+.docx-fit-width .docx-wrapper > section.docx,
+.docx-fit-width section.docx {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding-left: clamp(24px, 4vw, 56px) !important;
+  padding-right: clamp(24px, 4vw, 56px) !important;
+}
+
+/* Page width mode: standard centered letter width */
+.docx-page-width .docx-wrapper > section.docx,
+.docx-page-width section.docx {
+  width: 840px !important;
+  max-width: 100% !important;
+}
+
+section.docx * {
+  box-sizing: border-box !important;
+}
+
+section.docx table {
+  border-collapse: collapse !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+section.docx td,
+section.docx th {
+  padding: 6px 10px !important;
+}
+
+
+
