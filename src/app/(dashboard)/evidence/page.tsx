@@ -33,6 +33,7 @@ import {
   Sparkles,
   X,
   RotateCcw,
+  Clock,
 } from 'lucide-react';
 
 interface ParsedEvidenceMeta {
@@ -1437,18 +1438,58 @@ export default function EvidencePage() {
 
               {/* Extraction Warnings/Hints */}
               {extractionResult && uploadMode === 'file' && (
-                <div className={`p-4 rounded-lg text-sm flex gap-3 items-start border ${extractionResult.warning ? 'bg-amber-50 text-amber-800 border-amber-200' : 'bg-blue-50 text-blue-800 border-blue-200'
-                  }`}>
-                  {extractionResult.warning ? (
+                <div
+                  className={`p-4 rounded-xl text-sm flex gap-3 items-start border transition-all ${
+                    extractionResult.isExpiredRecency
+                      ? 'bg-amber-50/95 border-amber-300 text-amber-950 shadow-sm'
+                      : extractionResult.warning
+                      ? 'bg-amber-50 text-amber-800 border-amber-200'
+                      : 'bg-emerald-50 text-emerald-900 border-emerald-200'
+                  }`}
+                >
+                  {extractionResult.isExpiredRecency ? (
+                    <Clock className="w-5 h-5 flex-shrink-0 mt-0.5 text-amber-600" />
+                  ) : extractionResult.warning ? (
                     <AlertTriangle className="w-5 h-5 flex-shrink-0 mt-0.5 text-amber-600" />
                   ) : (
-                    <Info className="w-5 h-5 flex-shrink-0 mt-0.5 text-blue-600" />
+                    <CheckCircle2 className="w-5 h-5 flex-shrink-0 mt-0.5 text-emerald-600" />
                   )}
-                  <div>
-                    <p className="font-semibold">{extractionResult.warning ? 'Heads up — please double-check this document' : 'Document scan complete'}</p>
-                    <p className="mt-1">{extractionResult.warning || extractionResult.info || 'The document contents match the expected type.'}</p>
+                  <div className="space-y-1 w-full">
+                    <div className="flex items-center justify-between gap-2 flex-wrap">
+                      <p className="font-bold flex items-center gap-2">
+                        {extractionResult.isExpiredRecency ? (
+                          <>
+                            <span>PACUCOA 5-Year Recency Warning</span>
+                            <span className="px-2 py-0.5 text-[10px] font-black tracking-wider uppercase bg-amber-200 text-amber-900 rounded">
+                              Older Than 5 Years
+                            </span>
+                          </>
+                        ) : extractionResult.warning ? (
+                          'Heads up — please verify document details'
+                        ) : (
+                          'Document Verified & Compliant'
+                        )}
+                      </p>
+                      {extractionResult.suggestedDate && (
+                        <span className="text-xs font-mono bg-white px-2 py-0.5 rounded border border-amber-200 text-gray-700 shadow-2xs">
+                          Date: {extractionResult.suggestedDate}
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-xs leading-relaxed">
+                      {extractionResult.warning ||
+                        extractionResult.info ||
+                        'The document contents match the expected type and fall cleanly within the active 5-year compliance window.'}
+                    </p>
+                    {extractionResult.isExpiredRecency && (
+                      <p className="text-[11px] text-amber-800 font-medium bg-amber-100/60 p-2 rounded border border-amber-200">
+                        PACUCOA accreditation standards require documents submitted as evidence to be issued or updated within the last 5 years. While you may still upload this historical document for archival reference, QA scoring algorithms will flag it during audit calculations.
+                      </p>
+                    )}
                     {extractionResult.extractedKeywords.length > 0 && !extractionResult.warning && (
-                      <p className="text-xs mt-1 text-blue-600 font-semibold">Detected keywords: {extractionResult.extractedKeywords.join(', ')}</p>
+                      <p className="text-xs mt-1 text-emerald-700 font-semibold">
+                        Detected keywords: {extractionResult.extractedKeywords.join(', ')}
+                      </p>
                     )}
                   </div>
                 </div>

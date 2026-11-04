@@ -3,6 +3,128 @@ import { NextRequest, NextResponse } from 'next/server';
 // Force Node.js runtime (not Edge)
 export const runtime = 'nodejs';
 
+// -------------------------------------------------------------
+// Polyfill browser globals required by pdf-parse / pdfjs in Node.js
+// Pure JavaScript implementations to avoid native addon Webpack loader conflicts
+// -------------------------------------------------------------
+function ensurePolyfills() {
+  const g = globalThis as any;
+
+  if (typeof g.DOMMatrix === 'undefined') {
+    class DOMMatrixPolyfill {
+      a = 1; b = 0; c = 0; d = 1; e = 0; f = 0;
+      m11 = 1; m12 = 0; m13 = 0; m14 = 0;
+      m21 = 0; m22 = 1; m23 = 0; m24 = 0;
+      m31 = 0; m32 = 0; m33 = 1; m34 = 0;
+      m41 = 0; m42 = 0; m43 = 0; m44 = 1;
+      is2D = true;
+      isIdentity = true;
+
+      constructor(init?: any) {
+        if (Array.isArray(init) && init.length >= 6) {
+          this.a = this.m11 = init[0];
+          this.b = this.m12 = init[1];
+          this.c = this.m21 = init[2];
+          this.d = this.m22 = init[3];
+          this.e = this.m41 = init[4];
+          this.f = this.m42 = init[5];
+          this.isIdentity = false;
+        }
+      }
+
+      scaleSelf(sx = 1, sy = sx) {
+        this.a *= sx; this.m11 = this.a;
+        this.b *= sx; this.m12 = this.b;
+        this.c *= sy; this.m21 = this.c;
+        this.d *= sy; this.m22 = this.d;
+        this.isIdentity = false;
+        return this;
+      }
+
+      translateSelf(tx = 0, ty = 0) {
+        this.e += this.a * tx + this.c * ty;
+        this.f += this.b * tx + this.d * ty;
+        this.m41 = this.e;
+        this.m42 = this.f;
+        this.isIdentity = false;
+        return this;
+      }
+
+      multiplySelf(other?: any) {
+        if (other) {
+          const a = this.a * other.a + this.b * other.c;
+          const b = this.a * other.b + this.b * other.d;
+          const c = this.c * other.a + this.d * other.c;
+          const d = this.c * other.b + this.d * other.d;
+          const e = this.e * other.a + this.f * other.c + other.e;
+          const f = this.e * other.b + this.f * other.d + other.f;
+          this.a = this.m11 = a;
+          this.b = this.m12 = b;
+          this.c = this.m21 = c;
+          this.d = this.m22 = d;
+          this.e = this.m41 = e;
+          this.f = this.m42 = f;
+          this.isIdentity = false;
+        }
+        return this;
+      }
+
+      invertSelf() {
+        const det = this.a * this.d - this.b * this.c;
+        if (det !== 0) {
+          const a = this.d / det;
+          const b = -this.b / det;
+          const c = -this.c / det;
+          const d = this.a / det;
+          const e = (this.c * this.f - this.d * this.e) / det;
+          const f = (this.b * this.e - this.a * this.f) / det;
+          this.a = this.m11 = a;
+          this.b = this.m12 = b;
+          this.c = this.m21 = c;
+          this.d = this.m22 = d;
+          this.e = this.m41 = e;
+          this.f = this.m42 = f;
+          this.isIdentity = false;
+        }
+        return this;
+      }
+    }
+    g.DOMMatrix = DOMMatrixPolyfill;
+  }
+
+  if (typeof g.DOMPoint === 'undefined') {
+    class DOMPointPolyfill {
+      x = 0; y = 0; z = 0; w = 1;
+      constructor(x = 0, y = 0, z = 0, w = 1) {
+        this.x = x; this.y = y; this.z = z; this.w = w;
+      }
+    }
+    g.DOMPoint = DOMPointPolyfill;
+  }
+
+  if (typeof g.ImageData === 'undefined') {
+    class ImageDataPolyfill {
+      width: number;
+      height: number;
+      data: Uint8ClampedArray;
+      constructor(w: number, h: number) {
+        this.width = w;
+        this.height = h;
+        this.data = new Uint8ClampedArray(w * h * 4);
+      }
+    }
+    g.ImageData = ImageDataPolyfill;
+  }
+
+  if (typeof g.Path2D === 'undefined') {
+    class Path2DPolyfill {}
+    g.Path2D = Path2DPolyfill;
+  }
+}
+
+// Run immediately on module evaluation
+ensurePolyfills();
+
 // Keyword map for document type matching
 const KEYWORD_MAP: Record<string, string[]> = {
   'Memorandum of Agreement': ['MOA', 'memorandum', 'agreement', 'party', 'signatory'],
@@ -22,14 +144,23 @@ const KEYWORD_MAP: Record<string, string[]> = {
 const DATE_PATTERNS = [
   /(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})/,
   /(\d{4})[\/\-](\d{1,2})[\/\-](\d{1,2})/,
-  /(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{1,2}),?\s+(\d{4})/i,
-  /(\d{1,2})\s+(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{4})/i,
+  /(January|February|March|April|May|June|July|August|September|October|November|December|Jan|Feb|Mar|Apr|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)\s+(\d{1,2}),?\s+(\d{4})/i,
+  /(\d{1,2})\s+(January|February|March|April|May|June|July|August|September|October|November|December|Jan|Feb|Mar|Apr|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)\s+(\d{4})/i,
 ];
 
 const MONTHS: Record<string, string> = {
-  january: '01', february: '02', march: '03', april: '04',
-  may: '05', june: '06', july: '07', august: '08',
-  september: '09', october: '10', november: '11', december: '12',
+  january: '01', jan: '01',
+  february: '02', feb: '02',
+  march: '03', mar: '03',
+  april: '04', apr: '04',
+  may: '05',
+  june: '06', jun: '06',
+  july: '07', jul: '07',
+  august: '08', aug: '08',
+  september: '09', sep: '09', sept: '09',
+  october: '10', oct: '10',
+  november: '11', nov: '11',
+  december: '12', dec: '12',
 };
 
 function extractDate(text: string): string | null {
@@ -152,6 +283,9 @@ function matchKeywords(text: string, expectedType: string): { matched: boolean; 
 }
 
 export async function POST(request: NextRequest) {
+  ensurePolyfills();
+  let parser: any = null;
+
   try {
     const formData = await request.formData();
     const file = formData.get('file') as File;
@@ -165,6 +299,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({
         matchedType: false,
         suggestedDate: null,
+        isExpiredRecency: false,
         extractedKeywords: [],
         isScanned: false,
         warning: 'File is not a PDF. Text extraction is only available for PDF files.',
@@ -177,7 +312,7 @@ export async function POST(request: NextRequest) {
     const { PDFParse } = await import('pdf-parse');
     const Tesseract = await import('tesseract.js');
 
-    const parser = new PDFParse({ data: buffer });
+    parser = new PDFParse({ data: buffer });
     let text = '';
     let usedOcr = false;
 
@@ -217,13 +352,21 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    await parser.destroy();
+    if (parser) {
+      try {
+        await parser.destroy();
+        parser = null;
+      } catch (destroyErr) {
+        console.warn('[PDF Extract] Cleanup warning:', destroyErr);
+      }
+    }
 
     // If still no text after OCR
     if (text.trim().length < 20) {
       return NextResponse.json({
         matchedType: false,
         suggestedDate: null,
+        isExpiredRecency: false,
         extractedKeywords: [],
         isScanned: true,
         warning: 'Could not extract readable text from this PDF even with OCR. The document type has been pre-filled based on the criterion requirements.',
@@ -263,13 +406,30 @@ export async function POST(request: NextRequest) {
     });
   } catch (error: unknown) {
     const err = error as Error;
-    console.error('[PDF Extract] Error:', err?.message);
+    console.error('[PDF Extract] Error:', err?.message || err);
+
+    if (parser) {
+      try {
+        await parser.destroy();
+      } catch {}
+    }
+
+    let friendlyError = 'The PDF format could not be analyzed automatically.';
+    if (err?.message?.includes('password') || err?.message?.includes('encrypted')) {
+      friendlyError = 'The PDF is password protected or encrypted.';
+    } else if (err?.message?.includes('DOMMatrix') || err?.message?.includes('canvas')) {
+      friendlyError = 'PDF graphics rendering encountered a canvas issue. Text extraction was skipped.';
+    } else if (err?.message) {
+      friendlyError = err.message;
+    }
+
     return NextResponse.json({
       matchedType: false,
       suggestedDate: null,
+      isExpiredRecency: false,
       extractedKeywords: [],
       isScanned: false,
-      warning: `PDF extraction failed: ${err?.message || 'Unknown error'}. The document type has been pre-filled based on the criterion requirements.`,
+      warning: `PDF automatic extraction note: ${friendlyError} The document type has been pre-filled based on the criterion requirements.`,
     });
   }
 }

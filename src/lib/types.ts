@@ -188,6 +188,7 @@ export interface PdfExtractionResult {
   isScanned: boolean;
   info?: string | null;
   warning?: string | null;
+  isExpiredRecency?: boolean;
 }
 
 export interface AccreditationCycle {

@@ -873,16 +873,16 @@ export default function FrameworkConfigPage() {
 
       // 2. Ensure all 10 PACUCOA Areas have official titles, order, and weights (Sum = 30)
       const officialAreas = [
-        { code: 'Area I',    title: 'Philosophy and Objectives',              weight: 3.0, order: 1 },
-        { code: 'Area II',   title: 'Faculty',                                weight: 3.0, order: 2 },
-        { code: 'Area III',  title: 'Instruction',                            weight: 4.0, order: 3 },
-        { code: 'Area IV',   title: 'Laboratory',                             weight: 3.0, order: 4 },
-        { code: 'Area V',    title: 'Research',                               weight: 3.0, order: 5 },
-        { code: 'Area VI',   title: 'Library',                                weight: 3.0, order: 6 },
-        { code: 'Area VII',  title: 'Student Services',                       weight: 3.0, order: 7 },
+        { code: 'Area I', title: 'Philosophy and Objectives', weight: 3.0, order: 1 },
+        { code: 'Area II', title: 'Faculty', weight: 3.0, order: 2 },
+        { code: 'Area III', title: 'Instruction', weight: 4.0, order: 3 },
+        { code: 'Area IV', title: 'Laboratory', weight: 3.0, order: 4 },
+        { code: 'Area V', title: 'Research', weight: 3.0, order: 5 },
+        { code: 'Area VI', title: 'Library', weight: 3.0, order: 6 },
+        { code: 'Area VII', title: 'Student Services', weight: 3.0, order: 7 },
         { code: 'Area VIII', title: 'Social Orientation and Community Involvement', weight: 3.0, order: 8 },
-        { code: 'Area IX',   title: 'Physical Plant and Facilities',          weight: 2.0, order: 9 },
-        { code: 'Area X',    title: 'Organization and Administration',        weight: 3.0, order: 10 },
+        { code: 'Area IX', title: 'Physical Plant and Facilities', weight: 2.0, order: 9 },
+        { code: 'Area X', title: 'Organization and Administration', weight: 3.0, order: 10 },
       ];
 
       for (const oa of officialAreas) {
@@ -1061,9 +1061,8 @@ export default function FrameworkConfigPage() {
       <div className="shrink-0 flex items-center gap-1 bg-white border border-gray-200 rounded-xl p-1 overflow-x-auto select-none">
         <button
           onClick={() => setActiveTab('frameworks')}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
-            activeTab === 'frameworks' ? 'bg-primary text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
-          }`}
+          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${activeTab === 'frameworks' ? 'bg-primary text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
+            }`}
         >
           <Award className="w-3.5 h-3.5" />
           <span>1. Frameworks ({frameworks.length})</span>
@@ -1071,9 +1070,8 @@ export default function FrameworkConfigPage() {
 
         <button
           onClick={() => setActiveTab('areas')}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
-            activeTab === 'areas' ? 'bg-primary text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
-          }`}
+          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${activeTab === 'areas' ? 'bg-primary text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
+            }`}
         >
           <Layers className="w-3.5 h-3.5" />
           <span>2. Areas & Weights ({fwAreas.length})</span>
@@ -1084,9 +1082,8 @@ export default function FrameworkConfigPage() {
 
         <button
           onClick={() => setActiveTab('criteria')}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
-            activeTab === 'criteria' ? 'bg-primary text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
-          }`}
+          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${activeTab === 'criteria' ? 'bg-primary text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
+            }`}
         >
           <FolderTree className="w-3.5 h-3.5" />
           <span>3. Criteria Tree ({criteria.length})</span>
@@ -1094,9 +1091,8 @@ export default function FrameworkConfigPage() {
 
         <button
           onClick={() => setActiveTab('levels')}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
-            activeTab === 'levels' ? 'bg-primary text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
-          }`}
+          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${activeTab === 'levels' ? 'bg-primary text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
+            }`}
         >
           <Award className="w-3.5 h-3.5" />
           <span>4. Accreditation Levels ({levels.length})</span>
@@ -1104,9 +1100,8 @@ export default function FrameworkConfigPage() {
 
         <button
           onClick={() => setActiveTab('level_criteria')}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
-            activeTab === 'level_criteria' ? 'bg-primary text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
-          }`}
+          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${activeTab === 'level_criteria' ? 'bg-primary text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
+            }`}
         >
           <Sparkles className="w-3.5 h-3.5" />
           <span>5. Level-Specific Criteria ({levelCriteria.length})</span>
@@ -1114,9 +1109,8 @@ export default function FrameworkConfigPage() {
 
         <button
           onClick={() => setActiveTab('rating_scales')}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
-            activeTab === 'rating_scales' ? 'bg-primary text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
-          }`}
+          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${activeTab === 'rating_scales' ? 'bg-primary text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
+            }`}
         >
           <Scale className="w-3.5 h-3.5" />
           <span>6. Rating Scales ({ratingScales.length})</span>
@@ -1343,11 +1337,10 @@ export default function FrameworkConfigPage() {
                     <div className="flex items-center bg-gray-100 p-0.5 rounded-lg border border-gray-200">
                       <button
                         onClick={() => setCriteriaViewMode('hierarchy')}
-                        className={`flex items-center gap-1.5 px-2.5 py-1 rounded text-xs font-bold transition-all ${
-                          criteriaViewMode === 'hierarchy'
+                        className={`flex items-center gap-1.5 px-2.5 py-1 rounded text-xs font-bold transition-all ${criteriaViewMode === 'hierarchy'
                             ? 'bg-white text-primary shadow-xs'
                             : 'text-gray-500 hover:text-gray-900'
-                        }`}
+                          }`}
                         title="Hierarchical Tree view grouped by PACUCOA Areas"
                       >
                         <FolderTree className="w-3.5 h-3.5" />
@@ -1355,11 +1348,10 @@ export default function FrameworkConfigPage() {
                       </button>
                       <button
                         onClick={() => setCriteriaViewMode('flat')}
-                        className={`flex items-center gap-1.5 px-2.5 py-1 rounded text-xs font-bold transition-all ${
-                          criteriaViewMode === 'flat'
+                        className={`flex items-center gap-1.5 px-2.5 py-1 rounded text-xs font-bold transition-all ${criteriaViewMode === 'flat'
                             ? 'bg-white text-primary shadow-xs'
                             : 'text-gray-500 hover:text-gray-900'
-                        }`}
+                          }`}
                         title="Flat tabular list"
                       >
                         <List className="w-3.5 h-3.5" />
