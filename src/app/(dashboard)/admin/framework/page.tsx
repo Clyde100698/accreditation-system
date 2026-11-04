@@ -394,7 +394,7 @@ export default function FrameworkConfigPage() {
         display_order: Number(areaForm.display_order) || 1,
       };
 
-      let opError: { message: string } | null = null;
+      let opError: { message: string; code?: string } | null = null;
       let insertedId = editingArea?.id;
 
       if (editingArea) {
@@ -534,7 +534,7 @@ export default function FrameworkConfigPage() {
         framework_id: fwId,
       };
 
-      let opError: { message: string } | null = null;
+      let opError: { message: string; code?: string } | null = null;
       let insertedId = editingLevel?.id;
 
       if (editingLevel) {
