@@ -10,7 +10,7 @@ import { DocumentViewer } from '@/components/ui/DocumentViewer';
 import { openEvidenceDocument } from '@/lib/evidence-service';
 import { showToast } from '@/components/ui/Toast';
 import { EvidenceDocument, AreaAssignment } from '@/lib/types';
-import { getPendingEvidenceList, evaluateEvidenceAction } from '@/app/actions/evidenceActions';
+import { getPendingEvidenceList, evaluateEvidenceAction, deleteEvidenceAction } from '@/app/actions/evidenceActions';
 import {
   CheckCircle,
   XCircle,
@@ -20,6 +20,7 @@ import {
   Lock,
   ExternalLink,
   MessageSquare,
+  Trash2,
 } from 'lucide-react';
 
 
@@ -156,6 +157,35 @@ export default function VerificationPage() {
       setEvalTarget(null);
       setInspectingDoc(null);
       fetchPending();
+    }
+  };
+
+  const handleRetract = async (doc: EvidenceDocument) => {
+    if (!user) return;
+    const confirmDelete = window.confirm(
+      `Are you sure you want to retract and delete "${doc.document_type || 'this document'}"? You will be able to upload a new exhibit for [${doc.accreditation_criteria?.code || 'this criterion'}].`
+    );
+    if (!confirmDelete) return;
+
+    setActionLoading(doc.id);
+    try {
+      const res = await deleteEvidenceAction({
+        docId: doc.id,
+        userId: user.id,
+        userRole: user.role,
+        reason: 'Uploader retracted pending document from review queue to re-upload',
+      });
+
+      if (!res.success) {
+        showToast('error', res.error || 'Failed to retract document');
+      } else {
+        showToast('success', 'Document retracted successfully. You can now upload again.');
+        setPendingEvidence((prev) => prev.filter((d) => d.id !== doc.id));
+      }
+    } catch {
+      showToast('error', 'Failed to retract document');
+    } finally {
+      setActionLoading(null);
     }
   };
 
@@ -355,9 +385,33 @@ export default function VerificationPage() {
                             Reject
                           </Button>
                         </div>
+                      ) : isOwnUpload ? (
+                        <div className="flex items-center justify-end gap-2">
+                          <Button
+                            variant="secondary"
+                            className="!px-3 !py-1.5 !text-xs font-medium"
+                            onClick={() => handleOpenPreview(ev)}
+                          >
+                            <Eye className="w-3.5 h-3.5 mr-1" />
+                            Preview
+                          </Button>
+                          <Button
+                            variant="destructive"
+                            className="!px-2.5 !py-1.5 !text-xs font-medium !bg-red-50 hover:!bg-red-100 !text-red-700 !border !border-red-200"
+                            onClick={() => handleRetract(ev)}
+                            loading={isProcessing}
+                            title="Retract and delete this pending upload so you can upload again"
+                          >
+                            <Trash2 className="w-3.5 h-3.5 mr-1" />
+                            Retract / Undo
+                          </Button>
+                          <span className="inline-flex items-center gap-1 text-[11px] text-amber-700 bg-amber-50 px-2 py-1 rounded font-medium border border-amber-200 whitespace-nowrap">
+                            Own Upload
+                          </span>
+                        </div>
                       ) : (
                         <span className="inline-flex items-center gap-1.5 text-xs text-amber-700 bg-amber-50 px-2.5 py-1.5 rounded-lg font-medium border border-amber-200 whitespace-nowrap">
-                          {isOwnUpload ? 'Cannot evaluate own upload' : 'Not assigned to this area'}
+                          Not assigned to this area
                         </span>
                       )}
                     </td>

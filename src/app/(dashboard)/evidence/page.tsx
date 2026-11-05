@@ -11,7 +11,7 @@ import { Modal } from '@/components/ui/Modal';
 import { DocumentViewer } from '@/components/ui/DocumentViewer';
 import { openEvidenceDocument } from '@/lib/evidence-service';
 import { AccreditationCriterion, EvidenceDocument, PdfExtractionResult, Program, AccreditationArea } from '@/lib/types';
-import { getEvidenceList } from '@/app/actions/evidenceActions';
+import { getEvidenceList, deleteEvidenceAction } from '@/app/actions/evidenceActions';
 import { getLeafCriteriaForProgram, loadExclusionMap, ExclusionMap } from '@/lib/program-criteria';
 import {
   Upload,
@@ -33,6 +33,7 @@ import {
   Link2,
   Sparkles,
   X,
+  Trash2,
   RotateCcw,
   Clock,
 } from 'lucide-react';
@@ -612,6 +613,32 @@ export default function EvidencePage() {
     setExpandedAreaIds(new Set());
   };
 
+  const handleDeleteEvidence = async (doc: EvidenceDocument) => {
+    if (!user) return;
+    const confirmDelete = window.confirm(
+      `Are you sure you want to delete "${doc.document_type || 'this document'}"?`
+    );
+    if (!confirmDelete) return;
+
+    try {
+      const res = await deleteEvidenceAction({
+        docId: doc.id,
+        userId: user.id,
+        userRole: user.role,
+        reason: 'User deleted evidence from library',
+      });
+
+      if (!res.success) {
+        showToast('error', res.error || 'Failed to delete evidence');
+      } else {
+        showToast('success', 'Evidence document deleted.');
+        setAllEvidence((prev) => prev.filter((d) => d.id !== doc.id));
+      }
+    } catch {
+      showToast('error', 'Failed to delete evidence');
+    }
+  };
+
   // Group filtered evidence by Area -> Folders & Area -> Criteria
   const groupedByArea = displayAreas.map((area) => {
     const areaEvidence = filteredEvidence.filter((ev) => ev.accreditation_criteria?.area_id === area.id);
@@ -985,12 +1012,24 @@ export default function EvidencePage() {
                           <td className="px-3.5 py-2 text-gray-600">{ev.uploader?.full_name || '—'}</td>
                           <td className="px-3.5 py-2"><StatusBadge status={ev.status} /></td>
                           <td className="px-3.5 py-2 text-right">
-                            <button
-                              onClick={() => setPreviewDoc(ev)}
-                              className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-semibold bg-primary/10 text-primary hover:bg-primary/20 transition-colors"
-                            >
-                              <Eye className="w-3.5 h-3.5" /> Preview
-                            </button>
+                            <div className="inline-flex items-center gap-1.5 justify-end">
+                              <button
+                                onClick={() => setPreviewDoc(ev)}
+                                className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-semibold bg-primary/10 text-primary hover:bg-primary/20 transition-colors"
+                              >
+                                <Eye className="w-3.5 h-3.5" /> Preview
+                              </button>
+                              {(ev.uploaded_by === user?.id || ['qa', 'system_admin', 'program_head'].includes(user?.role || '')) && (
+                                <button
+                                  type="button"
+                                  onClick={() => handleDeleteEvidence(ev)}
+                                  className="p-1 rounded text-red-500 hover:text-red-700 hover:bg-red-50 transition-colors"
+                                  title="Delete / Retract evidence document"
+                                >
+                                  <Trash2 className="w-3.5 h-3.5" />
+                                </button>
+                              )}
+                            </div>
                           </td>
                         </tr>
                       );
@@ -1118,6 +1157,16 @@ export default function EvidencePage() {
                                               >
                                                 <ExternalLink className="w-3.5 h-3.5" />
                                               </button>
+                                              {(doc.uploaded_by === user?.id || ['qa', 'system_admin', 'program_head'].includes(user?.role || '')) && (
+                                                <button
+                                                  type="button"
+                                                  onClick={() => handleDeleteEvidence(doc)}
+                                                  className="p-1 rounded text-red-400 hover:text-red-700 hover:bg-red-50 transition-colors"
+                                                  title="Delete / Retract evidence document"
+                                                >
+                                                  <Trash2 className="w-3.5 h-3.5" />
+                                                </button>
+                                              )}
                                             </div>
                                           </div>
                                         </div>

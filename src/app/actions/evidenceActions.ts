@@ -145,3 +145,86 @@ export async function evaluateEvidenceAction(params: {
   }
 }
 
+/**
+ * Delete or retract an evidence document.
+ * Allowed for the uploader (especially for pending uploads), or QA/Admin/Program Head.
+ */
+export async function deleteEvidenceAction(params: {
+  docId: string;
+  userId: string;
+  userRole?: string;
+  reason?: string;
+}): Promise<{ success: boolean; error?: string }> {
+  try {
+    const supabase = getServiceClient();
+
+    // 1. Fetch document to check authorization
+    const { data: doc, error: fetchErr } = await supabase
+      .from('evidence_documents')
+      .select('*, accreditation_criteria(code, title)')
+      .eq('id', params.docId)
+      .single();
+
+    if (fetchErr || !doc) {
+      return { success: false, error: 'Document not found' };
+    }
+
+    const isOwner = doc.uploaded_by === params.userId;
+    const isPrivileged = ['qa', 'system_admin', 'program_head'].includes(params.userRole || '');
+
+    if (!isOwner && !isPrivileged) {
+      return { success: false, error: 'You are not authorized to delete this document' };
+    }
+
+    // 2. Try to clean up storage if path is known
+    try {
+      let storagePath: string | null = null;
+      if (doc.reviewer_notes) {
+        try {
+          const parsed = JSON.parse(doc.reviewer_notes);
+          if (parsed.storagePath) storagePath = parsed.storagePath;
+        } catch {}
+      }
+      if (!storagePath && doc.file_url) {
+        const parts = doc.file_url.split('/public/evidence/');
+        if (parts.length > 1) storagePath = decodeURIComponent(parts[1]);
+      }
+      if (storagePath) {
+        await supabase.storage.from('evidence').remove([storagePath]);
+      }
+    } catch (storageErr) {
+      console.warn('[evidenceActions.deleteEvidenceAction] Storage cleanup warning:', storageErr);
+    }
+
+    // 3. Delete from DB
+    const { error: delErr } = await supabase
+      .from('evidence_documents')
+      .delete()
+      .eq('id', params.docId);
+
+    if (delErr) {
+      return { success: false, error: delErr.message };
+    }
+
+    // 4. Record in audit trail
+    await supabase.from('audit_log').insert({
+      user_id: params.userId,
+      action: isOwner ? 'evidence_retracted' : 'evidence_deleted',
+      entity_type: 'evidence_documents',
+      entity_id: params.docId,
+      metadata: {
+        reason: params.reason || 'User retracted or deleted evidence upload',
+        criterion_code: doc.accreditation_criteria?.code,
+        criterion_title: doc.accreditation_criteria?.title,
+        document_type: doc.document_type,
+      },
+    });
+
+    return { success: true };
+  } catch (err: unknown) {
+    const msg = err instanceof Error ? err.message : 'Failed to delete evidence';
+    return { success: false, error: msg };
+  }
+}
+
+
