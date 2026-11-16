@@ -191,80 +191,87 @@ def icon_cloud(draw, cx, cy, size=24, color=TEXT_BLACK):
 
 
 # ==============================================================================
-# FIGURE 1: Conceptual Framework (Input - Process - Output with Feedback Loop)
+# FIGURE 1: Conceptual Framework (Input - Process - Output - Outcome with Feedback Loop)
 # ==============================================================================
 def figure1_conceptual_framework():
-    W, H = 2000, 960
+    W, H = 2400, 1020
     im = Image.new('RGB', (W, H), WHITE)
     d = ImageDraw.Draw(im)
 
-    f_title = get_font(32, bold=True)
-    f_head = get_font(24, bold=True)
-    f_body = get_font(21, bold=False)
+    f_title = get_font(30, bold=True)
+    f_head = get_font(22, bold=True)
+    f_body = get_font(18, bold=False)
 
     # Top Banner
-    rounded_box(d, (60, 40, W - 60, 115), radius=10, fill=HEADER_DARK, outline=BORDER_DARK, width=2)
-    draw_text_center(d, W / 2, 77, 'CONCEPTUAL FRAMEWORK: INPUT - PROCESS - OUTPUT (IPO) MODEL', f_title, fill=TEXT_WHITE)
+    rounded_box(d, (60, 35, W - 60, 110), radius=10, fill=HEADER_DARK, outline=BORDER_DARK, width=2)
+    draw_text_center(d, W / 2, 72, 'CONCEPTUAL FRAMEWORK: INPUT – PROCESS – OUTPUT – INTENDED OUTCOME MODEL', f_title, fill=TEXT_WHITE)
 
     cols = [
         ('INPUTS', [
-            '• PACUCOA 2023 Manual (10 Areas, sum=30 weights, floor criteria)',
-            '• Institutional BSCS & CICT quality assurance documentary exhibits',
-            '• Stakeholder profiles, role credentials, and area assignments',
-            '• Previous survey recommendations & 4-column compliance records',
-            '• Quality Assurance Office validity window rules and proxy counts (R)'
+            '• PACUCOA 2023 Manual (10 Areas, sum=30 weights, 0–5 scale, floor rules)',
+            '• 79 institution-defined BSCS criteria (from CICT Compliance Report)',
+            '• Configurable required document counts (R) & 5-year validity window',
+            '• Digital exhibits (PDF, DOCX, XLSX, PNG, JPG, cloud/video links)',
+            '• 8 RBAC user roles, area assignments, & revisit recommendations'
         ]),
         ('PROCESSES', [
-            '• Automated PDF text-layer extraction, date tagging, & keyword matching',
-            '• Multi-tier role-based access control with self-verification blocking',
-            '• Piecewise criterion scoring & 30-weight Area mean aggregation',
-            '• Dual-constraint eligibility evaluation (Candidate, Levels I to IV)',
-            '• Isolated what-if readiness simulation sandbox',
-            '• Continuous compliance tracking with sub-numbered action linking',
-            '• Comprehensive audit trail logging (actor, table, timestamp)'
+            '• Criterion-based evidence mapping & rule-based PDF date/type parsing',
+            '• Independent verification with UI & RLS self-verification block',
+            '• Piecewise criterion scoring s = f(V, R) for V=0, 0<V<R, and V>=R',
+            '• Arithmetic Area means (excluding N.A.) & 30-weight Program Rating',
+            '• Dual-constraint floor checks (Candidate, Level I >=3.0, Level II >=3.5)',
+            '• Non-mutating what-if simulation (4.00 benchmark on <=10 criteria)',
+            '• 4-column post-visit compliance tracking & immutable audit logging'
         ]),
         ('OUTPUTS', [
-            '• Centralized criterion-mapped institutional evidence repository',
-            '• Panoramic Executive 5x2 command dashboard with RAG status badges',
-            '• Real-time indicative program readiness ratings and gap heatmaps',
-            '• Simulated what-if gap projection reports for priority criteria',
-            '• Auditable 4-column post-visit compliance matrix with exhibits',
-            '• Validated software quality evaluation profile (ISO/IEC 25010)'
+            '• Centralized criterion-mapped evidence repository & audit trail',
+            '• Computed criterion scores, Area means, & 30-weight Program Rating',
+            '• Executive 5x2 command dashboard & 3-column criterion heatmap',
+            '• Isolated what-if readiness forecast reports & rating deltas',
+            '• Auditable 4-column post-visit compliance matrix with linked exhibits',
+            '• ISO/IEC 25010 software quality evaluation profile (N = 20)'
+        ]),
+        ('INTENDED OUTCOMES', [
+            '• Streamlined self-survey document preparation & faster retrieval',
+            '• Objective internal monitoring of evidence completeness vs. readiness',
+            '• Early identification of Area floor deficits before 30-day/6-mo deadlines',
+            '• Data-informed prioritization of criteria for 2030 Level II resurvey',
+            '• Strengthened internal audit integrity via separation of duties'
         ])
     ]
 
-    bw, gap, top, bot = 570, 75, 155, 780
-    xs = [70, 70 + bw + gap, 70 + 2 * (bw + gap)]
+    bw, gap, top, bot = 520, 60, 145, 835
+    xs = [70 + i * (bw + gap) for i in range(4)]
 
     for x, (title, items) in zip(xs, cols):
-        draw_card_with_header(d, x, top, x + bw, bot, title, f_head, radius=10, header_h=55,
+        draw_card_with_header(d, x, top, x + bw, bot, title, f_head, radius=10, header_h=50,
                               header_fill=HEADER_LIGHT, header_text_col=TEXT_BLACK, body_fill=BOX_FILL_WHITE)
-        y = top + 75
+        y = top + 66
         for it in items:
-            lines = wrap_text(d, it, f_body, bw - 45)
-            h = len(lines) * (f_body.size + 6) + 16
-            rounded_box(d, (x + 16, y, x + bw - 16, y + h), radius=6, fill=BOX_FILL_LIGHT, outline=BORDER_LIGHT, width=1)
-            draw_text_left(d, x + 26, y + 8, it, f_body, bw - 52, fill=TEXT_BLACK, line_gap=6)
-            y += h + 14
+            lines = wrap_text(d, it, f_body, bw - 42)
+            h = len(lines) * (f_body.size + 5) + 14
+            rounded_box(d, (x + 14, y, x + bw - 14, y + h), radius=6, fill=BOX_FILL_LIGHT, outline=BORDER_LIGHT, width=1)
+            draw_text_left(d, x + 24, y + 7, it, f_body, bw - 48, fill=TEXT_BLACK, line_gap=5)
+            y += h + 11
 
     # Connectors
     arrow_y = (top + bot) / 2
-    draw_arrow(d, [(xs[0] + bw + 6, arrow_y), (xs[1] - 6, arrow_y)], fill=LINE_DARK, width=4, head=18)
-    draw_arrow(d, [(xs[1] + bw + 6, arrow_y), (xs[2] - 6, arrow_y)], fill=LINE_DARK, width=4, head=18)
+    for i in range(3):
+        draw_arrow(d, [(xs[i] + bw + 5, arrow_y), (xs[i + 1] - 5, arrow_y)], fill=LINE_DARK, width=4, head=16)
 
     # Feedback Loop at bottom
-    fy = bot + 85
-    box_w, box_h = 1260, 54
+    fy = bot + 95
+    box_w, box_h = 1560, 54
     rounded_box(d, (W / 2 - box_w / 2, fy - box_h / 2, W / 2 + box_w / 2, fy + box_h / 2), radius=6, fill=HEADER_LIGHT, outline=BORDER_DARK, width=2)
-    draw_text_center(d, W / 2, fy, 'FEEDBACK LOOP: Gap Remediation, Supplementary Evidence Ingestion, & Continuous Policy Refinement', get_font(20, bold=True), fill=TEXT_BLACK)
+    draw_text_center(d, W / 2, fy, 'FEEDBACK LOOP: Gap Remediation, Exhibit Replacement, & Continuous Self-Survey Refinement', get_font(20, bold=True), fill=TEXT_BLACK)
 
-    ox = xs[2] + bw / 2
+    ox = xs[3] + bw / 2
     ix = xs[0] + bw / 2
     draw_arrow(d, [(ox, bot + 4), (ox, fy), (W / 2 + box_w / 2 + 4, fy)], fill=LINE_DARK, width=3, head=14)
     draw_arrow(d, [(W / 2 - box_w / 2, fy), (ix, fy), (ix, bot + 6)], fill=LINE_DARK, width=3, head=16)
 
     im.save(os.path.join(OUT, 'figure1_conceptual_framework.png'), dpi=(250, 250))
-    print("Figure 1 generated (Monochrome).")
+    print("Figure 1 generated (4-Column IPOO Monochrome).")
 
 
 # ==============================================================================
@@ -423,7 +430,7 @@ def figure3_system_architecture():
                           radius=10, header_h=42, header_fill=HEADER_LIGHT, header_text_col=TEXT_BLACK)
 
     # Left: User Roles
-    rounded_box(d, (95, t1_y0 + 55, 820, t1_y1 - 25), radius=8, fill=BOX_FILL_WHITE, outline=BORDER_DARK, width=1)
+    rounded_box(d, (95, t1_y0 + 55, 795, t1_y1 - 25), radius=8, fill=BOX_FILL_WHITE, outline=BORDER_DARK, width=1)
     icon_user(d, 145, t1_y0 + 95, size=24, color=TEXT_BLACK)
     d.text((185, t1_y0 + 85), "INSTITUTIONAL ROLES & SCOPES", font=f_head, fill=TEXT_BLACK)
     users_text = (
@@ -433,14 +440,18 @@ def figure3_system_architecture():
         "• Program Head (Area delegation & supervisory review)\n"
         "• Area Chair / Co-Chair (Evidence audit & criteria verification)\n"
         "• Faculty Member (Document upload & metadata tagging)\n"
-        "• Alumni / Student Reps (Readiness view & summaries)"
+        "• Alumni / Student Reps & Accreditors (Readiness & compliance views)"
     )
-    draw_text_left(d, 120, t1_y0 + 130, users_text, f_body, 670, fill=TEXT_BLACK, line_gap=6)
+    draw_text_left(d, 115, t1_y0 + 130, users_text, f_body, 665, fill=TEXT_BLACK, line_gap=6)
+
+    # Bi-directional Arrow between Roles and Web Client Interface
+    mid_t1_y = (t1_y0 + 55 + t1_y1 - 25) / 2
+    draw_double_arrow(d, (799, mid_t1_y), (856, mid_t1_y), fill=LINE_DARK, width=3, head=12)
 
     # Right: Web Client Interface
-    rounded_box(d, (850, t1_y0 + 55, W - 95, t1_y1 - 25), radius=8, fill=BOX_FILL_WHITE, outline=BORDER_DARK, width=1)
-    icon_browser(d, 900, t1_y0 + 95, size=24, color=TEXT_BLACK)
-    d.text((940, t1_y0 + 85), "NEXT.JS 14 WEB CLIENT INTERFACE (Tailwind CSS)", font=f_head, fill=TEXT_BLACK)
+    rounded_box(d, (860, t1_y0 + 55, W - 95, t1_y1 - 25), radius=8, fill=BOX_FILL_WHITE, outline=BORDER_DARK, width=1)
+    icon_browser(d, 910, t1_y0 + 95, size=24, color=TEXT_BLACK)
+    d.text((950, t1_y0 + 85), "NEXT.JS 14 WEB CLIENT INTERFACE (Tailwind CSS)", font=f_head, fill=TEXT_BLACK)
 
     ui_cols = [
         ('5x2 Executive Dashboard', 'Panoramic 10-Area grid, progress bars, color status badges (<3.00 to >=4.00)'),
@@ -449,17 +460,17 @@ def figure3_system_architecture():
         ('Simulation Sandbox UI', 'Interactive criterion toggles, projected Area scores & delta display'),
         ('Compliance Matrix UI', '4-Column table, sub-numbered actions (1.1, 1.2), direct exhibit links')
     ]
-    uix = 875
+    uix = 880
     for title, desc in ui_cols:
-        rounded_box(d, (uix, t1_y0 + 130, uix + 225, t1_y1 - 35), radius=6, fill=BOX_FILL_LIGHT, outline=BORDER_LIGHT, width=1)
-        draw_text_center(d, uix + 112, t1_y0 + 155, title, get_font(17, bold=True), fill=TEXT_BLACK, max_w=205)
-        draw_text_center(d, uix + 112, t1_y0 + 225, desc, get_font(15), fill=TEXT_MUTED, max_w=205, line_gap=4)
-        uix += 240
+        rounded_box(d, (uix, t1_y0 + 130, uix + 223, t1_y1 - 35), radius=6, fill=BOX_FILL_LIGHT, outline=BORDER_LIGHT, width=1)
+        draw_text_center(d, uix + 111, t1_y0 + 155, title, get_font(17, bold=True), fill=TEXT_BLACK, max_w=203)
+        draw_text_center(d, uix + 111, t1_y0 + 225, desc, get_font(15), fill=TEXT_MUTED, max_w=203, line_gap=4)
+        uix += 238
 
-    # Connector Arrows Tier 1 to Tier 2
+    # Bi-directional Connector Arrows Tier 1 <-> Tier 2
     for mx in [450, 1100, 1750]:
-        draw_arrow(d, [(mx, t1_y1 + 4), (mx, t1_y1 + 55)], fill=LINE_DARK, width=3, head=14)
-        d.text((mx + 15, t1_y1 + 22), "HTTPS / REST", font=get_font(15, bold=True), fill=TEXT_MUTED)
+        draw_double_arrow(d, (mx, t1_y1 + 5), (mx, t1_y1 + 53), fill=LINE_DARK, width=3, head=12)
+        d.text((mx + 15, t1_y1 + 20), "HTTPS / REST (Req <-> Res)", font=get_font(15, bold=True), fill=TEXT_MUTED)
 
     # ------------------ TIER 2: APPLICATION & COMPUTATIONAL LOGIC ------------------
     t2_y0, t2_y1 = 525, 835
@@ -494,10 +505,10 @@ def figure3_system_architecture():
         draw_text_center(d, x + 225, t2_y0 + 85, title, get_font(17, bold=True), fill=TEXT_BLACK, max_w=250)
         draw_text_left(d, x + 20, t2_y0 + 140, desc, f_body, mod_w - 40, fill=TEXT_BLACK, line_gap=6)
 
-    # Connector Arrows Tier 2 to Tier 3
+    # Bi-directional Connector Arrows Tier 2 <-> Tier 3
     for mx in [350, 1100, 1850]:
-        draw_arrow(d, [(mx, t2_y1 + 4), (mx, t2_y1 + 55)], fill=LINE_DARK, width=3, head=14)
-        d.text((mx + 15, t2_y1 + 22), "SQL / RLS", font=get_font(15, bold=True), fill=TEXT_MUTED)
+        draw_double_arrow(d, (mx, t2_y1 + 5), (mx, t2_y1 + 53), fill=LINE_DARK, width=3, head=12)
+        d.text((mx + 15, t2_y1 + 20), "SQL / RLS & Signed URLs (Query <-> Result)", font=get_font(15, bold=True), fill=TEXT_MUTED)
 
     # ------------------ TIER 3: DATA & CLOUD STORAGE TIER ------------------
     t3_y0, t3_y1 = 890, 1200
@@ -590,24 +601,24 @@ def figure4_context_diagram():
                               body_fill=BOX_FILL_LIGHT, outline=BORDER_DARK, width=2)
         draw_text_left(d, ex + 18, ey + 50, desc, f_body, ent_w - 36, fill=TEXT_BLACK, line_gap=6)
 
-    # Clean Directional Arrows
-    # Admin to System (Top Left)
-    draw_arrow(d, [(90 + ent_w, 245), (cx - 150, cy - cr_h / 2)], fill=LINE_DARK, width=3, head=14)
-    # QA to System (Top Center)
+    # Clean Bi-Directional Arrows for all 7 External Entities
+    # Admin <-> System (Top Left)
+    draw_double_arrow(d, (90 + ent_w, 245), (cx - 150, cy - cr_h / 2), fill=LINE_DARK, width=3, head=14)
+    # QA <-> System (Top Center)
     draw_arrow(d, [(W / 2 - 40, 305), (W / 2 - 40, cy - cr_h / 2)], fill=LINE_DARK, width=3, head=14)
     draw_arrow(d, [(W / 2 + 40, cy - cr_h / 2), (W / 2 + 40, 305)], fill=LINE_DARK, width=3, head=14)
-    # Dean to System (Top Right)
-    draw_arrow(d, [(W - 90 - ent_w, 245), (cx + 150, cy - cr_h / 2)], fill=LINE_DARK, width=3, head=14)
-    # Program Head to System (Mid Left)
+    # Dean <-> System (Top Right)
+    draw_double_arrow(d, (W - 90 - ent_w, 245), (cx + 150, cy - cr_h / 2), fill=LINE_DARK, width=3, head=14)
+    # Program Head <-> System (Mid Left)
     draw_arrow(d, [(90 + ent_w, cy - 20), (cx - cr_w / 2, cy - 20)], fill=LINE_DARK, width=3, head=14)
     draw_arrow(d, [(cx - cr_w / 2, cy + 20), (90 + ent_w, cy + 20)], fill=LINE_DARK, width=3, head=14)
-    # Area Chair to System (Mid Right)
+    # Area Chair <-> System (Mid Right)
     draw_arrow(d, [(W - 90 - ent_w, cy - 20), (cx + cr_w / 2, cy - 20)], fill=LINE_DARK, width=3, head=14)
     draw_arrow(d, [(cx + cr_w / 2, cy + 20), (W - 90 - ent_w, cy + 20)], fill=LINE_DARK, width=3, head=14)
-    # Faculty to System (Bottom Left)
-    draw_arrow(d, [(90 + ent_w, H - 200), (cx - 150, cy + cr_h / 2)], fill=LINE_DARK, width=3, head=14)
-    # PACUCOA to System (Bottom Right)
-    draw_arrow(d, [(cx + 150, cy + cr_h / 2), (W - 90 - ent_w, H - 200)], fill=LINE_DARK, width=3, head=14)
+    # Faculty <-> System (Bottom Left)
+    draw_double_arrow(d, (90 + ent_w, H - 200), (cx - 150, cy + cr_h / 2), fill=LINE_DARK, width=3, head=14)
+    # PACUCOA <-> System (Bottom Right)
+    draw_double_arrow(d, (cx + 150, cy + cr_h / 2), (W - 90 - ent_w, H - 200), fill=LINE_DARK, width=3, head=14)
 
     im.save(os.path.join(OUT, 'figure4_context_diagram.png'), dpi=(250, 250))
     print("Figure 4 generated (Monochrome).")

@@ -112,76 +112,80 @@ def draw_app_navbar(draw, W, active_tab="Dashboard"):
     draw.text((W - 200, y0 + 41), "Program Head - BSCS", font=f_role, fill=(160, 180, 210))
 
 # ==============================================================================
-# FIGURE 16: Executive 5x2 Command Dashboard
+# FIGURE 16: Executive 5x2 Command Dashboard & 79-Criterion Readiness Heatmap
 # ==============================================================================
 def generate_figure16():
-    W, H = 2000, 1250
+    W, H = 2000, 1560
     im = Image.new('RGB', (W, H), BG_CANVAS)
     d = ImageDraw.Draw(im)
     
-    draw_top_browser_bar(d, W, "STI WNU Accreditation - Dashboard", "/dashboard")
+    draw_top_browser_bar(d, W, "STI WNU Accreditation - Dashboard & Heatmap", "/dashboard")
     draw_app_navbar(d, W, active_tab="Dashboard")
     
+    COLOR_YELLOW_BG = (254, 252, 232)
+    COLOR_YELLOW_TEXT = (161, 98, 7)
+    COLOR_YELLOW_BORDER = (253, 224, 71)
+
     # Executive Banner
-    top_y = 170
-    rounded_box(d, (35, top_y, W - 35, top_y + 115), radius=10, fill=WHITE, outline=BORDER_SUBTLE, width=2)
+    top_y = 165
+    rounded_box(d, (35, top_y, W - 35, top_y + 108), radius=10, fill=WHITE, outline=BORDER_SUBTLE, width=2)
     
-    f_h1 = get_font(28, bold=True)
-    d.text((60, top_y + 20), "Executive Accreditation Command Dashboard (PACUCOA Framework)", font=f_h1, fill=TEXT_DARK)
+    f_h1 = get_font(26, bold=True)
+    d.text((55, top_y + 18), "Executive 5x2 Command Dashboard & Readiness Heatmap", font=f_h1, fill=TEXT_DARK)
     
-    f_desc = get_font(17, bold=False)
-    d.text((60, top_y + 65), "Academic Program: Bachelor of Science in Computer Science (BSCS) | Survey Status: PACUCOA Level I Accreditation Preparation", font=f_desc, fill=TEXT_MUTED)
+    f_desc = get_font(16, bold=False)
+    d.text((55, top_y + 58), "Program: BS Computer Science (BSCS) | 10 PACUCOA Areas (Weight = 30) | 79 Configured Compliance Criteria", font=f_desc, fill=TEXT_MUTED)
     
     # KPI Badges in Banner
     kpi_x = W - 780
-    f_kpi_lbl = get_font(14, bold=True)
-    f_kpi_val = get_font(26, bold=True)
+    f_kpi_lbl = get_font(13, bold=True)
+    f_kpi_val = get_font(24, bold=True)
     
     # Baseline Score Card
-    rounded_box(d, (kpi_x, top_y + 15, kpi_x + 220, top_y + 98), radius=6, fill=COLOR_BLUE_BG, outline=COLOR_BLUE_BORDER, width=1)
-    d.text((kpi_x + 15, top_y + 22), "INDICATIVE RATING", font=f_kpi_lbl, fill=COLOR_BLUE_TEXT)
-    d.text((kpi_x + 15, top_y + 48), "3.22 / 5.00", font=f_kpi_val, fill=COLOR_BLUE_TEXT)
+    rounded_box(d, (kpi_x, top_y + 14, kpi_x + 225, top_y + 94), radius=6, fill=COLOR_BLUE_BG, outline=COLOR_BLUE_BORDER, width=1)
+    d.text((kpi_x + 15, top_y + 20), "INDICATIVE BASELINE", font=f_kpi_lbl, fill=COLOR_BLUE_TEXT)
+    d.text((kpi_x + 15, top_y + 46), "3.22 / 5.00", font=f_kpi_val, fill=COLOR_BLUE_TEXT)
     
-    # Total Exhibits Card
-    rounded_box(d, (kpi_x + 240, top_y + 15, kpi_x + 460, top_y + 98), radius=6, fill=COLOR_GREEN_BG, outline=COLOR_GREEN_BORDER, width=1)
-    d.text((kpi_x + 255, top_y + 22), "TOTAL EXHIBITS LOADED", font=f_kpi_lbl, fill=COLOR_GREEN_TEXT)
-    d.text((kpi_x + 255, top_y + 48), "142 Files", font=f_kpi_val, fill=COLOR_GREEN_TEXT)
+    # Active Criteria Card
+    rounded_box(d, (kpi_x + 240, top_y + 14, kpi_x + 465, top_y + 94), radius=6, fill=COLOR_GREEN_BG, outline=COLOR_GREEN_BORDER, width=1)
+    d.text((kpi_x + 255, top_y + 20), "ACTIVE CRITERIA", font=f_kpi_lbl, fill=COLOR_GREEN_TEXT)
+    d.text((kpi_x + 255, top_y + 46), "79 Criteria", font=f_kpi_val, fill=COLOR_GREEN_TEXT)
     
     # Floor Constraint Status Card
-    rounded_box(d, (kpi_x + 480, top_y + 15, kpi_x + 720, top_y + 98), radius=6, fill=COLOR_AMBER_BG, outline=COLOR_AMBER_BORDER, width=1)
-    d.text((kpi_x + 495, top_y + 22), "LEVEL I FLOOR STATUS", font=f_kpi_lbl, fill=COLOR_AMBER_TEXT)
-    d.text((kpi_x + 495, top_y + 48), "3 Area Deficits", font=f_kpi_val, fill=COLOR_AMBER_TEXT)
+    rounded_box(d, (kpi_x + 480, top_y + 14, kpi_x + 725, top_y + 94), radius=6, fill=COLOR_RED_BG, outline=COLOR_RED_BORDER, width=1)
+    d.text((kpi_x + 495, top_y + 20), "LEVEL I FLOOR (<3.00)", font=f_kpi_lbl, fill=COLOR_RED_TEXT)
+    d.text((kpi_x + 495, top_y + 46), "3 Area Deficits", font=f_kpi_val, fill=COLOR_RED_TEXT)
     
-    # 5x2 GRID OF PACUCOA AREAS
+    # 5x2 GRID OF PACUCOA AREAS (Exact Table 1 Weights & Table 9 Baseline Means)
     areas = [
         # Row 1 (Areas I to V)
-        ("Area I: Philosophy and Objectives", 1, "4.20", "Compliant", COLOR_GREEN_BG, COLOR_GREEN_TEXT, COLOR_GREEN_BORDER, 15, 15),
-        ("Area II: Faculty", 6, "3.85", "Compliant", COLOR_GREEN_BG, COLOR_GREEN_TEXT, COLOR_GREEN_BORDER, 28, 28),
-        ("Area III: Instruction", 6, "3.60", "Compliant", COLOR_GREEN_BG, COLOR_GREEN_TEXT, COLOR_GREEN_BORDER, 24, 25),
-        ("Area IV: Laboratories", 4, "2.67", "Below Floor (3.00)", COLOR_AMBER_BG, COLOR_AMBER_TEXT, COLOR_AMBER_BORDER, 11, 16),
-        ("Area V: Research", 2, "2.82", "Below Floor (3.00)", COLOR_AMBER_BG, COLOR_AMBER_TEXT, COLOR_AMBER_BORDER, 9, 14),
+        ("Area I: Philosophy & Objectives", 3, "3.00", "Amber: Level I Floor (3.00)", COLOR_AMBER_BG, COLOR_AMBER_TEXT, COLOR_AMBER_BORDER, 3, 3, [3.00, 3.00, 3.00]),
+        ("Area II: Faculty", 3, "3.74", "Yellow: Level II Floor (>=3.50)", COLOR_YELLOW_BG, COLOR_YELLOW_TEXT, COLOR_YELLOW_BORDER, 9, 9, [4.00, 4.00, 4.00, 4.00, 4.00, 3.50, 3.50, 3.50, 3.16]),
+        ("Area III: Instruction", 4, "3.00", "Amber: Level I Floor (3.00)", COLOR_AMBER_BG, COLOR_AMBER_TEXT, COLOR_AMBER_BORDER, 6, 6, [3.00, 3.00, 3.00, 3.00, 3.00, 3.00]),
+        ("Area IV: Laboratory", 3, "2.67", "Red: Below 3.00 Floor", COLOR_RED_BG, COLOR_RED_TEXT, COLOR_RED_BORDER, 9, 11, [3.00, 3.00, 3.00, 3.00, 3.00, 3.00, 3.50, 3.50, 4.37, 0.00, 0.00]),
+        ("Area V: Research", 3, "2.82", "Red: Below 3.00 Floor", COLOR_RED_BG, COLOR_RED_TEXT, COLOR_RED_BORDER, 12, 15, [3.50, 3.50, 3.50, 3.50, 3.50, 3.50, 4.00, 4.00, 4.00, 3.10, 3.10, 3.10, 0.00, 0.00, 0.00]),
         # Row 2 (Areas VI to X)
-        ("Area VI: Library", 3, "3.75", "Compliant", COLOR_GREEN_BG, COLOR_GREEN_TEXT, COLOR_GREEN_BORDER, 18, 19),
-        ("Area VII: Community Extension", 1, "1.30", "Critical Deficit", COLOR_RED_BG, COLOR_RED_TEXT, COLOR_RED_BORDER, 4, 12),
-        ("Area VIII: Student Services", 3, "3.80", "Compliant", COLOR_GREEN_BG, COLOR_GREEN_TEXT, COLOR_GREEN_BORDER, 16, 17),
-        ("Area IX: Physical Plant", 2, "3.50", "Compliant", COLOR_GREEN_BG, COLOR_GREEN_TEXT, COLOR_GREEN_BORDER, 10, 11),
-        ("Area X: Organization & Admin", 2, "4.10", "Compliant", COLOR_GREEN_BG, COLOR_GREEN_TEXT, COLOR_GREEN_BORDER, 12, 12),
+        ("Area VI: Library", 3, "3.45", "Amber: Level I Floor (3.00-3.49)", COLOR_AMBER_BG, COLOR_AMBER_TEXT, COLOR_AMBER_BORDER, 6, 6, [3.50, 3.50, 3.50, 3.40, 3.40, 3.40]),
+        ("Area VII: Student Services", 3, "1.30", "Red: Critical Deficit (<3.00)", COLOR_RED_BG, COLOR_RED_TEXT, COLOR_RED_BORDER, 5, 10, [3.00, 3.00, 3.00, 2.00, 2.00, 0.00, 0.00, 0.00, 0.00, 0.00]),
+        ("Area VIII: Social Orientation", 3, "4.38", "Green: High Readiness (>=4.00)", COLOR_GREEN_BG, COLOR_GREEN_TEXT, COLOR_GREEN_BORDER, 8, 8, [4.50, 4.50, 4.50, 4.50, 4.50, 4.50, 4.02, 4.02]),
+        ("Area IX: Physical Plant", 2, "5.00", "Green: High Readiness (5.00)", COLOR_GREEN_BG, COLOR_GREEN_TEXT, COLOR_GREEN_BORDER, 7, 7, [5.00, 5.00, 5.00, 5.00, 5.00, 5.00, 5.00]),
+        ("Area X: Org. & Administration", 3, "3.50", "Yellow: Level II Floor (3.50)", COLOR_YELLOW_BG, COLOR_YELLOW_TEXT, COLOR_YELLOW_BORDER, 4, 4, [3.50, 3.50, 3.50, 3.50]),
     ]
     
-    grid_y = 315
+    grid_y = 290
     card_w = 368
-    card_h = 425
+    card_h = 305
     gap_x = 22
-    gap_y = 30
+    gap_y = 20
     
-    f_area_title = get_font(18, bold=True)
-    f_area_sub = get_font(14, bold=False)
-    f_score_num = get_font(38, bold=True)
-    f_score_lbl = get_font(14, bold=False)
-    f_badge = get_font(13, bold=True)
-    f_detail = get_font(14, bold=False)
+    f_area_title = get_font(17, bold=True)
+    f_area_sub = get_font(13, bold=False)
+    f_score_num = get_font(34, bold=True)
+    f_score_lbl = get_font(13, bold=False)
+    f_badge = get_font(12, bold=True)
+    f_detail = get_font(13, bold=False)
     
-    for idx, (title, weight, score, status, bg_c, txt_c, brd_c, verified, total) in enumerate(areas):
+    for idx, (title, weight, score, status, bg_c, txt_c, brd_c, verified, total, c_scores) in enumerate(areas):
         row = idx // 5
         col = idx % 5
         cx0 = 35 + col * (card_w + gap_x)
@@ -189,46 +193,103 @@ def generate_figure16():
         cx1 = cx0 + card_w
         cy1 = cy0 + card_h
         
-        # Outer Card
-        rounded_box(d, (cx0, cy0, cx1, cy1), radius=8, fill=CARD_BG, outline=brd_c if status != "Compliant" else BORDER_SUBTLE, width=2 if status != "Compliant" else 1)
+        is_deficit = float(score) < 3.00
+        rounded_box(d, (cx0, cy0, cx1, cy1), radius=8, fill=CARD_BG, outline=brd_c if is_deficit else BORDER_SUBTLE, width=2 if is_deficit else 1)
         
         # Card Header
-        d.rounded_rectangle([cx0, cy0, cx1, cy0 + 65], radius=8, fill=CARD_HEADER_BG)
-        d.rectangle([cx0, cy0 + 55, cx1, cy0 + 65], fill=CARD_HEADER_BG)
-        d.line([cx0, cy0 + 65, cx1, cy0 + 65], fill=BORDER_SUBTLE, width=1)
+        d.rounded_rectangle([cx0, cy0, cx1, cy0 + 56], radius=8, fill=CARD_HEADER_BG)
+        d.rectangle([cx0, cy0 + 48, cx1, cy0 + 56], fill=CARD_HEADER_BG)
+        d.line([cx0, cy0 + 56, cx1, cy0 + 56], fill=BORDER_SUBTLE, width=1)
         
-        # Title & Weight
-        d.text((cx0 + 16, cy0 + 14), title, font=f_area_title, fill=TEXT_DARK)
-        d.text((cx0 + 16, cy0 + 38), f"Assigned PACUCOA Weight: {weight} / 30", font=f_area_sub, fill=TEXT_MUTED)
+        d.text((cx0 + 14, cy0 + 11), title, font=f_area_title, fill=TEXT_DARK)
+        d.text((cx0 + 14, cy0 + 34), f"Weight: {weight} / 30  |  Weighted: {float(score)*weight:.2f}", font=f_area_sub, fill=TEXT_MUTED)
         
-        # Status Badge top right inside card body
-        draw_badge(d, cx0 + 16, cy0 + 82, status, f_badge, bg_c, txt_c, brd_c)
+        draw_badge(d, cx0 + 14, cy0 + 68, status, f_badge, bg_c, txt_c, brd_c, pad_x=10, pad_y=3)
         
-        # Large Score Display
-        d.text((cx0 + 16, cy0 + 130), score, font=f_score_num, fill=txt_c if status != "Compliant" else TEXT_DARK)
-        d.text((cx0 + 115, cy0 + 152), "/ 5.00 Area Mean", font=f_score_lbl, fill=TEXT_MUTED)
+        d.text((cx0 + 14, cy0 + 106), score, font=f_score_num, fill=txt_c)
+        d.text((cx0 + 102, cy0 + 124), "/ 5.00 Area Mean", font=f_score_lbl, fill=TEXT_MUTED)
         
-        # Progress Bar
         pct = float(score) / 5.0
-        bar_w = card_w - 32
-        d.rounded_rectangle([cx0 + 16, cy0 + 200, cx0 + 16 + bar_w, cy0 + 214], radius=4, fill=COLOR_GRAY_BG)
-        fill_col = (40, 167, 69) if status == "Compliant" else ((255, 193, 7) if "Floor" in status else (220, 53, 69))
-        d.rounded_rectangle([cx0 + 16, cy0 + 200, cx0 + 16 + int(bar_w * pct), cy0 + 214], radius=4, fill=fill_col)
+        bar_w = card_w - 28
+        d.rounded_rectangle([cx0 + 14, cy0 + 162, cx0 + 14 + bar_w, cy0 + 174], radius=4, fill=COLOR_GRAY_BG)
+        fill_col = (22, 115, 50) if float(score) >= 4.0 else ((202, 138, 4) if float(score) >= 3.5 else ((217, 119, 6) if float(score) >= 3.0 else (192, 40, 40)))
+        d.rounded_rectangle([cx0 + 14, cy0 + 162, cx0 + 14 + int(bar_w * pct), cy0 + 174], radius=4, fill=fill_col)
         
-        # Documentary Evidence Metrics
-        d.line([cx0 + 16, cy0 + 245, cx1 - 16, cy0 + 245], fill=BORDER_SUBTLE, width=1)
-        d.text((cx0 + 16, cy0 + 265), "Verified Documents:", font=f_detail, fill=TEXT_MUTED)
-        d.text((cx1 - 85, cy0 + 265), f"{verified} / {total}", font=get_font(14, bold=True), fill=TEXT_DARK)
+        d.line([cx0 + 14, cy0 + 190, cx1 - 14, cy0 + 190], fill=BORDER_SUBTLE, width=1)
+        d.text((cx0 + 14, cy0 + 202), f"Criteria with Evidence: {verified} / {total} criteria", font=f_detail, fill=TEXT_MUTED)
         
-        d.text((cx0 + 16, cy0 + 300), "Completeness Ratio:", font=f_detail, fill=TEXT_MUTED)
-        ratio_pct = int((verified / total) * 100)
-        d.text((cx1 - 65, cy0 + 300), f"{ratio_pct}%", font=get_font(14, bold=True), fill=TEXT_DARK)
-        
-        # Quick Drill-Down Button
-        btn_box = (cx0 + 16, cy1 - 55, cx1 - 16, cy1 - 16)
-        d.rounded_rectangle(btn_box, radius=6, fill=COLOR_GRAY_BG, outline=BORDER_SUBTLE, width=1)
-        d.text((cx0 + 105, cy1 - 42), "Drill-Down Criteria ->", font=get_font(14, bold=True), fill=TEXT_DARK)
-        
+        # Mini Criterion Heatmap Strip inside each Area card
+        d.text((cx0 + 14, cy0 + 228), "Criterion Heatmap Strip:", font=get_font(12, bold=True), fill=TEXT_DARK)
+        cell_x = cx0 + 14
+        cell_y = cy0 + 250
+        cell_w = max(16, min(32, int((card_w - 28 - (len(c_scores) - 1) * 4) / len(c_scores))))
+        for cs in c_scores:
+            if cs == 0:
+                c_bg, c_bd = COLOR_GRAY_BG, COLOR_GRAY_BORDER
+            elif cs < 3.0:
+                c_bg, c_bd = COLOR_RED_BG, COLOR_RED_BORDER
+            elif cs < 3.5:
+                c_bg, c_bd = COLOR_AMBER_BG, COLOR_AMBER_BORDER
+            elif cs < 4.0:
+                c_bg, c_bd = COLOR_YELLOW_BG, COLOR_YELLOW_BORDER
+            else:
+                c_bg, c_bd = COLOR_GREEN_BG, COLOR_GREEN_BORDER
+            d.rounded_rectangle([cell_x, cell_y, cell_x + cell_w, cell_y + 36], radius=3, fill=c_bg, outline=c_bd, width=1)
+            cell_x += cell_w + 4
+
+    # =========================================================================
+    # BOTTOM PANEL: CRITERION-LEVEL READINESS HEATMAP DRILL-DOWN (79 CRITERIA)
+    # =========================================================================
+    hm_y0 = 935
+    hm_y1 = H - 30
+    rounded_box(d, (35, hm_y0, W - 35, hm_y1), radius=10, fill=WHITE, outline=BORDER_SUBTLE, width=2)
+    d.rounded_rectangle([35, hm_y0, W - 35, hm_y0 + 58], radius=10, fill=CARD_HEADER_BG)
+    d.rectangle([35, hm_y0 + 48, W - 35, hm_y0 + 58], fill=CARD_HEADER_BG)
+    d.line([35, hm_y0 + 58, W - 35, hm_y0 + 58], fill=BORDER_SUBTLE, width=1)
+
+    d.text((55, hm_y0 + 18), "Criterion-Level Readiness Heatmap (All 79 BSCS Criteria, Areas I–X)", font=get_font(18, bold=True), fill=TEXT_DARK)
+
+    # Legend on Header Right
+    leg_items = [
+        ("Gray 0.00 (No Evidence: 10)", COLOR_GRAY_BG, COLOR_GRAY_TEXT, COLOR_GRAY_BORDER),
+        ("Red 1.00–2.99 (Weak: 2)", COLOR_RED_BG, COLOR_RED_TEXT, COLOR_RED_BORDER),
+        ("Amber 3.00–3.49 (Level I: 25)", COLOR_AMBER_BG, COLOR_AMBER_TEXT, COLOR_AMBER_BORDER),
+        ("Yellow 3.50–3.99 (Level II: 18)", COLOR_YELLOW_BG, COLOR_YELLOW_TEXT, COLOR_YELLOW_BORDER),
+        ("Green 4.00–5.00 (Strong: 24)", COLOR_GREEN_BG, COLOR_GREEN_TEXT, COLOR_GREEN_BORDER),
+    ]
+    lx = 885
+    for lbl, lbg, ltxt, lbd in leg_items:
+        lx = draw_badge(d, lx, hm_y0 + 16, lbl, get_font(12, bold=True), lbg, ltxt, lbd, pad_x=8, pad_y=4) + 10
+
+    # 10 Rows inside the Heatmap Matrix (one row per Area showing each criterion code & score)
+    area_codes = ["Area I (3)", "Area II (9)", "Area III (6)", "Area IV (11)", "Area V (15)",
+                  "Area VI (6)", "Area VII (10)", "Area VIII (8)", "Area IX (7)", "Area X (4)"]
+    roman = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"]
+
+    row_y = hm_y0 + 72
+    row_h = 46
+    for a_idx, (a_lbl, r_code, (_, _, a_mean, _, _, _, _, _, _, c_scores)) in enumerate(zip(area_codes, roman, areas)):
+        # Area label column
+        d.text((55, row_y + 12), f"{a_lbl} [Mean: {a_mean}]", font=get_font(13, bold=True), fill=TEXT_DARK)
+        cx = 248
+        cw = 105
+        for c_idx, cs in enumerate(c_scores, start=1):
+            if cs == 0:
+                c_bg, c_txt, c_bd = COLOR_GRAY_BG, COLOR_GRAY_TEXT, COLOR_GRAY_BORDER
+            elif cs < 3.0:
+                c_bg, c_txt, c_bd = COLOR_RED_BG, COLOR_RED_TEXT, COLOR_RED_BORDER
+            elif cs < 3.5:
+                c_bg, c_txt, c_bd = COLOR_AMBER_BG, COLOR_AMBER_TEXT, COLOR_AMBER_BORDER
+            elif cs < 4.0:
+                c_bg, c_txt, c_bd = COLOR_YELLOW_BG, COLOR_YELLOW_TEXT, COLOR_YELLOW_BORDER
+            else:
+                c_bg, c_txt, c_bd = COLOR_GREEN_BG, COLOR_GREEN_TEXT, COLOR_GREEN_BORDER
+            d.rounded_rectangle([cx, row_y + 4, cx + cw, row_y + row_h - 4], radius=5, fill=c_bg, outline=c_bd, width=1)
+            code_str = f"{r_code}.{c_idx}: {cs:.2f}"
+            d.text((cx + 8, row_y + 12), code_str, font=get_font(12, bold=True), fill=c_txt)
+            cx += cw + 7
+        row_y += row_h + 4
+
     out_path = os.path.join(OUT, "figure16_executive_dashboard.png")
     im.save(out_path, dpi=(300, 300))
     print(f"[SUCCESS] Generated {out_path}")
