@@ -29,8 +29,45 @@ November 5, 2026
 
 # ACKNOWLEDGEMENT
 
+First and foremost, the proponent conveys his deepest and most profound gratitude to the Almighty God for bestowing upon him divine wisdom, perseverance, good health, and spiritual fortitude throughout this demanding graduate journey. His providence, grace, and guidance served as an unfailing refuge and source of strength in overcoming every intellectual and technical challenge encountered during the development of this capstone research.
+
+The proponent wishes to express his sincere and heartfelt appreciation to his thesis adviser, whose expert guidance, scholarly mentorship, and unwavering support were invaluable throughout the entire research process. His insightful critiques, constructive feedback, boundless patience, and commitment to academic excellence continually inspired the proponent and steered this study toward methodological rigor, empirical accuracy, and practical relevance.
+
+Deepest gratitude is likewise extended to the esteemed members of the Committee on Oral Examination for their thorough evaluation, scholarly appraisal, and constructive recommendations during the defense. Their intellectual scrutiny and valuable insights greatly enriched the quality, depth, and academic integrity of this manuscript and software design.
+
+Sincere thanks and appreciation are conveyed to his respected colleagues, fellow faculty members, and the administrative staff of the College of Information and Communications Technology (CICT) at STI West Negros University and State University of Northern Negros. Their professional camaraderie, collaborative spirit, continuous encouragement, and invaluable assistance during the institutional pilot testing, data gathering, and software evaluation were indispensable to the successful completion of this study.
+
+The proponent conveys his profoundest gratitude to his beloved parents and family. Their boundless sacrifices, unconditional love, unending patience, moral encouragement, and constant prayers provided an enduring foundation and shield during seasons of exhaustion and doubt. Every achievement attained in this endeavor is dedicated to their steadfast faith and love.
+
+Most especially, the proponent expresses his most heartfelt and loving gratitude to his girlfriend, whose unwavering presence, unconditional love, boundless patience, and constant understanding have continually stood by his side through every milestone, late-night coding sprint, stressful deadline, and moment of uncertainty. Her steadfast belief in his capabilities, soothing words of encouragement, and steady companionship served as his greatest source of inspiration, comfort, and motivation throughout this journey.
+
+
+### J.M.C.B.T.
+
 
 # DEDICATION
+
+This humble work is affectionately and wholeheartedly dedicated:
+
+To the Almighty God,
+the supreme source of divine wisdom, guidance, strength, and grace;
+
+To my beloved parents and family,
+whose unconditional love, continuous prayers, and endless sacrifices
+have been my lifelong inspiration and foundation;
+
+And most especially,
+to my beloved girlfriend,
+who has stood faithfully and lovingly by my side
+through every sleepless night, triumph, challenge, and milestone,
+whose unwavering patience, understanding, and steadfast belief in me
+made this journey possible and meaningful;
+
+And to all educators, researchers, and quality assurance advocates
+committed to academic excellence and educational transformation.
+
+
+### — J.M.C.B.T. —
 
 
 # ABSTRACT
@@ -56,117 +93,117 @@ LIST OF TABLES                                                          ix
 LIST OF FIGURES                                                          x
 CHAPTER I: INTRODUCTION                                                  1
    Background of the Study                                               1
-      Background of the Institution                                      6
-      The Developed System                                               7
-   Objective of the Study                                                9
-      General Objective                                                  9
-      Specifically, the study sought to:                                10
-   Conceptual Framework                                                 11
-      Narrative of the Conceptual Framework                             11
-   Significance of the Study                                            13
-   Scope and Limitation of the Study                                    14
-      Scope of the Study                                                14
-      Limitations of the Study                                          15
-   Definition of Terms                                                  17
-CHAPTER II: RELATED LITERATURE AND PRIOR ARTS SEARCH                    22
-   Review of Related Literature                                         22
-      Accreditation and Quality Assurance in Philippine Higher Education  22
-      Digital Evidence Management and Continuous Readiness              25
-      Decision Support and What-If Analysis in Education                26
-      Access Control and Separation of Duties                           28
-      Software Quality Evaluation                                       30
-      Accreditation and Quality Assurance Information Systems in Southeast Asia  31
-   Prior Arts Search                                                    33
-      Scope of the Search                                               33
-      Existing Systems                                                  33
-      Comparative Analysis                                              34
-      Synthesis and Research Gap                                        36
-CHAPTER III: MATERIALS AND METHODS                                      38
-   System Design                                                        38
-      Requirements Gathering                                            38
-      Development Methodology                                           38
-      System Architecture                                               40
-      Hardware and Software Requirements                                41
-      Machine Learning and Artificial Intelligence Specifications       43
-      Users, Roles, and Access Control                                  45
-      Process Modeling                                                  47
-      Data Design                                                       48
-      System Process Flow                                               51
-      Functional Modules                                                66
-      Illustration of the Scoring Mechanics                             67
-   Research Design                                                      69
-   Locale of the Study                                                  69
-   Respondents of the Study (with sampling technique)                   70
-   Data Gathering Procedure                                             73
-   Data Analysis                                                        75
-      Evaluation Instrument                                             75
-      Statistical Treatment                                             75
-   Ethical Considerations                                               76
-   Declaration of the Use of AI                                         78
-CHAPTER IV: PRESENTATION, ANALYSIS AND INTERPRETATION                   80
-   Evidence Management and Mapping Implementation                       80
-   Readiness Scoring Engine, Executive 5x2 Command Dashboard, and Heatmap Visualization  82
-      Executive 5x2 Command Dashboard and Heatmap Visualization         82
-      Baseline Assessment of the BSCS Program                           84
-      Dual-Constraint Threshold Analysis                                85
-      Relationship to the Official Accreditation Status                 86
-   What-If Readiness Simulation Module and Optimization Analysis        86
-      What-If Readiness Simulation Sandbox                              86
-      Simulation Analysis and Readiness Optimization                    88
-   Four-Column Post-Visit Compliance Tracking Matrix                    89
-   Role-Based Access Control and Independent Verification (Self-Verification Block)  91
-   Software Quality Evaluation (ISO/IEC 25010)                          93
-      Respondent Profile                                                93
-      Evaluation Results Across Quality Characteristics                 94
-      Interpretation and Qualitative Synthesis                          95
-CHAPTER V: SUMMARY, CONCLUSION AND RECOMMENDATION                       99
-   Summary of Findings                                                  99
-   Conclusion                                                          101
-   Recommendation                                                      103
-REFERENCES                                                             106
-APPENDICES                                                             115
-   Appendix A. CURRICULUM VITAE                                        115
-   Appendix B. CERTIFICATE OF PLAGIARISM                               117
-   Appendix C. CERTIFICATE OF UTILIZATION                              119
-   Appendix D. USER'S MANUAL                                           121
+      Background of the Institution                                      7
+      The Developed System                                               9
+   Objective of the Study                                               11
+      General Objective                                                 11
+      Specifically, the study sought to:                                12
+   Conceptual Framework                                                 13
+      Narrative of the Conceptual Framework                             14
+   Significance of the Study                                            17
+   Scope and Limitation of the Study                                    19
+      Scope of the Study                                                19
+      Limitations of the Study                                          20
+   Definition of Terms                                                  22
+CHAPTER II: RELATED LITERATURE AND PRIOR ARTS SEARCH                    27
+   Review of Related Literature                                         27
+      Accreditation and Quality Assurance in Philippine Higher Education  27
+      Digital Evidence Management and Continuous Readiness              30
+      Decision Support and What-If Analysis in Education                31
+      Access Control and Separation of Duties                           33
+      Software Quality Evaluation                                       35
+      Accreditation and Quality Assurance Information Systems in Southeast Asia  36
+   Prior Arts Search                                                    38
+      Scope of the Search                                               38
+      Existing Systems                                                  38
+      Comparative Analysis                                              39
+      Synthesis and Research Gap                                        41
+CHAPTER III: MATERIALS AND METHODS                                      43
+   System Design                                                        43
+      Requirements Gathering                                            43
+      Development Methodology                                           45
+      System Architecture                                               46
+      Hardware and Software Requirements                                48
+      Machine Learning and Artificial Intelligence Specifications       50
+      Users, Roles, and Access Control                                  52
+      Process Modeling                                                  54
+      Data Design                                                       56
+      System Process Flow                                               58
+      Functional Modules                                                74
+      Illustration of the Scoring Mechanics                             79
+   Research Design                                                      80
+   Locale of the Study                                                  80
+   Respondents of the Study (with sampling technique)                   81
+   Data Gathering Procedure                                             84
+   Data Analysis                                                        86
+      Evaluation Instrument                                             86
+      Statistical Treatment                                             87
+   Ethical Considerations                                               88
+   Declaration of the Use of AI                                         89
+CHAPTER IV: PRESENTATION, ANALYSIS AND INTERPRETATION                   91
+   Evidence Management and Mapping Implementation                       91
+   Readiness Scoring Engine, Executive 5x2 Command Dashboard, and Heatmap Visualization  93
+      Executive 5x2 Command Dashboard and Heatmap Visualization         93
+      Baseline Assessment of the BSCS Program                           97
+      Dual-Constraint Threshold Analysis                                99
+      Relationship to the Official Accreditation Status                 99
+   What-If Readiness Simulation Module and Optimization Analysis       100
+      What-If Readiness Simulation Sandbox                             100
+      Simulation Analysis and Readiness Optimization                   101
+   Four-Column Post-Visit Compliance Tracking Matrix                   104
+   Role-Based Access Control and Independent Verification (Self-Verification Block)  106
+   Software Quality Evaluation (ISO/IEC 25010)                         107
+      Respondent Profile                                               107
+      Evaluation Results Across Quality Characteristics                108
+      Interpretation and Qualitative Synthesis                         110
+CHAPTER V: SUMMARY, CONCLUSION AND RECOMMENDATION                      113
+   Summary of Findings                                                 113
+   Conclusion                                                          116
+   Recommendation                                                      118
+REFERENCES                                                             122
+APPENDICES                                                             131
+   Appendix A. CURRICULUM VITAE                                        131
+   Appendix B. CERTIFICATE OF PLAGIARISM                               132
+   Appendix C. CERTIFICATE OF UTILIZATION                              133
+   Appendix D. USER'S MANUAL                                           134
 
 # LIST OF TABLES
 
 Table                                                                 Page
 Table 1. PACUCOA Undergraduate Areas and Equivalent Weights (Total Weight = 30)  2
-Table 2. Comparison of Reviewed Systems and the Proposed System, Based on Public Materials  35
-Table 3. Development Timeline, August to October 2026                   38
-Table 4. Roles and Permissions                                          45
-Table 5. Principal Data Entities                                        49
-Table 6. Hypothetical Computation of a Program Rating (Illustration)    68
-Table 7. Respondent Breakdown and Qualifications                        71
-Table 8. Interpretation of Weighted Means                               76
-Table 9. Baseline Assessment of the BSCS Program by PACUCOA Area        87
-Table 10. Summary of ISO/IEC 25010 Software Quality Evaluation Results Across User and Expert Groups  94
+Table 2. Comparison of Reviewed Systems and the Proposed System, Based on Public Materials  40
+Table 3. Development Timeline, August to October 2026                   45
+Table 4. Roles and Permissions                                          52
+Table 5. Principal Data Entities                                        56
+Table 6. Hypothetical Computation of a Program Rating (Illustration)    79
+Table 7. Respondent Breakdown and Qualifications                        82
+Table 8. Interpretation of Weighted Means                               87
+Table 9. Baseline Assessment of the BSCS Program by PACUCOA Area        97
+Table 10. Summary of ISO/IEC 25010 Software Quality Evaluation Results Across User and Expert Groups  108
 
 # LIST OF FIGURES
 
 Figure                                                                Page
-Figure 1. Conceptual Framework of the Study (Input–Process–Output–Intended Outcome Model with Feedback Loop)  11
-Figure 2. Software Development Life Cycle (SDLC) Framework (Agile Scrum with Four Iterations)  40
-Figure 3. System Architecture of the Web-Based Accreditation Management and Readiness Assessment System  41
-Figure 4. Context Flow Diagram (Data Flow Diagram Level 0) of the Accreditation System  47
-Figure 5. Data Flow Diagram (Level 1) of the Accreditation System       48
-Figure 6. Entity-Relationship Diagram (ERD) of the Accreditation Management Database  51
-Figure 7. System Process Flow from Setup to Post-Visit Compliance Tracking  52
-Figure 8. User Flow of the System Administrator                         54
-Figure 9. User Flow of the Quality Assurance Officer                    56
-Figure 10. User Flow of the Dean                                        58
-Figure 11. User Flow of the Program Head                                60
-Figure 12. User Flow of the Area Chair and Co-Chair                     62
-Figure 13. User Flow of the Faculty Member                              64
-Figure 14. User Flow of the Alumni and Student Representative           65
-Figure 15. Location of STI West Negros University, Burgos Street, Bacolod City  70
-Figure 16. Accreditation Evidence Repository and Exhibit Ingestion Interface  81
-Figure 17. Executive 5x2 Command Dashboard and 79-Criterion Readiness Heatmap Visualization  82
-Figure 18. What-If Readiness Simulation Sandbox with Dual-Constraint Threshold Forecast  87
-Figure 19. PACUCOA Four-Column Post-Visit Compliance Tracking Matrix    90
-Figure 20. Independent Verification Queue with Enforced Self-Verification Block  91
+Figure 1. Conceptual Framework of the Study (Input–Process–Output–Intended Outcome Model with Feedback Loop)  14
+Figure 2. Software Development Life Cycle (SDLC) Framework (Agile Scrum with Four Iterations)  46
+Figure 3. System Architecture of the Web-Based Accreditation Management and Readiness Assessment System  48
+Figure 4. Context Flow Diagram (Data Flow Diagram Level 0) of the Accreditation System  55
+Figure 5. Data Flow Diagram (Level 1) of the Accreditation System       55
+Figure 6. Entity-Relationship Diagram (ERD) of the Accreditation Management Database  58
+Figure 7. System Process Flow from Setup to Post-Visit Compliance Tracking  59
+Figure 8. User Flow of the System Administrator                         62
+Figure 9. User Flow of the Quality Assurance Officer                    64
+Figure 10. User Flow of the Dean                                        66
+Figure 11. User Flow of the Program Head                                68
+Figure 12. User Flow of the Area Chair and Co-Chair                     70
+Figure 13. User Flow of the Faculty Member                              72
+Figure 14. User Flow of the Alumni and Student Representative           73
+Figure 15. Location of STI West Negros University, Burgos Street, Bacolod City  81
+Figure 16. Accreditation Evidence Repository and Exhibit Ingestion Interface  93
+Figure 17. Executive 5x2 Command Dashboard and 79-Criterion Readiness Heatmap Visualization  94
+Figure 18. What-If Readiness Simulation Sandbox with Dual-Constraint Threshold Forecast  101
+Figure 19. PACUCOA Four-Column Post-Visit Compliance Tracking Matrix   106
+Figure 20. Independent Verification Queue with Enforced Self-Verification Block  107
 
 # INTRODUCTION
 
@@ -1131,45 +1168,7 @@ Watermark Insights. (2024). Watermark Planning & Self-Study: Continuous improvem
 
 ### Appendix A. CURRICULUM VITAE
 
-
-### Personal Details
-
-
-### • Name: Clyde Taburada
-
-
-### • Degree: Bachelor of Science in Computer Science (BSCS)
-
-
-### • Institution: STI West Negros University, Bacolod City, Philippines
-
-
-### • Email: clyde.taburada@gmail.com
-
-
-### Educational Background
-
-• Tertiary: Bachelor of Science in Computer Science, STI West Negros University (2022 – 2026)
-
-
-### • Secondary: Senior High School, STEM Strand (Graduated with Honors)
-
-
-### Technical Competencies
-
-• Programming & Web: TypeScript, JavaScript, Python, React.js, Next.js, HTML5, CSS3, Tailwind CSS
-
-
-### • Database & Cloud: PostgreSQL, Supabase, Row-Level Security, REST APIs, Vercel
-
-• Software Engineering: Agile Scrum Methodology, Systems Analysis & Design, ISO/IEC 25010 Quality Evaluation
-
-
-### Capstone Project Involvement
-
-• Lead Developer & Proponent: Web-Based Accreditation Management and Readiness Assessment System for STI West Negros University
-
-• Engineered PACUCOA mathematical scoring engine, 5x2 executive command dashboard, what-if simulation sandbox, and post-visit compliance matrix
+[PLACEHOLDER: Appendix A – Curriculum Vitae. The proponent's comprehensive curriculum vitae, detailing personal information, educational background, professional credentials, and technical qualifications, is to be inserted here in the final bound volume.]
 
 
 ### Appendix B. CERTIFICATE OF PLAGIARISM
@@ -1177,20 +1176,7 @@ Watermark Insights. (2024). Watermark Planning & Self-Study: Continuous improvem
 
 ### RESEARCH AND DEVELOPMENT OFFICE
 
-This is to certify that the capstone project manuscript entitled "WEB-BASED ACCREDITATION MANAGEMENT AND READINESS ASSESSMENT SYSTEM FOR STI WEST NEGROS UNIVERSITY", prepared and submitted by CLYDE TABURADA in partial fulfillment of the requirements for the degree Bachelor of Science in Computer Science (BSCS), has been subjected to comprehensive similarity index analysis and plagiarism screening in accordance with the institutional research policies of STI West Negros University.
-
-Screening was conducted utilizing institutional text-matching software (Turnitin / Grammarly) under the supervision of the Research and Development Office. The manuscript yielded an overall similarity index within the permissible institutional ceiling (below 15%), with no evidence of uncredited academic attribution, intellectual property violation, or verbatim duplication detected.
-
-This certification is issued this October 2026 at the Research and Development Office, STI West Negros University, Bacolod City, Philippines, for presentation to the Committee on Oral Examination and for permanent binding in the official Capstone Book.
-
-_________________________________________
-Plagiarism Screening Coordinator
-Research and Development Office
-
-
-_________________________________________
-Director, Research and Development Office
-STI West Negros University
+[PLACEHOLDER: Appendix B – Certificate of Plagiarism Screening. The official similarity index certificate and clearance issued by the Research and Development Office of STI West Negros University is to be inserted here in the final bound volume.]
 
 
 ### Appendix C. CERTIFICATE OF UTILIZATION
@@ -1198,20 +1184,7 @@ STI West Negros University
 
 ### COLLEGE OF INFORMATION AND COMMUNICATIONS TECHNOLOGY
 
-This is to certify that the "WEB-BASED ACCREDITATION MANAGEMENT AND READINESS ASSESSMENT SYSTEM", developed by CLYDE TABURADA, has been deployed, demonstrated, and utilized by the College of Information and Communications Technology (CICT) in coordination with the Quality Assurance Office of STI West Negros University.
-
-The software successfully mapped PACUCOA undergraduate accreditation exhibits, calculated baseline readiness scores for the Bachelor of Science in Computer Science (BSCS) program, enforced separation of duties through independent verification, and provided effective what-if readiness simulation and post-visit compliance tracking. The system is hereby accepted for operational implementation in support of institutional self-survey and accreditation audits.
-
-Given this October 2026 at STI West Negros University, Bacolod City, Philippines.
-
-_________________________________________
-Dean, College of Information and Communications Technology
-STI West Negros University
-
-
-_________________________________________
-Director, Quality Assurance Office
-STI West Negros University
+[PLACEHOLDER: Appendix C – Certificate of Utilization. The signed certificate of utilization issued by the College of Information and Communications Technology (CICT) and the Quality Assurance Office of STI West Negros University is to be inserted here in the final bound volume.]
 
 
 ### Appendix D. USER'S MANUAL
@@ -1219,83 +1192,4 @@ STI West Negros University
 
 ### WEB-BASED ACCREDITATION MANAGEMENT AND READINESS ASSESSMENT SYSTEM
 
-This User's Manual provides step-by-step operating instructions for institutional users, faculty members, and academic administrators.
-
-
-### 1. System Access and Authentication
-
-• Navigate to the web portal URL using any standard web browser (Chrome, Edge, Firefox, Safari).
-
-• Enter your institutional email address and secure password on the login screen.
-
-• Upon authentication, the system automatically redirects you to the personalized dashboard corresponding to your assigned role (Admin, QA, Dean, Program Head, Faculty, or Representative).
-
-
-### 2. Navigating the Executive 5x2 Command Dashboard
-
-
-### • Access the `/dashboard` route from the primary navigation bar.
-
-• View the ten PACUCOA Areas displayed in a 5x2 grid: Row 1 (Areas I to V) and Row 2 (Areas VI to X).
-
-• Inspect each Area card for its assigned weight, verified document ratio, computed Area mean, and color-coded status badge (Red, Amber, Yellow, Green).
-
-
-### • Click on any Area card to instantly drill down into its constituent criteria.
-
-
-### 3. Uploading and Mapping Accreditation Evidence
-
-
-### • Navigate to the `/evidence` repository page.
-
-• Select the target PACUCOA Area and specific criterion from the dropdown selectors.
-
-• Drag and drop the documentary file (PDF, DOCX, XLSX, PNG, JPG) into the upload dropzone.
-
-• The system automatically parses PDF text to suggest the expected document type and validity window.
-
-• Enter the exhibit title, effective date, and remarks, then click 'Submit Evidence'.
-
-
-### 4. Independent Verification and Self-Verification Block
-
-• Area Chairs, Co-Chairs, and Program Heads review pending documents in their assigned Area.
-
-• Click on the document title to open a secure, time-limited preview via signed cloud URL.
-
-• Verify that the document matches the expected criteria, document type, and effective date.
-
-
-### • Click 'Verify Document' to accept or 'Reject' with feedback notes.
-
-• Note: If you uploaded the document, the verification button is disabled to enforce separation of duties.
-
-
-### 5. Running What-If Readiness Simulations
-
-• Navigate to the `/simulation` route (available to QA Officers, Deans, and Program Heads).
-
-
-### • Review the current baseline Area means and overall program rating.
-
-
-### • Select up to ten (10) unresolved criteria that you plan to address.
-
-• Click 'Run Simulation'. The system computes projected Area means, overall rating, and level eligibility.
-
-• Review the delta indicators (change in the program rating) and export the simulation scenario for planning meetings.
-
-
-### 6. Managing the Post-Visit Compliance Matrix
-
-
-### • Navigate to the `/recommendations` route.
-
-• View the four-column matrix: Opportunity for Improvement, PACUCOA Recommendation, Actions Taken, and Verification.
-
-• To add compliance progress, click 'Add Action Taken' and input sub-numbered items (e.g., 1.1, 1.2).
-
-• Link uploaded verification exhibits directly from the evidence repository to substantiate compliance.
-
-• Generate the formal PACUCOA Revisit Compliance Report for submission to the Research and QA Office.
+[PLACEHOLDER: Appendix D – User's Manual. The complete end-user operational manual, user interface guides, and administrative deployment documentation for the Web-Based Accreditation Management and Readiness Assessment System are to be inserted here in the final bound volume.]

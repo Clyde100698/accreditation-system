@@ -155,14 +155,101 @@ def populate_preliminaries(doc, toc_pages=None, table_pages=None, figure_pages=N
     _add_page_heading(doc, "APPROVAL SHEET")
 
     # -------------------------------------------------------------------------
-    # 1.3 ACKNOWLEDGEMENT (Page iii — Title only, 1 blank page)
+    # 1.3 ACKNOWLEDGEMENT (Page iii)
     # -------------------------------------------------------------------------
     _add_page_heading(doc, "ACKNOWLEDGEMENT")
 
+    def add_ack_p(text):
+        p = doc.add_paragraph()
+        p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+        p.paragraph_format.line_spacing = 1.3
+        p.paragraph_format.space_before = Pt(0)
+        p.paragraph_format.space_after = Pt(4)
+        p.paragraph_format.first_line_indent = Inches(0.5)
+        run = p.add_run(text)
+        apply_font(run)
+        return p
+
+    add_ack_p(
+        "First and foremost, the proponent conveys his deepest and most profound gratitude "
+        "to the Almighty God for bestowing upon him divine wisdom, perseverance, good health, "
+        "and spiritual fortitude throughout this demanding graduate journey. His providence, "
+        "grace, and guidance served as an unfailing refuge and source of strength in overcoming "
+        "every intellectual and technical challenge encountered during the development of this capstone research."
+    )
+    add_ack_p(
+        "The proponent wishes to express his sincere and heartfelt appreciation to his thesis adviser, "
+        "whose expert guidance, scholarly mentorship, and unwavering support were invaluable throughout "
+        "the entire research process. His insightful critiques, constructive feedback, boundless patience, "
+        "and commitment to academic excellence continually inspired the proponent and steered this study "
+        "toward methodological rigor, empirical accuracy, and practical relevance."
+    )
+    add_ack_p(
+        "Deepest gratitude is likewise extended to the esteemed members of the Committee on Oral Examination "
+        "for their thorough evaluation, scholarly appraisal, and constructive recommendations during the defense. "
+        "Their intellectual scrutiny and valuable insights greatly enriched the quality, depth, and academic "
+        "integrity of this manuscript and software design."
+    )
+    add_ack_p(
+        "Sincere thanks and appreciation are conveyed to his respected colleagues, fellow faculty members, "
+        "and the administrative staff of the College of Information and Communications Technology (CICT) at "
+        "STI West Negros University and State University of Northern Negros. Their professional camaraderie, "
+        "collaborative spirit, continuous encouragement, and invaluable assistance during the institutional "
+        "pilot testing, data gathering, and software evaluation were indispensable to the successful completion of this study."
+    )
+    add_ack_p(
+        "The proponent conveys his profoundest gratitude to his beloved parents and family. Their boundless "
+        "sacrifices, unconditional love, unending patience, moral encouragement, and constant prayers provided "
+        "an enduring foundation and shield during seasons of exhaustion and doubt. Every achievement attained "
+        "in this endeavor is dedicated to their steadfast faith and love."
+    )
+    add_ack_p(
+        "Most especially, the proponent expresses his most heartfelt and loving gratitude to his girlfriend, "
+        "whose unwavering presence, unconditional love, boundless patience, and constant understanding have "
+        "continually stood by his side through every milestone, late-night coding sprint, stressful deadline, "
+        "and moment of uncertainty. Her steadfast belief in his capabilities, soothing words of encouragement, "
+        "and steady companionship served as his greatest source of inspiration, comfort, and motivation throughout this journey."
+    )
+
+    p_ack_sig = doc.add_paragraph()
+    p_ack_sig.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+    p_ack_sig.paragraph_format.line_spacing = SINGLE_SPACE
+    p_ack_sig.paragraph_format.space_before = Pt(8)
+    p_ack_sig.paragraph_format.space_after = Pt(0)
+    p_ack_sig.paragraph_format.first_line_indent = Inches(0.0)
+    r_ack_sig = p_ack_sig.add_run("J.M.C.B.T.")
+    apply_font(r_ack_sig, bold=True)
+
     # -------------------------------------------------------------------------
-    # 1.4 DEDICATION (Page iv — Title only, 1 blank page)
+    # 1.4 DEDICATION (Page iv)
     # -------------------------------------------------------------------------
     _add_page_heading(doc, "DEDICATION")
+
+    def add_ded_p(text, italic=True, space_before=0, space_after=14):
+        p = doc.add_paragraph()
+        p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        p.paragraph_format.line_spacing = 1.35
+        p.paragraph_format.space_before = Pt(space_before)
+        p.paragraph_format.space_after = Pt(space_after)
+        p.paragraph_format.first_line_indent = Inches(0.0)
+        run = p.add_run(text)
+        apply_font(run, italic=italic)
+        return p
+
+    add_ded_p("This humble work is affectionately and wholeheartedly dedicated:", italic=True, space_before=36, space_after=20)
+    add_ded_p("To the Almighty God,\nthe supreme source of divine wisdom, guidance, strength, and grace;", italic=True, space_after=20)
+    add_ded_p("To my beloved parents and family,\nwhose unconditional love, continuous prayers, and endless sacrifices\nhave been my lifelong inspiration and foundation;", italic=True, space_after=20)
+    add_ded_p("And most especially,\nto my beloved girlfriend,\nwho has stood faithfully and lovingly by my side\nthrough every sleepless night, triumph, challenge, and milestone,\nwhose unwavering patience, understanding, and steadfast belief in me\nmade this journey possible and meaningful;", italic=True, space_after=20)
+    add_ded_p("And to all educators, researchers, and quality assurance advocates\ncommitted to academic excellence and educational transformation.", italic=True, space_after=36)
+
+    p_ded_sig = doc.add_paragraph()
+    p_ded_sig.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    p_ded_sig.paragraph_format.line_spacing = SINGLE_SPACE
+    p_ded_sig.paragraph_format.space_before = Pt(12)
+    p_ded_sig.paragraph_format.space_after = Pt(0)
+    p_ded_sig.paragraph_format.first_line_indent = Inches(0.0)
+    r_ded_sig = p_ded_sig.add_run("— J.M.C.B.T. —")
+    apply_font(r_ded_sig, bold=True)
 
     # -------------------------------------------------------------------------
     # 1.5 ABSTRACT (Page v — <= 250 words max, single-spaced, justified, no indent)

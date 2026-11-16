@@ -173,5 +173,24 @@ def build_chapters_1_to_5_only_no_prelims():
 
 
 if __name__ == "__main__":
-    build_chapters_1_to_5_with_preliminaries()
+    import json
+    toc_pages = {}
+    table_pages = {}
+    figure_pages = {}
+    exact_json_path = os.path.join(os.path.dirname(__file__), "..", "exact_pages.json")
+    if not os.path.exists(exact_json_path):
+        exact_json_path = "exact_pages.json"
+
+    if os.path.exists(exact_json_path):
+        try:
+            with open(exact_json_path, "r", encoding="utf-8-sig") as f:
+                data = json.load(f)
+                toc_pages = data.get("toc_pages", {})
+                table_pages = data.get("table_pages", {})
+                figure_pages = data.get("figure_pages", {})
+                print(f"[INFO] Loaded verified Word page numbers: {len(toc_pages)} TOC, {len(table_pages)} tables, {len(figure_pages)} figures.")
+        except Exception as e:
+            print(f"[WARNING] Could not load exact_pages.json: {e}")
+
+    build_chapters_1_to_5_with_preliminaries(toc_pages=toc_pages, table_pages=table_pages, figure_pages=figure_pages)
     build_chapters_1_to_5_only_no_prelims()

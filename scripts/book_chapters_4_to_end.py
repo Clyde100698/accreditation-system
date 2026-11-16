@@ -387,29 +387,15 @@ def add_references(doc):
     print("References generated successfully.")
 
 def add_appendices(doc):
-    """Generates APPENDICES section."""
+    """Generates APPENDICES section with clean placeholders as requested."""
     add_major_section_heading(doc, "APPENDICES")
 
     # Appendix A: CURRICULUM VITAE
     add_heading(doc, "Appendix A. CURRICULUM VITAE")
-    add_body_p(doc, "**Personal Details**")
-    add_bullet_p(doc, "Name: Clyde Taburada")
-    add_bullet_p(doc, "Degree: Bachelor of Science in Computer Science (BSCS)")
-    add_bullet_p(doc, "Institution: STI West Negros University, Bacolod City, Philippines")
-    add_bullet_p(doc, "Email: clyde.taburada@gmail.com")
-
-    add_body_p(doc, "**Educational Background**")
-    add_bullet_p(doc, "Tertiary: Bachelor of Science in Computer Science, STI West Negros University (2022 – 2026)")
-    add_bullet_p(doc, "Secondary: Senior High School, STEM Strand (Graduated with Honors)")
-
-    add_body_p(doc, "**Technical Competencies**")
-    add_bullet_p(doc, "Programming & Web: TypeScript, JavaScript, Python, React.js, Next.js, HTML5, CSS3, Tailwind CSS")
-    add_bullet_p(doc, "Database & Cloud: PostgreSQL, Supabase, Row-Level Security, REST APIs, Vercel")
-    add_bullet_p(doc, "Software Engineering: Agile Scrum Methodology, Systems Analysis & Design, ISO/IEC 25010 Quality Evaluation")
-
-    add_body_p(doc, "**Capstone Project Involvement**")
-    add_bullet_p(doc, "Lead Developer & Proponent: Web-Based Accreditation Management and Readiness Assessment System for STI West Negros University")
-    add_bullet_p(doc, "Engineered PACUCOA mathematical scoring engine, 5x2 executive command dashboard, what-if simulation sandbox, and post-visit compliance matrix")
+    add_body_p(
+        doc,
+        "[PLACEHOLDER: Appendix A – Curriculum Vitae. The proponent's comprehensive curriculum vitae, detailing personal information, educational background, professional credentials, and technical qualifications, is to be inserted here in the final bound volume.]"
+    )
 
     doc.add_page_break()
 
@@ -418,29 +404,8 @@ def add_appendices(doc):
     add_subheading(doc, "RESEARCH AND DEVELOPMENT OFFICE")
     add_body_p(
         doc,
-        "This is to certify that the capstone project manuscript entitled **\"WEB-BASED ACCREDITATION MANAGEMENT AND READINESS ASSESSMENT SYSTEM FOR STI WEST NEGROS UNIVERSITY\"**, prepared and submitted by **CLYDE TABURADA** in partial fulfillment of the requirements for the degree **Bachelor of Science in Computer Science (BSCS)**, has been subjected to comprehensive similarity index analysis and plagiarism screening in accordance with the institutional research policies of STI West Negros University."
+        "[PLACEHOLDER: Appendix B – Certificate of Plagiarism Screening. The official similarity index certificate and clearance issued by the Research and Development Office of STI West Negros University is to be inserted here in the final bound volume.]"
     )
-    add_body_p(
-        doc,
-        "Screening was conducted utilizing institutional text-matching software (Turnitin / Grammarly) under the supervision of the Research and Development Office. The manuscript yielded an overall similarity index within the permissible institutional ceiling (below 15%), with no evidence of uncredited academic attribution, intellectual property violation, or verbatim duplication detected."
-    )
-    add_body_p(
-        doc,
-        "This certification is issued this October 2026 at the Research and Development Office, STI West Negros University, Bacolod City, Philippines, for presentation to the Committee on Oral Examination and for permanent binding in the official Capstone Book."
-    )
-
-    p_sig_plag = doc.add_paragraph()
-    p_sig_plag.paragraph_format.line_spacing = DOUBLE_SPACE
-    p_sig_plag.paragraph_format.space_before = Pt(36)
-    r_sig_plag = p_sig_plag.add_run(
-        "_________________________________________\n"
-        "Plagiarism Screening Coordinator\n"
-        "Research and Development Office\n\n\n"
-        "_________________________________________\n"
-        "Director, Research and Development Office\n"
-        "STI West Negros University"
-    )
-    apply_font(r_sig_plag)
 
     doc.add_page_break()
 
@@ -449,29 +414,8 @@ def add_appendices(doc):
     add_subheading(doc, "COLLEGE OF INFORMATION AND COMMUNICATIONS TECHNOLOGY")
     add_body_p(
         doc,
-        "This is to certify that the **\"WEB-BASED ACCREDITATION MANAGEMENT AND READINESS ASSESSMENT SYSTEM\"**, developed by **CLYDE TABURADA**, has been deployed, demonstrated, and utilized by the College of Information and Communications Technology (CICT) in coordination with the Quality Assurance Office of STI West Negros University."
+        "[PLACEHOLDER: Appendix C – Certificate of Utilization. The signed certificate of utilization issued by the College of Information and Communications Technology (CICT) and the Quality Assurance Office of STI West Negros University is to be inserted here in the final bound volume.]"
     )
-    add_body_p(
-        doc,
-        "The software successfully mapped PACUCOA undergraduate accreditation exhibits, calculated baseline readiness scores for the Bachelor of Science in Computer Science (BSCS) program, enforced separation of duties through independent verification, and provided effective what-if readiness simulation and post-visit compliance tracking. The system is hereby accepted for operational implementation in support of institutional self-survey and accreditation audits."
-    )
-    add_body_p(
-        doc,
-        "Given this October 2026 at STI West Negros University, Bacolod City, Philippines."
-    )
-
-    p_sig2 = doc.add_paragraph()
-    p_sig2.paragraph_format.line_spacing = DOUBLE_SPACE
-    p_sig2.paragraph_format.space_before = Pt(36)
-    r_sig2 = p_sig2.add_run(
-        "_________________________________________\n"
-        "Dean, College of Information and Communications Technology\n"
-        "STI West Negros University\n\n\n"
-        "_________________________________________\n"
-        "Director, Quality Assurance Office\n"
-        "STI West Negros University"
-    )
-    apply_font(r_sig2)
 
     doc.add_page_break()
 
@@ -480,65 +424,9 @@ def add_appendices(doc):
     add_subheading(doc, "WEB-BASED ACCREDITATION MANAGEMENT AND READINESS ASSESSMENT SYSTEM")
     add_body_p(
         doc,
-        "This User's Manual provides step-by-step operating instructions for institutional users, faculty members, and academic administrators."
+        "[PLACEHOLDER: Appendix D – User's Manual. The complete end-user operational manual, user interface guides, and administrative deployment documentation for the Web-Based Accreditation Management and Readiness Assessment System are to be inserted here in the final bound volume.]"
     )
-    add_body_p(
-        doc,
-        "**1. System Access and Authentication**"
-    )
-    add_bullet_p(doc, "Navigate to the web portal URL using any standard web browser (Chrome, Edge, Firefox, Safari).")
-    add_bullet_p(doc, "Enter your institutional email address and secure password on the login screen.")
-    add_bullet_p(doc, "Upon authentication, the system automatically redirects you to the personalized dashboard corresponding to your assigned role (Admin, QA, Dean, Program Head, Faculty, or Representative).")
 
-    add_body_p(
-        doc,
-        "**2. Navigating the Executive 5x2 Command Dashboard**"
-    )
-    add_bullet_p(doc, "Access the `/dashboard` route from the primary navigation bar.")
-    add_bullet_p(doc, "View the ten PACUCOA Areas displayed in a 5x2 grid: Row 1 (Areas I to V) and Row 2 (Areas VI to X).")
-    add_bullet_p(doc, "Inspect each Area card for its assigned weight, verified document ratio, computed Area mean, and color-coded status badge (Red, Amber, Yellow, Green).")
-    add_bullet_p(doc, "Click on any Area card to instantly drill down into its constituent criteria.")
-
-    add_body_p(
-        doc,
-        "**3. Uploading and Mapping Accreditation Evidence**"
-    )
-    add_bullet_p(doc, "Navigate to the `/evidence` repository page.")
-    add_bullet_p(doc, "Select the target PACUCOA Area and specific criterion from the dropdown selectors.")
-    add_bullet_p(doc, "Drag and drop the documentary file (PDF, DOCX, XLSX, PNG, JPG) into the upload dropzone.")
-    add_bullet_p(doc, "The system automatically parses PDF text to suggest the expected document type and validity window.")
-    add_bullet_p(doc, "Enter the exhibit title, effective date, and remarks, then click 'Submit Evidence'.")
-
-    add_body_p(
-        doc,
-        "**4. Independent Verification and Self-Verification Block**"
-    )
-    add_bullet_p(doc, "Area Chairs, Co-Chairs, and Program Heads review pending documents in their assigned Area.")
-    add_bullet_p(doc, "Click on the document title to open a secure, time-limited preview via signed cloud URL.")
-    add_bullet_p(doc, "Verify that the document matches the expected criteria, document type, and effective date.")
-    add_bullet_p(doc, "Click 'Verify Document' to accept or 'Reject' with feedback notes.")
-    add_bullet_p(doc, "Note: If you uploaded the document, the verification button is disabled to enforce separation of duties.")
-
-    add_body_p(
-        doc,
-        "**5. Running What-If Readiness Simulations**"
-    )
-    add_bullet_p(doc, "Navigate to the `/simulation` route (available to QA Officers, Deans, and Program Heads).")
-    add_bullet_p(doc, "Review the current baseline Area means and overall program rating.")
-    add_bullet_p(doc, "Select up to ten (10) unresolved criteria that you plan to address.")
-    add_bullet_p(doc, "Click 'Run Simulation'. The system computes projected Area means, overall rating, and level eligibility.")
-    add_bullet_p(doc, "Review the delta indicators (change in the program rating) and export the simulation scenario for planning meetings.")
-
-    add_body_p(
-        doc,
-        "**6. Managing the Post-Visit Compliance Matrix**"
-    )
-    add_bullet_p(doc, "Navigate to the `/recommendations` route.")
-    add_bullet_p(doc, "View the four-column matrix: Opportunity for Improvement, PACUCOA Recommendation, Actions Taken, and Verification.")
-    add_bullet_p(doc, "To add compliance progress, click 'Add Action Taken' and input sub-numbered items (e.g., 1.1, 1.2).")
-    add_bullet_p(doc, "Link uploaded verification exhibits directly from the evidence repository to substantiate compliance.")
-    add_bullet_p(doc, "Generate the formal PACUCOA Revisit Compliance Report for submission to the Research and QA Office.")
-
-    print("Appendices generated successfully.")
+    print("Appendices (placeholders) generated successfully.")
 
 print("Chapters 4 to End module defined.")
