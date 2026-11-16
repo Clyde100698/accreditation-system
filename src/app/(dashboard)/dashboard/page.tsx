@@ -637,14 +637,14 @@ export default function DashboardPage() {
           <div>
             <div className="flex items-center gap-2">
               <h2 className="text-sm sm:text-base font-bold text-gray-900">
-                {frameworkName} 10-Area Readiness Command Center
+                {frameworkName} 10-Area Readiness Command Center &amp; Heatmap
               </h2>
               <span className="text-[11px] font-bold text-primary bg-primary/10 px-2 py-0.5 rounded border border-primary/20">
                 10 Areas · {stats.totalCriteria} Criteria
               </span>
             </div>
             <p className="text-xs text-gray-500 mt-0.5">
-              All 10 PACUCOA areas displayed simultaneously. Click any area card to inspect its criteria breakdown.
+              All 10 PACUCOA areas and criterion readiness heatmap strips displayed simultaneously. Click any area card to inspect its criteria breakdown.
             </p>
           </div>
 
@@ -698,8 +698,12 @@ export default function DashboardPage() {
                     </span>
                     <span
                       className={`text-xs font-bold px-2 py-0.5 rounded border ${
-                        isMet
+                        a.avg >= 4.0
                           ? 'bg-emerald-50 text-emerald-800 border-emerald-200'
+                          : a.avg >= 3.5
+                          ? 'bg-yellow-50 text-yellow-800 border-yellow-200'
+                          : a.avg >= 3.0
+                          ? 'bg-amber-50 text-amber-800 border-amber-200'
                           : 'bg-red-50 text-red-800 border-red-200'
                       }`}
                     >
@@ -707,14 +711,40 @@ export default function DashboardPage() {
                     </span>
                   </div>
 
-                  <p className="text-xs font-semibold text-gray-800 line-clamp-1 mb-2" title={a.title}>
+                  <p className="text-xs font-semibold text-gray-800 line-clamp-1 mb-1.5" title={a.title}>
                     {a.title}
                   </p>
 
+                  {/* Mini Criterion Readiness Heatmap Strip inside each Area Card */}
+                  {a.topLevelCriteria.length > 0 && (
+                    <div className="flex items-center gap-0.5 mb-1.5" title="Criterion Readiness Heatmap Strip">
+                      {a.topLevelCriteria.map((c) => {
+                        const cs = c.scoreObj?.score || 0;
+                        const cellColor =
+                          cs === 0
+                            ? 'bg-gray-200 border-gray-300'
+                            : cs < 3.0
+                            ? 'bg-red-400 border-red-500'
+                            : cs < 3.5
+                            ? 'bg-amber-400 border-amber-500'
+                            : cs < 4.0
+                            ? 'bg-yellow-400 border-yellow-500'
+                            : 'bg-emerald-500 border-emerald-600';
+                        return (
+                          <div
+                            key={c.id}
+                            title={`${c.code}: ${cs.toFixed(2)}/5.00`}
+                            className={`h-2 flex-1 rounded-[2px] border ${cellColor}`}
+                          />
+                        );
+                      })}
+                    </div>
+                  )}
+
                   <div className="flex items-center justify-between text-[10px] pt-1.5 border-t border-gray-100 text-gray-500 font-medium">
                     <span>{metCount}/{a.topLevelCriteria.length} Met</span>
-                    <span className={isMet ? 'text-emerald-700 font-bold' : 'text-amber-700 font-bold'}>
-                      {isMet ? 'Goal Met' : 'Gap'}
+                    <span className={isMet ? 'text-emerald-700 font-bold' : 'text-red-700 font-bold'}>
+                      {isMet ? 'Goal Met' : 'Below Floor'}
                     </span>
                   </div>
                 </div>
@@ -740,13 +770,16 @@ export default function DashboardPage() {
             return (
               <div className="space-y-3">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2.5 border-b border-gray-100">
-                  <div className="flex items-center gap-2.5 min-w-0">
+                  <div className="flex items-center gap-2 min-w-0">
                     <span className="px-2 py-0.5 rounded font-mono text-xs font-bold bg-primary text-white">
                       {activeArea.code}
                     </span>
                     <h3 className="text-sm font-bold text-gray-900 truncate">
                       {activeArea.title}
                     </h3>
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-primary bg-primary/10 px-2 py-0.5 rounded border border-primary/20 shrink-0">
+                      Criterion Readiness Heatmap
+                    </span>
                   </div>
 
                   <div className="flex items-center gap-2 shrink-0">
@@ -782,15 +815,16 @@ export default function DashboardPage() {
 
         {/* Legend Footer */}
         <div className="px-4 py-2 bg-gray-50 border-t border-gray-200 flex flex-wrap items-center justify-between gap-3 text-xs">
-          <div className="flex items-center gap-3">
-            <span className="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Legend:</span>
-            <div className="flex items-center gap-1"><div className="w-2.5 h-2.5 rounded bg-gray-100 border border-gray-300" /><span className="text-[11px] text-gray-700">None (0)</span></div>
-            <div className="flex items-center gap-1"><div className="w-2.5 h-2.5 rounded bg-red-100 border border-red-300" /><span className="text-[11px] text-gray-700">Weak (1-2)</span></div>
-            <div className="flex items-center gap-1"><div className="w-2.5 h-2.5 rounded bg-amber-100 border border-amber-300" /><span className="text-[11px] text-gray-700">Fair (3)</span></div>
-            <div className="flex items-center gap-1"><div className="w-2.5 h-2.5 rounded bg-green-100 border border-green-300" /><span className="text-[11px] text-gray-700">Strong (4-5)</span></div>
+          <div className="flex items-center gap-3 flex-wrap">
+            <span className="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Heatmap Legend:</span>
+            <div className="flex items-center gap-1"><div className="w-2.5 h-2.5 rounded bg-gray-200 border border-gray-300" /><span className="text-[11px] text-gray-700">None (0.00)</span></div>
+            <div className="flex items-center gap-1"><div className="w-2.5 h-2.5 rounded bg-red-100 border border-red-300" /><span className="text-[11px] text-gray-700">Weak (1.00–2.99)</span></div>
+            <div className="flex items-center gap-1"><div className="w-2.5 h-2.5 rounded bg-amber-100 border border-amber-300" /><span className="text-[11px] text-gray-700">Fair (3.00–3.49)</span></div>
+            <div className="flex items-center gap-1"><div className="w-2.5 h-2.5 rounded bg-yellow-100 border border-yellow-300" /><span className="text-[11px] text-gray-700">Satisfactory (3.50–3.99)</span></div>
+            <div className="flex items-center gap-1"><div className="w-2.5 h-2.5 rounded bg-green-100 border border-green-300" /><span className="text-[11px] text-gray-700">Strong (4.00–5.00)</span></div>
           </div>
           <span className="text-[11px] text-gray-400 italic">
-            Click any area card in the matrix above to view its criteria
+            Click any area card in the matrix above to inspect its criterion heatmap
           </span>
         </div>
       </div>
